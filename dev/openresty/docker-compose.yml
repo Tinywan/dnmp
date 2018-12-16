@@ -1,10 +1,10 @@
 web:
-  image: nginx:latest
+  image: openresty/openresty:alpine
   ports:
     - "8080:80"
   volumes:
     - ./code:/code
-    - ./config/nginx.conf:/etc/nginx/conf.d/site.conf
+    - ./config/conf.d:/etc/nginx/conf.d
   links:
     - php
 php:
