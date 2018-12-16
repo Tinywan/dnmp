@@ -2,31 +2,38 @@ version: '3'
 
 services:
     nginx:
-        image: nginx:alpine
+        image: nginx:1.14.2-alpine
         ports:
-            - "8080:80"
+            - 8080:80
+            - 443:443
         volumes:
-          - ./code:/code
-          - ./config/nginx.conf:/etc/nginx/conf.d/site.conf
-          - ./config/php-fpm/sock:/var/run
+          - ./conf/nginx.conf:/etc/nginx/nginx.conf # 修改默认配置文件
+          - ./conf/conf.d:/etc/nginx/conf.d
+          - ./log:/var/log/nginx
+          - ./www:/var/www
+          - ./var/run:/var/run
+          - ./etc/letsencrypt:/etc/letsencrypt
+        restart: always  
+        container_name: nginx-1.14.2-alpine-v2 # 容器名称
         networks:
             - code-network
         links:
-            - php7-fpm
-        container_name: nginx-v2 # 容器名称
-    php7-fpm:
+            - php-fpm
+
+    # PHP with fpm       
+    php-fpm:
         image: php:7.3-fpm
         volumes:
-            - ./code:/code
-            - ./config/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
-            - ./config/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
-            - ./config/php-fpm/sock:/var/run
+            - ./www:/var/www
+            - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
+            - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+            - ./var/run:/var/run
         networks:
             - code-network
-        container_name: php7-fpm-v2 # 容器名称    
+        container_name: php-fpm-socket-v2 # 容器名称   
 
 networks:
     code-network:
         driver: bridge
 volumes:
-    phpsocket:
+    phpsocket:        
