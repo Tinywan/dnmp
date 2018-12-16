@@ -15,3 +15,84 @@
 2018/12/16 08:58:46 [crit] 6#6: *1 connect() to unix:/var/run/php7.3-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php7.3-fpm.sock:", host: "127.0.0.1:8080"
 2018/12/16 08:59:37 [alert] 1#1: unlink() "/var/run/nginx.pid" failed (2: No such file or directory)
 2018/12/16 09:00:01 [crit] 6#6: *1 connect() to unix:/var/run/php7.3-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php7.3-fpm.sock:", host: "127.0.0.1:8080"
+2018/12/16 09:08:56 [crit] 6#6: *1 connect() to unix:/var/run/php7.3-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php7.3-fpm.sock:", host: "127.0.0.1:8080"
+2018/12/16 09:14:58 [crit] 6#6: *1 connect() to unix:/var/run/php7.3-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php7.3-fpm.sock:", host: "127.0.0.1:8080"
+2018/12/16 09:15:00 [crit] 6#6: *1 connect() to unix:/var/run/php7.3-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://unix:/var/run/php7.3-fpm.sock:", host: "127.0.0.1:8080"
+2018/12/16 09:15:32 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:36 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:39 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:42 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:45 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:48 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:15:52 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:00 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:14 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:22 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:25 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:28 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:31 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:34 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:36 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:41 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:16:48 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:17:02 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:10
+2018/12/16 09:17:29 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:39 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:42 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:45 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:48 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:51 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:54 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:17:58 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:06 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:20 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:41 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:44 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:46 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:49 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:52 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:55 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:18:59 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:19:07 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:19
+2018/12/16 09:19:21 [emerg] 1#1: host not found in upstream "php" in /etc/nginx/conf.d/www.conf:11
+2018/12/16 09:19:34 [error] 6#6: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: 127.0.0.1, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "127.0.0.1:8080"
+2018/12/16 14:12:35 [emerg] 1#1: getpwnam("www-data") failed in /etc/nginx/nginx.conf:2
+2018/12/16 14:12:38 [emerg] 1#1: getpwnam("www-data") failed in /etc/nginx/nginx.conf:2
+2018/12/16 14:12:41 [emerg] 1#1: getpwnam("www-data") failed in /etc/nginx/nginx.conf:2
+2018/12/16 15:45:40 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:11
+2018/12/16 15:45:44 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:11
+2018/12/16 15:46:34 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:46:37 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:46:40 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:46:44 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:46:49 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:46:52 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:11
+2018/12/16 15:46:57 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:11
+2018/12/16 15:47:50 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:47:53 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:47:56 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:00 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:03 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:07 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:11 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:19 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:48:34 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:01 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:27 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:30 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:33 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:37 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:41 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:43 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:49 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:49:57 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:50:11 [emerg] 1#1: no "events" section in configuration
+2018/12/16 15:50:37 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:00 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:04 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:07 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:10 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:14 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:17 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:24:22 [emerg] 1#1: no "events" section in configuration
+2018/12/16 16:26:48 [error] 6#6: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.21.0.1, server: 127.0.0.1, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "127.0.0.1:8080"
