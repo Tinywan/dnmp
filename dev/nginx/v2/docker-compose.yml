@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:alpine
+        ports:
+            - "8080:80"
+        volumes:
+          - ./code:/code
+          - ./config/nginx.conf:/etc/nginx/conf.d/site.conf
+          - ./config/php-fpm/sock:/var/run
+        networks:
+            - code-network
+        links:
+            - php7-fpm
+        container_name: nginx-v2 # 容器名称
+    php7-fpm:
+        image: php:7.3-fpm
+        volumes:
+            - ./code:/code
+            - ./config/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
+            - ./config/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+            - ./config/php-fpm/sock:/var/run
+        networks:
+            - code-network
+        container_name: php7-fpm-v2 # 容器名称    
+
+networks:
+    code-network:
+        driver: bridge
+volumes:
+    phpsocket:
