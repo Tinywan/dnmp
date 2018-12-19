@@ -11,7 +11,7 @@ services:
           - ./conf/conf.d:/etc/nginx/conf.d
           - ./log:/var/log/nginx
           - ./www:/var/www
-          - /etc/letsencrypt:/etc/letsencrypt
+          - ./etc/letsencrypt:/etc/letsencrypt
         restart: always  
         container_name: lnmp-nginx-alpine # 容器名称
         networks:
