@@ -1,5 +1,5 @@
 FROM centos:latest
-MAINTAINER lemon <lemon616@outlook.com>
+MAINTAINER Tinywan <756684177@qq.com>
 
 ENV TZ "Asia/Shanghai"
 
@@ -8,7 +8,13 @@ RUN yum install -y epel-release
 
 #安装依赖
 RUN yum -y update && \
-	yum install -y wget gcc automake autoconf libtool make gcc-c++ vixie-cron  file openssl-devel sharutils zip  bash vim cyrus-sasl-devel libmemcached libmemcached-devel libyaml libyaml-devel unzip libvpx-devel openssl-devel ImageMagick-devel autoconf tar gcc libxml2-devel libmcrypt mcrypt mhash libmcrypt-devel libxml2 libxml2-devel bzip2 bzip2-devel curl curl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel bison libtool-ltdl-devel net-tools
+	yum install -y wget gcc automake autoconf libtool make gcc-c++ vixie-cron  \
+	file openssl-devel sharutils zip  bash vim cyrus-sasl-devel libmemcached \
+	libmemcached-devel libyaml libyaml-devel unzip libvpx-devel openssl-devel \
+	ImageMagick-devel autoconf tar gcc libxml2-devel libmcrypt mcrypt mhash \
+	libmcrypt-devel libxml2 libxml2-devel bzip2 bzip2-devel curl curl-devel \
+	libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel bison \
+	libtool-ltdl-devel net-tools
 
 RUN yum install -y \
 	git zlib zlib-devel glibc glibc-devel \
@@ -32,8 +38,8 @@ RUN cd /tmp && \
 	./configure \
 	--prefix=/usr/local/php7 \
 	--with-config-file-path=/usr/local/php7/etc   \
-	--with-fpm-user=www \
-	--with-fpm-group=www \
+	--with-fpm-user=www-data \
+	--with-fpm-group=www-data \
 	--with-mysql-sock=/var/run/mysqld/mysqld.sock \
 	--with-mysqli \
 	--enable-fpm  \
@@ -112,10 +118,10 @@ RUN sed -i -e 's/listen = 127.0.0.1:9000/listen = 9000/' /usr/local/php7/etc/php
 #add extension
 
 #安装composer.phar
-# RUN cd /tmp
-# RUN wget https://getcomposer.org/composer.phar composer.phar
-# ADD composer.phar /usr/local/bin/composer
-# RUN chmod 755 /usr/local/bin/composer
+RUN cd /tmp
+RUN wget https://getcomposer.org/composer.phar composer.phar
+ADD composer.phar /usr/local/bin/composer
+RUN chmod 755 /usr/local/bin/composer
 
 EXPOSE 9000
 

@@ -13,18 +13,19 @@ services:
           - ./www:/var/www
           - /etc/letsencrypt:/etc/letsencrypt
         restart: always  
-        container_name: nginx-1.14.2-alpine # 容器名称
+        container_name: lnmp-nginx-alpine # 容器名称
         networks:
             - code-network
-    php:
-        image: php:7.3-fpm
+    lnmp-php:
+        image: tinywan/lnmp-php7.2.13:latest
         volumes:
             - ./www:/var/www
+            - ./etc/php.ini:/usr/local/php/etc/php.ini
             - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
             - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
         networks:
             - code-network
-        container_name: php-7.3-fpm # 容器名称   
+        container_name: lnmp-php7.2.13 # 容器名称   
 
 networks:
     code-network:
