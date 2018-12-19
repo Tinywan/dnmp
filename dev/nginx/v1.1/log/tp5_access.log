@@ -1,0 +1,5 @@
+172.19.0.1 - - [19/Dec/2018:05:55:08 +0000] "GET / HTTP/1.1" 400 673 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+172.19.0.1 - - [19/Dec/2018:05:55:30 +0000] "GET / HTTP/1.1" 200 804 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+172.19.0.1 - - [19/Dec/2018:05:55:31 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 "https://127.0.0.1:8088/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+172.19.0.1 - - [19/Dec/2018:05:55:36 +0000] "GET / HTTP/1.1" 200 804 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+172.19.0.1 - - [19/Dec/2018:05:55:40 +0000] "GET / HTTP/1.1" 200 804 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
