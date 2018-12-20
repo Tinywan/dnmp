@@ -13,7 +13,7 @@ services:
           - ./www:/var/www
           - /etc/letsencrypt:/etc/letsencrypt
         restart: always  
-        container_name: nginx-1.14.2-alpine # 容器名称
+        container_name: lnmp-nginx-v1 # 容器名称
         networks:
             - code-network
     php:
@@ -24,7 +24,7 @@ services:
             - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
         networks:
             - code-network
-        container_name: php-7.3-fpm # 容器名称   
+        container_name: lnmp-php-v1 # 容器名称   
 
 networks:
     code-network:

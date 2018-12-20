@@ -1,31 +1,26 @@
-2018/12/16 08:32:33 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:36 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:39 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:41 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:43 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:46 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:51 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:32:58 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/16 08:33:12 [emerg] 1#1: getpwnam("www") failed in /etc/nginx/nginx.conf:2
-2018/12/17 01:57:49 [error] 6#6: *1 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: 127.0.0.1, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/"
-2018/12/17 01:59:52 [error] 6#6: *1 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: 127.0.0.1, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8088", referrer: "http://127.0.0.1:8088/"
-2018/12/17 02:07:13 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:16 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:19 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:21 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:24 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:27 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:31 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:38 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:07:52 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:08:19 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:08:58 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:01 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:07 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:10 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:12 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:15 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:19 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:26 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:09:40 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
-2018/12/17 02:10:06 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/www.conf:30
+2018/12/19 05:47:33 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:47:36 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:47:38 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:47:41 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:47:43 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:47:45 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:51:06 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:08 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:10 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:13 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:15 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:17 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:51:22 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:2
+2018/12/19 05:52:21 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:1
+2018/12/19 05:52:23 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:1
+2018/12/19 05:52:25 [emerg] 1#1: getpwnam("root") failed (2: No such file or directory) in /etc/nginx/nginx.conf:1
+2018/12/19 05:52:42 [emerg] 1#1: BIO_new_file("/etc/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:52:45 [emerg] 1#1: BIO_new_file("/etc/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:52:47 [emerg] 1#1: BIO_new_file("/etc/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/19 05:52:50 [emerg] 1#1: BIO_new_file("/etc/ssl.crt") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/ssl.crt','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:16:50 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:16:53 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:16:55 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:16:58 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:17:00 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 03:17:03 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)

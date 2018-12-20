@@ -1,7 +1,9 @@
 version: '3'
 
 services:
-    nginx:
+    lnmp-nginx:
+        depends_on:
+            - lnmp-php
         image: nginx:1.14.2-alpine
         ports:
             - 8088:80
@@ -11,23 +13,53 @@ services:
           - ./conf/conf.d:/etc/nginx/conf.d
           - ./log:/var/log/nginx
           - ./www:/var/www
-          - /etc/letsencrypt:/etc/letsencrypt
+          - ./etc/letsencrypt:/etc/letsencrypt
         restart: always  
-        container_name: nginx-1.14.2-alpine-tp51 # 容器名称
+        container_name: lnmp-nginx-v3 # 容器名称
         networks:
-            - code-network
-    php-fpm:
-        image: php:7.3-fpm
+            - frontend
+    lnmp-php:
+        depends_on:
+            - lnmp-mysql
+            - lnmp-redis
+        image: tinywan/lnmp-php7.2.13:latest
         volumes:
             - ./www:/var/www
+            - ./etc/php.ini:/usr/local/php/etc/php.ini
             - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
             - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
         networks:
-            - code-network
-        container_name: php-7.3-fpm-tp51 # 容器名称   
-
+            - frontend
+            - backend    
+        container_name: lnmp-php7.3-v3 # 容器名称   
+    lnmp-mysql:
+        image: hub.c.163.com/library/mysql:latest
+        hostname: lnmp-mysql-v3
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./etc/mysql/data:/var/lib/mysql
+            - ./etc/mysql/my.cnf:/etc/my.cnf
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456789
+        networks:
+            - backend
+        restart: always
+        container_name: lnmp-mysql-v3
+    lnmp-redis:
+        image: yahuiwong/lnmp:redis3.2.9
+        hostname: lnmp-redis-v3
+        ports:
+            - "63789:63789"
+        networks:
+            - backend      
+        volumes:
+            - ./etc/redis/redis.conf:/usr/local/redis/redis.conf
+            - ./log/redis.log:/usr/local/redis/redis.log
+        restart: always
+        container_name: lnmp-redis-v3
 networks:
-    code-network:
-        driver: bridge
-volumes:
-    phpsocket:        
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge   
