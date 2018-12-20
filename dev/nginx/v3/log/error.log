@@ -24,3 +24,7 @@
 2018/12/20 03:16:58 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
 2018/12/20 03:17:00 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
 2018/12/20 03:17:03 [emerg] 1#1: BIO_new_file("/etc/letsencrypt/fullchain.cer") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/letsencrypt/fullchain.cer','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/12/20 14:36:52 [emerg] 1#1: host not found in upstream "lnmp-php7.3-v3" in /etc/nginx/conf.d/www.conf:33
+2018/12/20 14:36:56 [emerg] 1#1: host not found in upstream "lnmp-php7.3-v3" in /etc/nginx/conf.d/www.conf:33
+2018/12/20 14:36:59 [emerg] 1#1: host not found in upstream "lnmp-php7.3-v3" in /etc/nginx/conf.d/www.conf:33
+2018/12/20 14:37:03 [emerg] 1#1: host not found in upstream "lnmp-php7.3-v3" in /etc/nginx/conf.d/www.conf:33
