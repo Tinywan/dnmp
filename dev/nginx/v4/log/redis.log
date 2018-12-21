@@ -45,3 +45,21 @@
 1:M 21 Dec 2018 02:00:57.006 # Server initialized
 1:M 21 Dec 2018 02:00:57.018 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
 1:M 21 Dec 2018 02:00:57.030 * Ready to accept connections
+1:signal-handler (1545362551) Received SIGTERM scheduling shutdown...
+1:M 21 Dec 2018 03:22:31.994 # User requested shutdown...
+1:M 21 Dec 2018 03:22:31.998 * Calling fsync() on the AOF file.
+1:M 21 Dec 2018 03:22:32.012 * Removing the pid file.
+1:M 21 Dec 2018 03:22:32.014 # Redis is now ready to exit, bye bye...
+1:C 21 Dec 2018 03:56:49.028 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 21 Dec 2018 03:56:49.032 # Redis version=5.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 21 Dec 2018 03:56:49.034 # Configuration loaded
+1:M 21 Dec 2018 03:56:49.037 * Running mode=standalone, port=63789.
+1:M 21 Dec 2018 03:56:49.039 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 21 Dec 2018 03:56:49.041 # Server initialized
+1:M 21 Dec 2018 03:56:49.043 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+1:M 21 Dec 2018 03:56:49.045 * Ready to accept connections
+1:signal-handler (1545369571) Received SIGTERM scheduling shutdown...
+1:M 21 Dec 2018 05:19:31.457 # User requested shutdown...
+1:M 21 Dec 2018 05:19:31.459 * Calling fsync() on the AOF file.
+1:M 21 Dec 2018 05:19:31.472 * Removing the pid file.
+1:M 21 Dec 2018 05:19:31.473 # Redis is now ready to exit, bye bye...
