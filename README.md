@@ -1,3 +1,4 @@
+![images](images/LempStackWithDockerCompose.png)
 ## 版本
 ```java
 docker-lnmp
