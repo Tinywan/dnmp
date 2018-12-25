@@ -3,7 +3,7 @@
 $redis = new \Redis();
 var_dump($redis);
 try {
-    $redis->connect('lnmp-redis-v3', 63789);
+    $redis->connect('lnmp-redis-v4', 63789);
     var_dump($redis->keys("*"));
 } catch (\Exception $e) {
     var_dump($e->getMessage());
