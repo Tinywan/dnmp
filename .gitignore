@@ -8,3 +8,12 @@ data
 /dev/nginx/v4/etc/letsencrypt/tinywan.top.key
 /dev/nginx/v5/www/tp5.1
 /dev/nginx/v4/www/tp5.1
+/product/etc/letsencrypt/account.conf
+/product/etc/letsencrypt/ca
+/product/etc/letsencrypt/tinywan.top
+/production/etc/letsencrypt/account.conf
+/production/etc/letsencrypt/ca
+/production/etc/letsencrypt/tinywan.top
+/development/nginx/v5/etc/letsencrypt/account.conf
+/development/nginx/v5/etc/letsencrypt/ca
+/development/nginx/v5/etc/letsencrypt/tinywan.top

@@ -10,8 +10,8 @@ docker-lnmp
 ```
 ## 项目结构  
 ```java
-docker-lnmp
-└── vn
+development
+└── v1
     ├── conf                    -- Nginx 配置目录
     │   ├── conf.d
     │   │   └── www.conf        -- Nginx 扩展配置文件
@@ -49,79 +49,29 @@ docker-lnmp
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-## 部署
-* 项目目录：`docker-lnmp\dev\nginx\v1`
+## 如何使用
+#### 启动 
+* 拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
+* 进入目录：`cd production` 
 * 启动所有容器 
     ```java
     $ docker-compose up -d
-    $ docker-compose up -d
-    Restarting lnmp-nginx-v3  ... done
-    Restarting lnmp-php7.3-v3 ... done
-    Restarting lnmp-mysql-v3  ... done
-    Restarting lnmp-redis-v3  ... done
+    Starting lnmp-redis ... done
+    Starting lnmp-mysql ... done
+    Starting lnmp-php7.2 ... done
+    Recreating lnmp-nginx ... done
     ```
-* 浏览器输入：`https://127.0.0.1:8088/index/index/index`
-    * 支持Https `https://lnmp-v2.frps.tinywan.top/`
-    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
-* 重启所有容器
-    ```java
-    $ docker-compose restart
-    Restarting lnmp-nginx-v3  ... done
-    Restarting lnmp-php7.3-v3 ... done
-    Restarting lnmp-mysql-v3  ... done
-    Restarting lnmp-redis-v3  ... done
-    ```
-* 停止所有容器
-    ```java
-    $ docker-compose stop
-    Restarting lnmp-nginx-v3  ... done
-    Restarting lnmp-php7.3-v3 ... done
-    Restarting lnmp-mysql-v3  ... done
-    Restarting lnmp-redis-v3  ... done
-    ```
-* 进入Docker 容器 `$ docker exec -it lnmp-php7.3-v3 bash`
-    > Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
-
-## 案例
-#### 连接Redis
-```php
-<?php
-    $redis = new \Redis();
-    var_dump($redis);
-    try {
-        $redis->connect('lnmp-redis-v3', 63789);
-        var_dump($redis->keys("*"));
-    } catch (\Exception $e) {
-        var_dump($e->getMessage())  ;
-    }
-```
-> 注意：连接主机为`lnmp-redis-v3`
-
-#### 连接MySQL
-```php
-<?php
-    $servername = "lnmp-mysql-v3";
-    $username = "root";
-    $password = "123456";
-    $dbname = "docker";
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    if (!$conn) {
-        die("连接失败: " . mysqli_connect_error());
-    }
-
-    $sql = "SELECT id,name FROM test";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "id: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
-        }
-    } else {
-        echo "0 结果";
-    }
-    mysqli_close($conn);
-```
-> 注意：连接主机为`lnmp-mysql-v3`
+* 进入Docker 容器  
+    * Linux 环境`$ docker exec -it lnmp-php7.3-v3 bash`
+    * Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
+#### 测试  
+* 浏览器访问  
+    * PHP 安装信息：`http://127.0.0.1/` 
+    * Redis 扩展：`http://127.0.0.1/redis.php` 
+    * MySQL 扩展：`http://127.0.0.1/mysql.php` 
+* 注意连接：
+    * Redis 容器内连接，连接主机为：`lnmp-redis`
+    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
 
 ## 通过Docker 生成 Https
 
@@ -156,6 +106,26 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 -e Ali_Key="LTAInNlMZ" -e Ali_Secret="zLzefTpRA" neilpang/acme.sh --issue --dns dns_ali \
 -d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
 ```
+## 其他
+* 浏览器输入：`https://127.0.0.1:8088/index/index/index`
+    * 支持Https `https://lnmp-v2.frps.tinywan.top/`
+    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
+* 重启所有容器
+    ```java
+    $ docker-compose restart
+    Restarting lnmp-nginx-v3  ... done
+    Restarting lnmp-php7.3-v3 ... done
+    Restarting lnmp-mysql-v3  ... done
+    Restarting lnmp-redis-v3  ... done
+    ```
+* 停止所有容器
+    ```java
+    $ docker-compose stop
+    Restarting lnmp-nginx-v3  ... done
+    Restarting lnmp-php7.3-v3 ... done
+    Restarting lnmp-mysql-v3  ... done
+    Restarting lnmp-redis-v3  ... done
+    ```
 ## 参考
 * [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 * [docker-openresty](https://github.com/openresty/docker-openresty)
