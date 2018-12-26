@@ -2,7 +2,6 @@
 /dev/nginx/v2/www/tp5.2
 data
 /dev/openresty/v1/www/tp5.1
-/dev/nginx/v5/etc/letsencrypt
 /dev/nginx/v4/etc/letsencrypt/fullchain.cer
 /dev/nginx/v4/etc/letsencrypt/openssl.crt
 /dev/nginx/v4/etc/letsencrypt/openssl.key

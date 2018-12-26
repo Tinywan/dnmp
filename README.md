@@ -61,8 +61,8 @@ docker-lnmp
     Restarting lnmp-redis-v3  ... done
     ```
 * 浏览器输入：`https://127.0.0.1:8088/index/index/index`
-    > 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
-    > 支持Https `https://lnmp-v2.frps.tinywan.top/`
+    * 支持Https `https://lnmp-v2.frps.tinywan.top/`
+    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 * 重启所有容器
     ```java
     $ docker-compose restart
@@ -95,7 +95,7 @@ docker-lnmp
         var_dump($e->getMessage())  ;
     }
 ```
-> 注意：连接主机为`hostname: lnmp-redis-v3`
+> 注意：连接主机为`lnmp-redis-v3`
 
 #### 连接MySQL
 ```php
@@ -121,13 +121,14 @@ docker-lnmp
     }
     mysqli_close($conn);
 ```
-> 注意：连接主机为`hostname: lnmp-mysql-v3`
+> 注意：连接主机为`lnmp-mysql-v3`
 
 ## 通过Docker 生成 Https
 
 ```
-$ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh -e Ali_Key="LTAIn" -e Ali_Secret="zLzA" neilpang/acme.sh --issue --dns dns_ali -d tinywan.t
-op -d *.tinywan.top
+$ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
+-e Ali_Key="LTAIn" -e Ali_Secret="zLzA" neilpang/acme.sh --issue --dns dns_ali \
+-d tinywan.top -d *.tinywan.top
 [Tue Dec 25 01:44:38 UTC 2018] Registering account
 [Tue Dec 25 01:44:40 UTC 2018] Registered
 [Tue Dec 25 01:44:40 UTC 2018] ACCOUNT_THUMBPRINT='UjJGcl0AYEvwHhkimYhobMKf3vIIFItPd2g4Y7HAUmI'
@@ -137,19 +138,7 @@ op -d *.tinywan.top
 [Tue Dec 25 01:44:40 UTC 2018] Getting domain auth token for each domain
 [Tue Dec 25 01:44:41 UTC 2018] Getting webroot for domain='tinywan.top'
 [Tue Dec 25 01:44:41 UTC 2018] Getting webroot for domain='*.tinywan.top'
-[Tue Dec 25 01:44:41 UTC 2018] Found domain api file: /root/.acme.sh/dnsapi/dns_ali.sh
-[Tue Dec 25 01:44:42 UTC 2018] Found domain api file: /root/.acme.sh/dnsapi/dns_ali.sh
-[Tue Dec 25 01:44:43 UTC 2018] Sleep 120 seconds for the txt records to take effect
-[Tue Dec 25 01:46:44 UTC 2018] Verifying:tinywan.top
-[Tue Dec 25 01:46:47 UTC 2018] Success
-[Tue Dec 25 01:46:47 UTC 2018] Verifying:*.tinywan.top
-[Tue Dec 25 01:46:51 UTC 2018] Success
-[Tue Dec 25 01:46:51 UTC 2018] Removing DNS records.
-[Tue Dec 25 01:46:54 UTC 2018] Verify finished, start to sign.
-[Tue Dec 25 01:46:57 UTC 2018] Cert success.
------BEGIN CERTIFICATE-----
-MIIFXDCCBESgAwIBAgISAxdu6rCkYCOfSo3YSzuLV0RKMA0GCSqGSIb3DQEBCwUA
------END CERTIFICATE-----
+....
 [Tue Dec 25 01:46:57 UTC 2018] Your cert is in  /acme.sh/tinywan.top/tinywan.top.cer
 [Tue Dec 25 01:46:57 UTC 2018] Your cert key is in  /acme.sh/tinywan.top/tinywan.top.key
 [Tue Dec 25 01:46:57 UTC 2018] The intermediate CA cert is in  /acme.sh/tinywan.top/ca.cer
@@ -163,10 +152,11 @@ MIIFXDCCBESgAwIBAgISAxdu6rCkYCOfSo3YSzuLV0RKMA0GCSqGSIb3DQEBCwUA
 * `Ali_Secret` 阿里云 Access Key Secret
 > 如果是二级域名,则应该多追加域名：`*.frps.tinywan.top`
 ```
-docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh -e Ali_Key="LTAInNlMZ" -e Ali_Secret="zLzefTpRA" neilpang/acme.sh --issue --dns dns_ali -d tinywan.
-top -d *.tinywan.top -d *.frps.tinywan.top
+docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
+-e Ali_Key="LTAInNlMZ" -e Ali_Secret="zLzefTpRA" neilpang/acme.sh --issue --dns dns_ali \
+-d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
 ```
-## HELP
+## 参考
 * [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 * [docker-openresty](https://github.com/openresty/docker-openresty)
 
