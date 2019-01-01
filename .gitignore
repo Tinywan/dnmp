@@ -17,3 +17,6 @@ data
 /development/nginx/v5/etc/letsencrypt/account.conf
 /development/nginx/v5/etc/letsencrypt/ca
 /development/nginx/v5/etc/letsencrypt/tinywan.top
+runtime
+thinkphp
+vendor

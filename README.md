@@ -1,14 +1,16 @@
 ![images](images/LempStackWithDockerCompose.png)
-## 版本
+
+##  版本
 ```java
 docker-lnmp
 ├── v1      -- Nginx + PHHP-FPM
 ├── v2      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0
 ├── v3      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2 Private
 ├── v4      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official
-└── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
+├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
+└── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS + Crontab
 ```
-## 项目结构  
+##  项目结构  
 ```java
 development
 └── v1
@@ -49,11 +51,11 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-## 如何使用
-#### 启动 
-* 拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
-* 进入目录：`cd production` 
-* 启动所有容器 
+##  如何使用
+####    启动 
+*   拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
+*   进入目录：`cd production` 
+*   启动所有容器 
     ```java
     $ docker-compose up -d
     Starting lnmp-redis ... done
@@ -61,7 +63,7 @@ development
     Starting lnmp-php7.2 ... done
     Recreating lnmp-nginx ... done
     ```
-* 进入Docker 容器  
+*   进入Docker 容器  
     * Linux 环境`$ docker exec -it lnmp-php7.3-v3 bash`
     * Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
 #### 测试  
@@ -94,12 +96,15 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 [Tue Dec 25 01:46:57 UTC 2018] The intermediate CA cert is in  /acme.sh/tinywan.top/ca.cer
 [Tue Dec 25 01:46:57 UTC 2018] And the full chain certs is there:  /acme.sh/tinywan.top/fullchain.cer
 ```
+
 > 保存目录
 * Linux 环境 : `/home/www/openssl`
 * Windows 环境 : `D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt`
+
 > 参数详解（阿里云后台获取的密钥）
 * `Ali_Key` 阿里云 AccessKey ID
 * `Ali_Secret` 阿里云 Access Key Secret
+
 > 如果是二级域名,则应该多追加域名：`*.frps.tinywan.top`
 ```
 docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
@@ -107,10 +112,10 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 -d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
 ```
 ## 其他
-* 浏览器输入：`https://127.0.0.1:8088/index/index/index`
+*   浏览器输入：`https://127.0.0.1:8088/index/index/index`
     * 支持Https `https://lnmp-v2.frps.tinywan.top/`
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
-* 重启所有容器
+*   重启所有容器
     ```java
     $ docker-compose restart
     Restarting lnmp-nginx-v3  ... done
@@ -118,7 +123,7 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     Restarting lnmp-mysql-v3  ... done
     Restarting lnmp-redis-v3  ... done
     ```
-* 停止所有容器
+*   停止所有容器
     ```java
     $ docker-compose stop
     Restarting lnmp-nginx-v3  ... done
@@ -126,17 +131,40 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     Restarting lnmp-mysql-v3  ... done
     Restarting lnmp-redis-v3  ... done
     ```
-## 参考
-* [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
-* [docker-openresty](https://github.com/openresty/docker-openresty)
 
-* 相比`nginx:latest`，`nginx:alpine`有几点优势：
+## Composer 安装依赖
+*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php7.2-v5 bash`
+*   查看 `composer`版本：`composer --version`
+    ```  
+    Composer version 1.8.0 2018-12-03 10:31:16
+    ```
+*   修改 composer 的全局配置文件（推荐方式）
+    ```
+    composer config -g repo.packagist composer https://packagist.phpcomposer.com
+    ```
+*   更新框架或者扩展
+    ```
+    /var/www/tp5.1# composer update
+    - Installing topthink/think-installer (v2.0.0): Downloading (100%)
+    - Installing topthink/framework (v5.1.32): Downloading (100%)
+    Writing lock file
+    Generating autoload files
+    ```
+##  Crontab 添加定时任务
+*   编辑`crontab -e`  
+*   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
+*   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
+
+##  参考
+*   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
+*   [docker-openresty](https://github.com/openresty/docker-openresty)
+
+*   相比`nginx:latest`，`nginx:alpine`有几点优势：
     * 用的是最新版nginx镜像，功能与`nginx:latest`一模一样
     * alpine 镜像用的是[Alpine Linux](https://alpinelinux.org/)内核，比ubuntu内核要小很多。
     * `nginx:alpine` 默认支持http2。
 
-
-* 连接Redis报错：`Connection refused`，其他客户端可以正常连接
-  > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
-* Windows 10 启动错误 `Error starting userland proxy: Bind for 127.0.0.1:3306: unexpected error Permission denied `  
-  > 检查本地是否有MySQL已经启动或者端口被占用。关闭即可 
+*   连接Redis报错：`Connection refused`，其他客户端可以正常连接
+    > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
+*   Windows 10 启动错误 `Error starting userland proxy: Bind for 127.0.0.1:3306: unexpected error Permission denied `  
+    > 检查本地是否有MySQL已经启动或者端口被占用。关闭即可 
