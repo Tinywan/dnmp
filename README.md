@@ -8,7 +8,7 @@ docker-lnmp
 ├── v3      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2 Private
 ├── v4      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official
 ├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
-└── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS + Crontab
+└── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
 ```
 ##  项目结构  
 ```java
@@ -171,9 +171,6 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
         *   2、https://docker-v6.frps.tinywan.top/
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
-
-* 进入：`docker exec -it lnmp-mysql-v6 /bin/bash`
-* 命令行连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
 ## 遇到的问题
 
