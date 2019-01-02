@@ -126,6 +126,11 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 *   重新拉取镜像：`docker-compose pull`   
 *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
+## Nginx 操作
+
+*   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
+    > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
+
 ## MySQL 操作
 
 * 进入：`docker exec -it lnmp-mysql-v6 /bin/bash`
@@ -141,6 +146,8 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     ```
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
     ```
+    > 如果你是墙内客户，务必添加以上国内镜像
+    
 *   更新框架或者扩展
     ```
     /var/www/tp5.1# composer update
@@ -154,6 +161,31 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
+## 多域名配置
+*   域名列表
+    *   HTTP访问：
+        *   1、http://localhost:8081/
+        *   2、http://localhost:8082/
+    *   HTTPS访问：    
+        *   1、https://docker-v5.frps.tinywan.top/
+        *   2、https://docker-v6.frps.tinywan.top/
+        *   3、https://docker-v7.frps.tinywan.top/
+*   配置文件列表
+
+* 进入：`docker exec -it lnmp-mysql-v6 /bin/bash`
+* 命令行连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
+
+## 遇到的问题
+
+*   连接Redis报错：`Connection refused`，其他客户端可以正常连接
+    > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
+
+*   Windows 10 启动错误 `Error starting userland proxy: Bind for 127.0.0.1:3306: unexpected error Permission denied `  
+    > 检查本地是否有MySQL已经启动或者端口被占用。关闭即可 
+
+*   Linux 环境启动的时候，MySQL总是`Restarting`：`lnmp-mysql-v6    docker-entrypoint.sh --def ...   Restarting`
+    > 解决办法：`cd etc/mysql `，查看文件权限。最暴力的：`rm -r data && mkdir data`解决问题
+
 ##  参考
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
@@ -163,7 +195,4 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     * alpine 镜像用的是[Alpine Linux](https://alpinelinux.org/)内核，比ubuntu内核要小很多。
     * `nginx:alpine` 默认支持http2。
 
-*   连接Redis报错：`Connection refused`，其他客户端可以正常连接
-    > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
-*   Windows 10 启动错误 `Error starting userland proxy: Bind for 127.0.0.1:3306: unexpected error Permission denied `  
-    > 检查本地是否有MySQL已经启动或者端口被占用。关闭即可 
+
