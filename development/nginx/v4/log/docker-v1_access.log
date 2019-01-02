@@ -1,6 +1,0 @@
-172.21.0.1 - - [25/Dec/2018:04:03:01 +0000] "GET / HTTP/1.1" 200 804 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-172.21.0.1 - - [25/Dec/2018:04:03:02 +0000] "GET /favicon.ico HTTP/1.1" 200 1150 "http://docker-v1.frp.tinywan.top:8007/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-172.21.0.1 - - [25/Dec/2018:04:03:37 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-172.21.0.1 - - [25/Dec/2018:04:03:39 +0000] "GET / HTTP/1.1" 200 120 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-172.21.0.1 - - [25/Dec/2018:04:03:42 +0000] "GET / HTTP/1.1" 200 120 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-172.21.0.1 - - [25/Dec/2018:04:03:57 +0000] "GET / HTTP/1.1" 200 48 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
