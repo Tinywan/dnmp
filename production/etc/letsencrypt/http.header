@@ -4,9 +4,9 @@ Content-Type: application/pem-certificate-chain
 Content-Length: 3596
 X-Frame-Options: DENY
 Strict-Transport-Security: max-age=604800
-Expires: Tue, 25 Dec 2018 05:33:43 GMT
+Expires: Wed, 02 Jan 2019 06:19:59 GMT
 Cache-Control: max-age=0, no-cache, no-store
 Pragma: no-cache
-Date: Tue, 25 Dec 2018 05:33:43 GMT
+Date: Wed, 02 Jan 2019 06:19:59 GMT
 Connection: keep-alive
 
