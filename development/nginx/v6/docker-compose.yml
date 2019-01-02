@@ -34,14 +34,16 @@ services:
         container_name: lnmp-php7.2-v6 # 容器名称   
     lnmp-mysql:
         image: mysql:5.7
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password # 这行代码解决无法访问的问题
         hostname: lnmp-mysql-v6
         ports:
-            - "3308:3308"
+            - "3308:3306"
         volumes:
             - ./etc/mysql/data:/var/lib/mysql
             - ./etc/mysql/my.cnf:/etc/mysql/my.cnf
         environment:
-            MYSQL_ROOT_PASSWORD: 123456    
+            MYSQL_ROOT_PASSWORD: 123456  
         networks:
             - backend
         restart: always

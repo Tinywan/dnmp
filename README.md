@@ -111,26 +111,25 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 -e Ali_Key="LTAInNlMZ" -e Ali_Secret="zLzefTpRA" neilpang/acme.sh --issue --dns dns_ali \
 -d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
 ```
-## 其他
+## 部署访问
 *   浏览器输入：`https://127.0.0.1:8088/index/index/index`
-    * 支持Https `https://lnmp-v2.frps.tinywan.top/`
+    * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
-*   重启所有容器
-    ```java
-    $ docker-compose restart
-    Restarting lnmp-nginx-v3  ... done
-    Restarting lnmp-php7.3-v3 ... done
-    Restarting lnmp-mysql-v3  ... done
-    Restarting lnmp-redis-v3  ... done
-    ```
-*   停止所有容器
-    ```java
-    $ docker-compose stop
-    Restarting lnmp-nginx-v3  ... done
-    Restarting lnmp-php7.3-v3 ... done
-    Restarting lnmp-mysql-v3  ... done
-    Restarting lnmp-redis-v3  ... done
-    ```
+
+## docker-compose常用命令
+*   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
+*   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
+*   停止`docker-compose.yml`中定义的所有服务(当前目录配置)：`docker-compose stop`
+*   停止现有 docker-compose 中的容器：`docker-compose down`（重要）
+    > 如果你修改了`docker-compose.yml`文件中的内容，请使用该命令，否则配置文件不会生效  
+    > 例如：Nginx或者 MySQL配置文件的端口
+*   重新拉取镜像：`docker-compose pull`   
+*   后台启动 docker-compose 中的容器：`docker-compose up -d`   
+
+## MySQL 操作
+
+* 进入：`docker exec -it lnmp-mysql-v6 /bin/bash`
+* 命令行连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
 ## Composer 安装依赖
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php7.2-v5 bash`
