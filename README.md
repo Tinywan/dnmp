@@ -85,6 +85,9 @@ development
 *   进入Docker 容器  
     * Linux 环境`$ docker exec -it lnmp-php7.3-v3 bash`
     * Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
+*   单独重启redis服务 `docker-compose up --no-deps -d redis` 
+    > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
+
 #### 测试  
 * 浏览器访问  
     * PHP 安装信息：`http://127.0.0.1/` 
