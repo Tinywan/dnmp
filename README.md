@@ -1,4 +1,4 @@
-![images](images/docker-composer.png)
+![images](images/docker-composer-lnmp.png)
 
 ## 使用 Ddocker-compose 部署 LNMP 环境
 
