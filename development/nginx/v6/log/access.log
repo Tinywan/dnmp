@@ -20,3 +20,4 @@
 192.168.128.1 - - [02/Jan/2019:09:17:37 +0000] "GET / HTTP/2.0" 200 23 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36" "-"
 192.168.128.1 - - [02/Jan/2019:09:17:57 +0000] "GET / HTTP/2.0" 200 87802 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36" "-"
 192.168.128.1 - - [02/Jan/2019:09:41:46 +0000] "GET / HTTP/2.0" 200 87802 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36" "-"
+192.168.128.1 - - [02/Jan/2019:09:52:00 +0000] "GET /hp/device/InternalPages/Index?id=ConfigurationPage HTTP/1.1" 200 34 "-" "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)" "-"

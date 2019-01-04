@@ -115,8 +115,10 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 *   浏览器输入：`https://127.0.0.1:8088/index/index/index`
     * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
+*   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
 ## docker-compose常用命令
+
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
 *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
 *   停止`docker-compose.yml`中定义的所有服务(当前目录配置)：`docker-compose stop`
@@ -182,7 +184,10 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 
 *   Linux 环境启动的时候，MySQL总是`Restarting`：`lnmp-mysql-v6    docker-entrypoint.sh --def ...   Restarting`
     > 解决办法：`cd etc/mysql `，查看文件权限。最暴力的：`rm -r data && mkdir data`解决问题
-
+*   ThinkPHP5，`thinkphp5 404 file_put_contents` 无法权限被拒绝
+    > 执行命令：`chmod -R 777 runtime`
+    > 如果图片上传也有问题：`chmod -R 777 upload`
+    
 ##  参考
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
@@ -191,5 +196,4 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     * 用的是最新版nginx镜像，功能与`nginx:latest`一模一样
     * alpine 镜像用的是[Alpine Linux](https://alpinelinux.org/)内核，比ubuntu内核要小很多。
     * `nginx:alpine` 默认支持http2。
-
-
+*   [Docker Volume 之权限管理(转)](https://www.cnblogs.com/jackluo/p/5783116.html)
