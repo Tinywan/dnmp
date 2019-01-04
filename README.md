@@ -2,10 +2,10 @@
 
 ## 使用 Ddocker-compose 部署 LNMP 环境
 
-### <font face="黑体">Docker 简介</font>
+### :helicopter: <font face="黑体">Docker 简介</font>
   Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
-### 为什么使用Docker
+### :steam_locomotive: 为什么使用Docker
 
 - [x] 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
 - [x] 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果  
@@ -13,7 +13,7 @@
 - [x] 高性能、超大规划的宿主机部署  
 - [x] 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
 
-###  版本
+###  :vertical_traffic_light: 版本
 ```java
 docker-lnmp
 ├── v1      -- Nginx + PHHP-FPM
@@ -23,7 +23,7 @@ docker-lnmp
 ├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
 └── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
 ```
-###  项目结构  
+###  :notebook: 项目结构  
 ```java
 development
 └── v1
@@ -64,7 +64,7 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-###  如何使用
+###  :postal_horn: 如何使用
 
 ####    部署环境要求
 
@@ -100,7 +100,7 @@ development
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
-### docker-compose常用命令
+### :hotsprings: docker-compose常用命令
 
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
 *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
@@ -111,7 +111,7 @@ development
 *   重新拉取镜像：`docker-compose pull`   
 *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
-### Nginx 操作
+### :train2: Nginx 操作
 
 *   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
@@ -143,7 +143,7 @@ development
         }
 
         # assets, media
-        location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ {
+        location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|mp3|m4a|aac||flv|wmv)$ {
             expires 7d;
             access_log off;
         }
@@ -173,13 +173,13 @@ development
     }
     ```
 
-### MySQL 操作
+### :package: MySQL 操作
 
 * 进入容器：`docker exec -it lnmp-mysql /bin/bash`
 * 容器内连接：`mysql -uroot -p123456`
 * 外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
-### Composer 安装依赖
+### :beginner: Composer 安装依赖
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   查看 `composer`版本：`composer --version`
@@ -202,13 +202,13 @@ development
     Writing lock file
     Generating autoload files
     ```
-###  Crontab 添加定时任务
+###  :bell: Crontab 添加定时任务
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-### 通过Docker 生成 Https
+### :closed_lock_with_key: 通过Docker 生成 Https
 
 ```java
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
@@ -224,7 +224,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 * `Ali_Key` 阿里云 AccessKey ID
 * `Ali_Secret` 阿里云 Access Key Secret
 
-### 多域名配置
+### :cn: 多域名配置
 *   域名列表
     *   HTTP访问：
         *   1、http://localhost:8081/
@@ -235,7 +235,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
 
-### 遇到的问题
+### :warning: 遇到的问题
 
 *   连接Redis报错：`Connection refused`，其他客户端可以正常连接
     > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
