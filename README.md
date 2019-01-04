@@ -1,6 +1,19 @@
 ![images](images/LempStackWithDockerCompose.png)
 
-##  版本
+## 使用 Ddocker-compose 部署 LNMP 环境
+
+### <font face="黑体">Docker 简介</font>
+  Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+
+### 为什么使用Docker
+
+- [x] 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
+- [x] 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果  
+- [x] 创建隔离的环境来进行测试  
+- [x] 高性能、超大规划的宿主机部署  
+- [x] 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
+
+###  版本
 ```java
 docker-lnmp
 ├── v1      -- Nginx + PHHP-FPM
@@ -10,7 +23,7 @@ docker-lnmp
 ├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
 └── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
 ```
-##  项目结构  
+###  项目结构  
 ```java
 development
 └── v1
@@ -51,7 +64,13 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-##  如何使用
+###  如何使用
+
+####    部署环境要求
+
+* 安装Docker 
+* 安装Docker-compose
+
 ####    启动 
 *   拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
 *   进入目录：`cd production` 
@@ -60,7 +79,7 @@ development
     $ docker-compose up -d
     Starting lnmp-redis ... done
     Starting lnmp-mysql ... done
-    Starting lnmp-php7.2 ... done
+    Starting lnmp-php ... done
     Recreating lnmp-nginx ... done
     ```
 *   进入Docker 容器  
@@ -75,49 +94,13 @@ development
     * Redis 容器内连接，连接主机为：`lnmp-redis`
     * MySQL 容器内连接，连接主机为：`lnmp-mysql`
 
-## 通过Docker 生成 Https
-
-```
-$ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
--e Ali_Key="LTAIn" -e Ali_Secret="zLzA" neilpang/acme.sh --issue --dns dns_ali \
--d tinywan.top -d *.tinywan.top
-[Tue Dec 25 01:44:38 UTC 2018] Registering account
-[Tue Dec 25 01:44:40 UTC 2018] Registered
-[Tue Dec 25 01:44:40 UTC 2018] ACCOUNT_THUMBPRINT='UjJGcl0AYEvwHhkimYhobMKf3vIIFItPd2g4Y7HAUmI'
-[Tue Dec 25 01:44:40 UTC 2018] Creating domain key
-[Tue Dec 25 01:44:40 UTC 2018] The domain key is here: /acme.sh/tinywan.top/tinywan.top.key
-[Tue Dec 25 01:44:40 UTC 2018] Multi domain='DNS:tinywan.top,DNS:*.tinywan.top'
-[Tue Dec 25 01:44:40 UTC 2018] Getting domain auth token for each domain
-[Tue Dec 25 01:44:41 UTC 2018] Getting webroot for domain='tinywan.top'
-[Tue Dec 25 01:44:41 UTC 2018] Getting webroot for domain='*.tinywan.top'
-....
-[Tue Dec 25 01:46:57 UTC 2018] Your cert is in  /acme.sh/tinywan.top/tinywan.top.cer
-[Tue Dec 25 01:46:57 UTC 2018] Your cert key is in  /acme.sh/tinywan.top/tinywan.top.key
-[Tue Dec 25 01:46:57 UTC 2018] The intermediate CA cert is in  /acme.sh/tinywan.top/ca.cer
-[Tue Dec 25 01:46:57 UTC 2018] And the full chain certs is there:  /acme.sh/tinywan.top/fullchain.cer
-```
-
-> 保存目录
-* Linux 环境 : `/home/www/openssl`
-* Windows 环境 : `D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt`
-
-> 参数详解（阿里云后台获取的密钥）
-* `Ali_Key` 阿里云 AccessKey ID
-* `Ali_Secret` 阿里云 Access Key Secret
-
-> 如果是二级域名,则应该多追加域名：`*.frps.tinywan.top`
-```
-docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
--e Ali_Key="LTAInNlMZ" -e Ali_Secret="zLzefTpRA" neilpang/acme.sh --issue --dns dns_ali \
--d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
-```
-## 部署访问
+#### 访问
 *   浏览器输入：`https://127.0.0.1:8088/index/index/index`
     * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
-## docker-compose常用命令
+### docker-compose常用命令
 
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
 *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
@@ -128,13 +111,14 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
 *   重新拉取镜像：`docker-compose pull`   
 *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
-## Nginx 操作
+### Nginx 操作
 
 *   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
 
 *   虚拟主机参考配置
-    ```
+
+    ```java
     server {
         listen 443 ssl http2;
         listen [::]:443 ssl http2;
@@ -189,17 +173,21 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     }
     ```
 
-## MySQL 操作
+### MySQL 操作
 
-* 进入：`docker exec -it lnmp-mysql-v6 /bin/bash`
-* 命令行连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
+* 进入容器：`docker exec -it lnmp-mysql /bin/bash`
+* 容器内连接：`mysql -uroot -p123456`
+* 外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
-## Composer 安装依赖
-*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php7.2-v5 bash`
+### Composer 安装依赖
+
+*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   查看 `composer`版本：`composer --version`
-    ```  
+
+    ```java  
     Composer version 1.8.0 2018-12-03 10:31:16
     ```
+
 *   修改 composer 的全局配置文件（推荐方式）
     ```
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
@@ -207,19 +195,36 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     > 如果你是墙内客户，务必添加以上国内镜像
     
 *   更新框架或者扩展
-    ```
+    ```java
     /var/www/tp5.1# composer update
     - Installing topthink/think-installer (v2.0.0): Downloading (100%)
     - Installing topthink/framework (v5.1.32): Downloading (100%)
     Writing lock file
     Generating autoload files
     ```
-##  Crontab 添加定时任务
-*   编辑`crontab -e`  
+###  Crontab 添加定时任务
+*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
+*   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-## 多域名配置
+### 通过Docker 生成 Https
+
+```java
+$ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
+-e Ali_Key="LTAIn" -e Ali_Secret="zLzA" neilpang/acme.sh --issue --dns dns_ali \
+-d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
+```
+
+> 保存目录
+* Linux 环境 : `/home/www/openssl`
+* Windows 环境 : `D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt`
+
+> 参数详解（阿里云后台获取的密钥）
+* `Ali_Key` 阿里云 AccessKey ID
+* `Ali_Secret` 阿里云 Access Key Secret
+
+### 多域名配置
 *   域名列表
     *   HTTP访问：
         *   1、http://localhost:8081/
@@ -230,7 +235,7 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
 
-## 遇到的问题
+### 遇到的问题
 
 *   连接Redis报错：`Connection refused`，其他客户端可以正常连接
     > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
@@ -244,7 +249,7 @@ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.
     > 执行命令：`chmod -R 777 runtime`
     > 如果图片上传也有问题：`chmod -R 777 upload`
     
-##  参考
+###  参考
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
 
