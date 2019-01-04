@@ -20,3 +20,4 @@ data
 runtime
 thinkphp
 vendor
+/development/nginx/v6/log
