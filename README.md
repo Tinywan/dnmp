@@ -1,6 +1,6 @@
 ![images](images/docker-composer-lnmp.png)
 
-使用 Ddocker-compose 部署 LNMP 环境
+#  使用 Ddocker-compose 部署 LNMP 环境
 
 ## :book: 目录
 
@@ -16,8 +16,8 @@
 * [Nginx操作](#Nginx操作)
 * [MySQL操作](#MySQL操作)
 * [Composer安装依赖](#Composer安装依赖)
-* [Crontab添加定时任务](#Crontab 添加定时任务)
-* [通过Docker生成Https](#通过Docker 生成 Https)
+* [Crontab添加定时任务](#Crontab添加定时任务)
+* [通过Docker生成Https](#通过Docker生成 Https)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
