@@ -1,6 +1,6 @@
 ![images](images/docker-composer-lnmp.png)
 
-#  使用 Ddocker-compose 部署 LNMP 环境
+#  使用 docker-compose 部署 LNMP 环境
 
 ## :book: 目录
 
@@ -10,14 +10,14 @@
 * [项目结构](#项目结构)
 * [版本更新](#版本更新)
 * [如何快速使用](#如何快速使用)
-    *   部署环境要求
-    *   快速启动
-    *   测试访问
+    *   [部署环境要求](#部署环境要求)
+    *   [快速启动](#快速启动)
+    *   [测试访问](#测试访问)
 * [Nginx操作](#Nginx操作)
 * [MySQL操作](#MySQL操作)
 * [Composer安装依赖](#Composer安装依赖)
 * [Crontab添加定时任务](#Crontab添加定时任务)
-* [通过Docker生成Https](#通过Docker生成 Https)
+* [通过Docker生成Https](#通过Docker生成Https)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -120,9 +120,11 @@ development
     ```java
     docker exec -it lnmp-nginx nginx -s reload
     ```
-    > 其他容器配置，同理。
+    > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID    
+    
+    > `nginx`为服务名称（`docker-compose.yml`）  
 
-*   修改`docker-compose.ym`l文件之后，如何使修改的`docker-compose.yml`生效
+*   修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效
 
     ```
     docker-compose up --no-deps -d  nginx
