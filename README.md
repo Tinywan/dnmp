@@ -1,11 +1,21 @@
 ![images](images/docker-composer-lnmp.png)
 
-## 使用 Ddocker-compose 部署 LNMP 环境
+使用 Ddocker-compose 部署 LNMP 环境
 
-### :helicopter: <font face="黑体">Docker 简介</font>
-  Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+## :blue_book: 目录
+* [Docker简介](#Docker简介)
+* [为什么使用Docker](#为什么使用Docker)
+* [版本更新](#版本更新)
+* [项目结构](#项目结构)
+* [版本更新](#版本更新)
+* [如何快速使用](#如何快速使用)
 
-### :steam_locomotive: 为什么使用Docker
+
+### :book: Docker简介
+
+Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+
+### :interrobang: 为什么使用Docker
 
 - [x] 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
 - [x] 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果  
@@ -13,7 +23,8 @@
 - [x] 高性能、超大规划的宿主机部署  
 - [x] 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
 
-###  :vertical_traffic_light: 版本
+###  :bookmark_tabs: 版本
+
 ```java
 docker-lnmp
 ├── v1      -- Nginx + PHHP-FPM
@@ -23,7 +34,8 @@ docker-lnmp
 ├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
 └── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
 ```
-###  :notebook: 项目结构  
+
+###  :page_with_curl: 项目结构  
 ```java
 development
 └── v1
@@ -64,17 +76,18 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-###  :postal_horn: 如何使用
+###  :postal_horn: 如何快速使用
 
 ####    部署环境要求
 
-* 安装Docker 
-* 安装Docker-compose
+* 安装 Docker 
+* 安装 Docker-compose
 
 ####    启动 
 *   拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
 *   进入目录：`cd production` 
-*   启动所有容器 
+*   启动所有容器（守护进程） 
+
     ```java
     $ docker-compose up -d
     Starting lnmp-redis ... done
@@ -82,11 +95,28 @@ development
     Starting lnmp-php ... done
     Recreating lnmp-nginx ... done
     ```
+
 *   进入Docker 容器  
+
     * Linux 环境`$ docker exec -it lnmp-php7.3-v3 bash`
+
     * Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
+
 *   单独重启redis服务 `docker-compose up --no-deps -d redis` 
     > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
+
+*   单独加载配置文件，列如修改了nginx配置文件`www.conf`中的内容，如何即使生效，请使用以下命令重启容器内的Nginx配置文件生效：
+
+    ```java
+    docker exec -it lnmp-nginx nginx -s reload
+    ```
+    > 其他容器配置，同理。
+
+*   修改`docker-compose.ym`l文件之后，如何使修改的`docker-compose.yml`生效
+
+    ```
+    docker-compose up --no-deps -d  nginx
+    ```
 
 #### 测试  
 * 浏览器访问  
