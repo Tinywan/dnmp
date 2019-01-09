@@ -9,10 +9,10 @@
 * [版本更新](#版本更新)
 * [项目结构](#项目结构)
 * [版本更新](#版本更新)
-* [如何快速使用](#:postal_horn: 如何使用)
-    *   1、部署环境要求
-    *   2、快速启动
-    *   3、测试访问
+* [如何快速使用](#如何快速使用)
+    *   部署环境要求
+    *   快速启动
+    *   测试访问
 * [Nginx操作](#Nginx操作)
 * [MySQL操作](#MySQL操作)
 * [Composer安装依赖](#Composer安装依赖)
@@ -86,7 +86,7 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-###  :postal_horn: 如何使用
+###  如何快速使用
 
 ####    部署环境要求
 
@@ -143,7 +143,7 @@ development
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
-### :hotsprings: docker-compose常用命令
+### docker-compose常用命令
 
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
 *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
@@ -154,7 +154,7 @@ development
 *   重新拉取镜像：`docker-compose pull`   
 *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
-### :train2: Nginx 操作
+### Nginx操作
 
 *   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
@@ -216,13 +216,13 @@ development
     }
     ```
 
-### :package: MySQL 操作
+### MySQL操作
 
 * 进入容器：`docker exec -it lnmp-mysql /bin/bash`
 * 容器内连接：`mysql -uroot -p123456`
 * 外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
-### :beginner: Composer 安装依赖
+### Composer安装依赖
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   查看 `composer`版本：`composer --version`
@@ -245,13 +245,14 @@ development
     Writing lock file
     Generating autoload files
     ```
-###  :bell: Crontab 添加定时任务
+### Crontab添加定时任务
+
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-### :closed_lock_with_key: 通过Docker 生成 Https
+### 通过Docker生成Https
 
 ```java
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
@@ -267,7 +268,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 * `Ali_Key` 阿里云 AccessKey ID
 * `Ali_Secret` 阿里云 Access Key Secret
 
-### :cn: 多域名配置
+### 多域名配置
 *   域名列表
     *   HTTP访问：
         *   1、http://localhost:8081/
@@ -278,7 +279,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
 
-### :warning: 遇到的问题
+### 遇到的问题
 
 *   连接Redis报错：`Connection refused`，其他客户端可以正常连接
     > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
@@ -293,6 +294,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
     > 如果图片上传也有问题：`chmod -R 777 upload`
     
 ###  参考
+
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
 
