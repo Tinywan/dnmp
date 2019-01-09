@@ -2,7 +2,8 @@
 
 使用 Ddocker-compose 部署 LNMP 环境
 
-## :blue_book: 目录
+### :book: 目录
+
 * [Docker简介](#Docker简介)
 * [为什么使用Docker](#为什么使用Docker)
 * [版本更新](#版本更新)
@@ -11,11 +12,11 @@
 * [如何快速使用](#如何快速使用)
 
 
-### :book: Docker简介
+### Docker简介
 
 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
-### :interrobang: 为什么使用Docker
+### 为什么使用Docker
 
 - [x] 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
 - [x] 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果  
@@ -23,7 +24,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 高性能、超大规划的宿主机部署  
 - [x] 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
 
-###  :bookmark_tabs: 版本
+### 版本更新
 
 ```java
 docker-lnmp
@@ -35,7 +36,8 @@ docker-lnmp
 └── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
 ```
 
-###  :page_with_curl: 项目结构  
+### 项目结构  
+
 ```java
 development
 └── v1
@@ -76,7 +78,7 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-###  :postal_horn: 如何快速使用
+###  :postal_horn: 如何使用
 
 ####    部署环境要求
 
