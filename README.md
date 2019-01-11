@@ -120,6 +120,8 @@ development
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
+![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
+
 #### 容器管理  
 
 *   进入Docker 容器  
