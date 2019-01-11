@@ -1,8 +1,8 @@
 ![images](images/docker-composer-lnmp.png)
 
-#  使用 docker-compose 部署 LNMP 环境
+##  使用 docker-compose 部署 LNMP 环境
 
-## :book: 目录
+### :book: 目录
 
 * [Docker简介](#Docker简介)
 * [为什么使用Docker](#为什么使用Docker)
@@ -86,14 +86,13 @@ development
             └── public
                └──index.php    -- 项目框架入口文件
 ```
-###  如何快速使用
 
-####    部署环境要求
+###    环境要求
 
-* 安装 Docker 
-* 安装 Docker-compose
+* 已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
+* 已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)  
 
-####    启动 
+###    如何快速使用 
 *   拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
 *   进入目录：`cd production` 
 *   启动所有容器（守护进程） 
@@ -105,12 +104,28 @@ development
     Starting lnmp-php ... done
     Recreating lnmp-nginx ... done
     ```
+    > 或者直接执行`./start.sh`脚本文件一键启动  
+
+* 浏览器访问  
+    * PHP 安装信息：`http://127.0.0.1/`  
+    * Redis 扩展：`http://127.0.0.1/redis.php`  
+    * MySQL 扩展：`http://127.0.0.1/mysql.php`
+
+* 注意连接：
+    * Redis 容器内连接，连接主机为：`lnmp-redis`
+    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
+
+*   浏览器输入：`https://127.0.0.1:8088/index/index/index`
+    * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
+    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
+*   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
+
+#### 容器管理  
 
 *   进入Docker 容器  
 
-    * Linux 环境`$ docker exec -it lnmp-php7.3-v3 bash`
-
-    * Windows 环境`$ winpty docker exec -it lnmp-php7.3-v3 bash`
+    * Linux 环境  `$ docker exec -it lnmp-php7.3-v3 bash`
+    * Windows 环境  `$ winpty docker exec -it lnmp-php7.3-v3 bash`
 
 *   单独重启redis服务 `docker-compose up --no-deps -d redis` 
     > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
@@ -120,32 +135,18 @@ development
     ```java
     docker exec -it lnmp-nginx nginx -s reload
     ```
-    > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID    
+    > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID  
     
     > `nginx`为服务名称（`docker-compose.yml`）  
 
 *   修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效
 
-    ```
+    ```java
     docker-compose up --no-deps -d  nginx
     ```
+    > 以上表示只是修改了`docker-compose.yml`中关于Nginx相关服务器的配置  
 
-#### 测试  
-* 浏览器访问  
-    * PHP 安装信息：`http://127.0.0.1/` 
-    * Redis 扩展：`http://127.0.0.1/redis.php` 
-    * MySQL 扩展：`http://127.0.0.1/mysql.php` 
-* 注意连接：
-    * Redis 容器内连接，连接主机为：`lnmp-redis`
-    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
-
-#### 访问
-*   浏览器输入：`https://127.0.0.1:8088/index/index/index`
-    * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
-    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
-*   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
-
-### docker-compose常用命令
+#### docker-compose常用命令
 
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
 *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
