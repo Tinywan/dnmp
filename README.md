@@ -13,11 +13,13 @@
     *   [部署环境要求](#部署环境要求)
     *   [快速启动](#快速启动)
     *   [测试访问](#测试访问)
-* [Nginx操作](#Nginx操作)
-* [MySQL操作](#MySQL操作)
-* [Composer安装依赖](#Composer安装依赖)
-* [Crontab添加定时任务](#Crontab添加定时任务)
-* [通过Docker生成Https](#通过Docker生成Https)
+* [Nginx管理](#Nginx管理)
+* [MySQL管理](#MySQL管理)
+* [Composer管理](#Composer管理)
+* [Crontab管理](#Crontab添加定时任务)
+* [证书管理](#证书管理)
+    * [本地生成HTTPS](#本地生成HTTPS)
+    * [通过Docker生成HTTPS](#通过Docker生成HTTPS)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -153,18 +155,18 @@ development
     *   查看多个容器资源使用：`docker stats lnmp-nginx lnmp-php lnmp-mysql lnmp-redis`  
     *   自定义格式的docker统计信息：`docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" lnmp-nginx lnmp-php`  
 
-#### docker-compose常用命令
+*   docker-compose常用命令
 
-*   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
-*   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
-*   停止`docker-compose.yml`中定义的所有服务(当前目录配置)：`docker-compose stop`
-*   停止现有 docker-compose 中的容器：`docker-compose down`（重要）
-    > 如果你修改了`docker-compose.yml`文件中的内容，请使用该命令，否则配置文件不会生效  
-    > 例如：Nginx或者 MySQL配置文件的端口
-*   重新拉取镜像：`docker-compose pull`   
-*   后台启动 docker-compose 中的容器：`docker-compose up -d`   
+    *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
+    *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
+    *   停止`docker-compose.yml`中定义的所有服务(当前目录配置)：`docker-compose stop`
+    *   停止现有 docker-compose 中的容器：`docker-compose down`（重要）
+        > 如果你修改了`docker-compose.yml`文件中的内容，请使用该命令，否则配置文件不会生效  
+        > 例如：Nginx或者 MySQL配置文件的端口
+    *   重新拉取镜像：`docker-compose pull`   
+    *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
-### Nginx操作
+### Nginx管理  
 
 *   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
@@ -226,13 +228,13 @@ development
     }
     ```
 
-### MySQL操作
+### MySQL管理
 
 * 进入容器：`docker exec -it lnmp-mysql /bin/bash`
 * 容器内连接：`mysql -uroot -p123456`
 * 外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 
-### Composer安装依赖
+### Composer管理
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   查看 `composer`版本：`composer --version`
@@ -255,7 +257,7 @@ development
     Writing lock file
     Generating autoload files
     ```
-### Crontab添加定时任务
+### Crontab管理
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
 *   添加Crontab任务 `crontab -e`  
@@ -264,7 +266,7 @@ development
 
 ### 证书管理
 
-#### 本地生成 HTTPS (Windows 10 环境)
+#### 本地生成HTTPS
 
 生成本地 HTTPS 加密证书的工具 [mkcert](https://github.com/FiloSottile/mkcert),一个命令就可以生成证书，不需要任何配置。
 
