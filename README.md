@@ -148,6 +148,11 @@ development
     ```
     > 以上表示只是修改了`docker-compose.yml`中关于Nginx相关服务器的配置  
 
+*   容器资源使用情况    
+    *   所有运行中的容器资源使用情况：`docker stats`  
+    *   查看多个容器资源使用：`docker stats lnmp-nginx lnmp-php lnmp-mysql lnmp-redis`  
+    *   自定义格式的docker统计信息：`docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" lnmp-nginx lnmp-php`  
+
 #### docker-compose常用命令
 
 *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
