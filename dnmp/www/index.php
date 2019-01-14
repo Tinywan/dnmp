@@ -7,7 +7,7 @@ function testRedis()
     $redis = new \Redis();
     var_dump($redis);
     try {
-        $redis->connect('lnmp-redis-v6', 63789);
+        $redis->connect('lnmp-redis', 63789);
         var_dump($redis->keys("*"));
         var_dump($redis->get("Name"));
     } catch (\Exception $e) {
@@ -19,7 +19,7 @@ function testRedis()
 // 测试MySQL
 function testMySQL()
 {
-    $servername = "lnmp-mysql-v6";
+    $servername = "lnmp-mysql";
     $username = "root";
     $password = "123456";
     $dbname = "mysql";

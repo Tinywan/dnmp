@@ -262,7 +262,73 @@ development
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-### 通过Docker生成Https
+### 证书管理
+
+#### 本地生成 HTTPS (Windows 10 环境)
+
+生成本地 HTTPS 加密证书的工具 [mkcert](https://github.com/FiloSottile/mkcert),一个命令就可以生成证书，不需要任何配置。
+
+*   本地本地`C:\Windows\System32\drivers\etc\hosts`文件，添加以下内容
+
+    ```
+    127.0.0.1	dnmp.com
+    127.0.0.1	www.dnmp.org
+    127.0.0.1	www.dnmp.cn
+    ```
+
+*   一键生成证书。进入证书存放目录：`$ cd etc/letsencrypt/`   
+
+    *   首次运行时，先生成并安装根证书  
+
+        ```
+        $ mkcert --install
+        Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
+        ```
+
+    *   自定义证书签名  
+
+        ```
+        $ mkcert dnmp.com "*.dnmp.org" "*.dnmp.cn" localhost 127.0.0.1
+        Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
+
+        Created a new certificate valid for the following names 📜
+        - "dnmp.com"
+        - "*.dnmp.org"
+        - "*.dnmp.cn"
+        - "localhost"
+        - "127.0.0.1"
+
+        Reminder: X.509 wildcards only go one level deep, so this won't match a.b.dnmp.org ℹ️
+
+        The certificate is at "./dnmp.com+4.pem" and the key at "./dnmp.com+4-key.pem" ✅
+        ```
+
+*   已经生成的证书
+
+    ```
+    $ ls etc/letsencrypt/
+    dnmp.com+4.pem  dnmp.com+4-key.pem
+    ```
+
+*   配置Nginx 虚拟主机配置文件
+
+    ```
+    server {
+        listen 443 ssl http2;
+        server_name www.dnmp.cn;
+
+        ssl_certificate /etc/letsencrypt/dnmp.com+4.pem;
+        ssl_certificate_key /etc/letsencrypt/dnmp.com+4-key.pem;
+
+        ...
+    }
+    ```
+
+*   浏览器访问效果  
+
+    ![images](images/docker-composer-https.png)
+
+#### 通过Docker生成 HTTPS
 
 ```java
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \

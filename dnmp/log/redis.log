@@ -517,3 +517,37 @@
 1:M 02 Jan 2019 09:13:51.366 # Server initialized
 1:M 02 Jan 2019 09:13:51.371 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
 1:M 02 Jan 2019 09:13:51.372 * Ready to accept connections
+1:C 14 Jan 2019 14:00:30.185 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 14 Jan 2019 14:00:30.201 # Redis version=5.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 14 Jan 2019 14:00:30.202 # Configuration loaded
+1:M 14 Jan 2019 14:00:30.207 * Running mode=standalone, port=63789.
+1:M 14 Jan 2019 14:00:30.209 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 14 Jan 2019 14:00:30.210 # Server initialized
+1:M 14 Jan 2019 14:00:30.212 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+1:M 14 Jan 2019 14:00:30.226 * Ready to accept connections
+1:signal-handler (1547474529) Received SIGTERM scheduling shutdown...
+1:M 14 Jan 2019 14:02:09.840 # User requested shutdown...
+1:M 14 Jan 2019 14:02:09.843 * Calling fsync() on the AOF file.
+1:M 14 Jan 2019 14:02:09.847 * Removing the pid file.
+1:M 14 Jan 2019 14:02:09.849 # Redis is now ready to exit, bye bye...
+1:C 14 Jan 2019 14:02:22.313 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 14 Jan 2019 14:02:22.329 # Redis version=5.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 14 Jan 2019 14:02:22.345 # Configuration loaded
+1:M 14 Jan 2019 14:02:22.362 * Running mode=standalone, port=63789.
+1:M 14 Jan 2019 14:02:22.367 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 14 Jan 2019 14:02:22.376 # Server initialized
+1:M 14 Jan 2019 14:02:22.382 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+1:M 14 Jan 2019 14:02:22.387 * Ready to accept connections
+1:signal-handler (1547475742) Received SIGTERM scheduling shutdown...
+1:M 14 Jan 2019 14:22:22.599 # User requested shutdown...
+1:M 14 Jan 2019 14:22:22.601 * Calling fsync() on the AOF file.
+1:M 14 Jan 2019 14:22:22.603 * Removing the pid file.
+1:M 14 Jan 2019 14:22:22.604 # Redis is now ready to exit, bye bye...
+1:C 14 Jan 2019 14:22:37.449 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 14 Jan 2019 14:22:37.452 # Redis version=5.0.3, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 14 Jan 2019 14:22:37.454 # Configuration loaded
+1:M 14 Jan 2019 14:22:37.467 * Running mode=standalone, port=63789.
+1:M 14 Jan 2019 14:22:37.469 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 14 Jan 2019 14:22:37.476 # Server initialized
+1:M 14 Jan 2019 14:22:37.482 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+1:M 14 Jan 2019 14:22:37.489 * Ready to accept connections

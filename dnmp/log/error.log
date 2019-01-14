@@ -1,0 +1,26 @@
+2019/01/14 14:02:27 [error] 8#8: *1 FastCGI sent in stderr: "PHP message: PHP Warning:  Redis::connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 10
+PHP message: PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26
+PHP message: PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26" while reading response header from upstream, client: 192.168.16.1, server: 127.0.0.1, request: "GET / HTTP/1.1", upstream: "fastcgi://192.168.16.2:9000", host: "127.0.0.1"
+2019/01/14 14:04:58 [warn] 9#9: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/lnmp.com+5.pem"
+2019/01/14 14:04:58 [notice] 9#9: signal process started
+2019/01/14 14:10:24 [warn] 20#20: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/lnmp.com+5.pem"
+2019/01/14 14:10:24 [notice] 20#20: signal process started
+2019/01/14 14:11:07 [warn] 26#26: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/lnmp.com+5.pem"
+2019/01/14 14:11:07 [notice] 26#26: signal process started
+2019/01/14 14:16:31 [warn] 33#33: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/lnmp.com+5.pem"
+2019/01/14 14:16:31 [notice] 33#33: signal process started
+2019/01/14 14:18:55 [warn] 39#39: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/localhost+3.pem"
+2019/01/14 14:18:55 [notice] 39#39: signal process started
+2019/01/14 14:22:40 [warn] 1#1: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/localhost+3.pem"
+2019/01/14 14:23:35 [warn] 7#7: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/localhost+3.pem"
+2019/01/14 14:23:35 [notice] 7#7: signal process started
+2019/01/14 14:26:10 [warn] 13#13: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/localhost+3.pem"
+2019/01/14 14:26:10 [notice] 13#13: signal process started
+2019/01/14 14:32:31 [warn] 22#22: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/letsencrypt/dnmp.com+4.pem"
+2019/01/14 14:32:31 [notice] 22#22: signal process started
+2019/01/14 14:33:15 [error] 27#27: *9 FastCGI sent in stderr: "PHP message: PHP Warning:  Redis::connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 10
+PHP message: PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26
+PHP message: PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26" while reading response header from upstream, client: 192.168.48.1, server: www.dnmp.cn, request: "GET / HTTP/2.0", upstream: "fastcgi://192.168.48.2:9000", host: "www.dnmp.cn"
+2019/01/14 14:33:20 [error] 27#27: *9 FastCGI sent in stderr: "PHP message: PHP Warning:  Redis::connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 10
+PHP message: PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26
+PHP message: PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /var/www/index.php on line 26" while reading response header from upstream, client: 192.168.48.1, server: www.dnmp.cn, request: "GET / HTTP/2.0", upstream: "fastcgi://192.168.48.2:9000", host: "www.dnmp.cn"
