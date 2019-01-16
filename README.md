@@ -19,7 +19,7 @@
 * [Crontab管理](#Crontab添加定时任务)
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
-    * [通过Docker生成HTTPS](#通过Docker生成HTTPS)
+    * [通过Docker生成通用HTTPS](#通过Docker生成HTTPS)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -37,7 +37,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 ### 版本更新
 
 ```java
-docker-lnmp
+dnmp
 ├── v1      -- Nginx + PHHP-FPM
 ├── v2      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0
 ├── v3      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2 Private
@@ -49,8 +49,8 @@ docker-lnmp
 ### 项目结构  
 
 ```java
-development
-└── v1
+dnmp
+└── dnmp
     ├── conf                    -- Nginx 配置目录
     │   ├── conf.d
     │   │   └── www.conf        -- Nginx 扩展配置文件
@@ -80,11 +80,6 @@ development
     └── www                     -- 项目代码目录
         └── tp5.1               -- 具体项目目录
             ├── application
-            │   └── index
-            ├── composer.json
-            ├── composer.lock
-            ├── config
-            │   ├── app.php
             └── public
                └──index.php    -- 项目框架入口文件
 ```
@@ -128,8 +123,8 @@ development
 
 *   进入Docker 容器  
 
-    * Linux 环境  `$ docker exec -it lnmp-php7.3-v3 bash`
-    * Windows 环境  `$ winpty docker exec -it lnmp-php7.3-v3 bash`
+    * Linux 环境  `$ docker exec -it lnmp-php bash`
+    * Windows 环境  `$ winpty docker exec -it lnmp-php bash`
 
 *   单独重启redis服务 `docker-compose up --no-deps -d redis` 
     > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
@@ -168,7 +163,7 @@ development
 
 ### Nginx管理  
 
-*   **配置文件注意**：配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
+*   配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
 
 *   虚拟主机参考配置
