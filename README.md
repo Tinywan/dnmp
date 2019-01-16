@@ -81,7 +81,7 @@ dnmp
         └── tp5.1               -- 具体项目目录
             ├── application
             └── public
-               └──index.php    -- 项目框架入口文件
+               └──index.php     -- 项目框架入口文件
 ```
 
 ###    环境要求
@@ -90,8 +90,8 @@ dnmp
 * 已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)  
 
 ###    如何快速使用 
-*   拉取项目：`git clone https://github.com/Tinywan/docker-lnmp.git`  
-*   进入目录：`cd production` 
+*   拉取项目：`git clone https://github.com/Tinywan/dnmp.git`  
+*   进入目录：`cd dnmp/dnmp` 
 *   启动所有容器（守护进程） 
 
     ```java
@@ -103,16 +103,10 @@ dnmp
     ```
     > 或者直接执行`./start.sh`脚本文件一键启动  
 
-* 浏览器访问  
-    * PHP 安装信息：`http://127.0.0.1/`  
-    * Redis 扩展：`http://127.0.0.1/redis.php`  
-    * MySQL 扩展：`http://127.0.0.1/mysql.php`
-
-* 注意连接：
-    * Redis 容器内连接，连接主机为：`lnmp-redis`
-    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
-
-*   浏览器输入：`https://127.0.0.1:8088/index/index/index`
+* 浏览器访问：`http://127.0.0.1/`  
+    * 注意连接：
+        * Redis 容器内连接，连接主机为：`lnmp-redis`
+        * MySQL 容器内连接，连接主机为：`lnmp-mysql`
     * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
     * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
@@ -134,11 +128,9 @@ dnmp
     ```java
     docker exec -it lnmp-nginx nginx -s reload
     ```
-    > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID  
-    
-    > `nginx`为服务名称（`docker-compose.yml`）  
+    > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID 。`nginx`为服务名称（`docker-compose.yml`）  
 
-*   修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效
+*   修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效？
 
     ```java
     docker-compose up --no-deps -d  nginx
