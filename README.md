@@ -84,12 +84,12 @@ dnmp
                └──index.php     -- 项目框架入口文件
 ```
 
-###    环境要求
+### 环境要求   
 
-* 已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
-* 已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)  
+*   已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
+*   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)  
 
-###    如何快速使用 
+### 如何快速使用 
 *   拉取项目：`git clone https://github.com/Tinywan/dnmp.git`  
 *   进入目录：`cd dnmp/dnmp` 
 *   启动所有容器（守护进程） 
