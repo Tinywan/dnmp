@@ -21,7 +21,7 @@
 * [Crontab管理](#Crontab添加定时任务)
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
-    * [通过Docker生成通用HTTPS](#通过Docker生成HTTPS)
+    * [Docker生成HTTPS](#Docker生成HTTPS)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -157,8 +157,8 @@ dnmp
 
 ### Nginx管理  
 
-*   配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
-    > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
+*   配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口一一对应
+    > 列如：`conf/conf.d/www.conf`中配置端口为 `80`,则映射端口也`80`，对应的映射端口为：`8088:80`
 
 *   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
 
@@ -191,13 +191,8 @@ dnmp
 
 ### Composer管理
 
-*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
+*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
 *   查看 `composer`版本：`composer --version`
-
-    ```java  
-    Composer version 1.8.0 2018-12-03 10:31:16
-    ```
-
 *   修改 composer 的全局配置文件（推荐方式）
     ```
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
@@ -214,7 +209,7 @@ dnmp
     ```
 ### Crontab管理
 
-*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php bash`
+*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
 *   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
@@ -338,7 +333,7 @@ dnmp
 
     ![images](images/docker-composer-https.png)
 
-#### 通过Docker生成 HTTPS
+#### Docker生成HTTPS
 
 ```java
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
@@ -384,9 +379,4 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
-
-*   相比`nginx:latest`，`nginx:alpine`有几点优势：
-    * 用的是最新版nginx镜像，功能与`nginx:latest`一模一样
-    * alpine 镜像用的是[Alpine Linux](https://alpinelinux.org/)内核，比ubuntu内核要小很多。
-    * `nginx:alpine` 默认支持http2。
 *   [Docker Volume 之权限管理(转)](https://www.cnblogs.com/jackluo/p/5783116.html)
