@@ -160,62 +160,7 @@ dnmp
 *   配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口对应
     > 列如：`conf/conf.d/www.conf`中配置端口为 `8888`,则映射端口也`8888`，对应的映射端口为：`8080:8888`
 
-*   虚拟主机参考配置
-
-    ```java
-    server {
-        listen 443 ssl http2;
-        listen [::]:443 ssl http2;
-
-        server_name docker.tinywan.top;
-        set $base /var/www/docker;
-        root $base;
-
-        ssl_certificate /etc/letsencrypt/docker.tinywan.top/fullchain.cer;
-        ssl_certificate_key /etc/letsencrypt/docker.tinywan.top/docker.tinywan.top.key;
-
-        location / {
-            if (!-e $request_filename) {
-                rewrite  ^(.*)$  /index.php?s=$1  last;
-                break;
-            }
-        }
-
-        # . files
-        location ~ /\.(?!well-known) {
-            deny all;
-        }
-
-        # assets, media
-        location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|mp3|m4a|aac||flv|wmv)$ {
-            expires 7d;
-            access_log off;
-        }
-
-        # svg, fonts
-        location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {
-            add_header Access-Control-Allow-Origin "*";
-            expires 7d;
-            access_log off;
-        }
-
-        location ~ \.php$ {
-            # 404
-            try_files $fastcgi_script_name =404;
-
-            # default fastcgi_params
-            include        fastcgi_params;
-
-            # fastcgi settings
-            fastcgi_pass lnmp-php:9000;
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_index   index.php;
-            fastcgi_buffers 8 16k;
-            fastcgi_buffer_size 32k;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        }
-    }
-    ```
+*   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
 
 ### MySQL管理
 
@@ -224,20 +169,17 @@ dnmp
 *   外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 *   数据库的数据-备份-恢复  
     *   导出数据库中的所有表结构和数据（备份）
-        > 只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql` 
+        > 只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
 
         > 只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
 
         > 导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
 
-    *   导入（恢复）
-    
-        ```
-        docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql
-        ```
+    *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`
 
 ### PHP管理
 
+*   进入php容器 `docker exec -it lnmp-php /bin/bash`  
 *   重启php服务 `docker-compose restart php`
 
 ### Redis管理
