@@ -41,11 +41,12 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 ```java
 dnmp
 ├── v1      -- Nginx + PHHP-FPM
-├── v2      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0
-├── v3      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2 Private
-├── v4      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official
-├── v5      -- Alpine Nginx + Tinywan/PHP7.2.3 + PHPRedis4.0 + MySQL5.7 Official + Reids5.0 Official + HTTPS
-└── v6      -- Alpine Nginx + Tinywan/PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
+├── v2      -- Nginx + PHP7.2.3 + PHPRedis4.0
+├── v3      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2
+├── v4      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0
+├── v5      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0  + HTTPS
+├── v6      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
+└── v7      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket  
 ```
 
 ### 项目结构  
