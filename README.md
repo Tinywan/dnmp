@@ -15,6 +15,7 @@
     *   [测试访问](#测试访问)
 * [Nginx管理](#Nginx管理)
 * [MySQL管理](#MySQL管理)
+* [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
 * [Crontab管理](#Crontab添加定时任务)
 * [证书管理](#证书管理)
@@ -217,9 +218,25 @@ dnmp
 
 ### MySQL管理
 
-* 进入容器：`docker exec -it lnmp-mysql /bin/bash`
-* 容器内连接：`mysql -uroot -p123456`
-* 外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
+*   进入容器：`docker exec -it lnmp-mysql /bin/bash`
+*   容器内连接：`mysql -uroot -p123456`
+*   外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
+*   数据库的数据-备份-恢复  
+    *   导出数据库中的所有表结构和数据（备份）：`docker exec -it lnmp-mysql mysqldump -uroot -p123456 test > test.sql`  
+        > 只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql` 
+
+        > 只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
+
+        > 导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
+
+    *   导入（恢复）：`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`
+
+### Redis管理
+
+*   连接Redis容器：`docker exec -it lnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
+*   通过容器连接：`docker exec -it lnmp-redis redis-cli -h lnmp-redis -p 63789`  
+*   单独重启redis服务 `docker-compose up --no-deps -d redis`
+*   外部宿主机连接：`redis-cli -h 127.0.0.1 -p 63789`
 
 ### Composer管理
 
@@ -357,7 +374,8 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   ThinkPHP5，`thinkphp5 404 file_put_contents` 无法权限被拒绝
     > 执行命令：`chmod -R 777 runtime`
     > 如果图片上传也有问题：`chmod -R 777 upload`
-    
+*   权限问题：`mkdir(): Permission denied`，解决办法：`sudo chmod -R 777 tp5.1/`
+
 ###  参考
 
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
