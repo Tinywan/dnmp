@@ -23,6 +23,9 @@ services:
             - mysql
             - redis
         image: tinywan/lnmp:php7.2.13-v1
+        ports:
+            - "9000:9000"
+            #- "9502:9502"
         volumes:
             - ./www:/var/www
             - ./etc/php.ini:/usr/local/php/etc/php.ini

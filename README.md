@@ -17,6 +17,7 @@
 * [MySQL管理](#MySQL管理)
 * [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
+* [WebSocket管理](#WebSocket管理)
 * [Crontab管理](#Crontab添加定时任务)
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
@@ -235,6 +236,10 @@ dnmp
         docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql
         ```
 
+### PHP管理
+
+*   重启php服务 `docker-compose restart php`
+
 ### Redis管理
 
 *   连接Redis容器：`docker exec -it lnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
@@ -271,6 +276,53 @@ dnmp
 *   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
+
+### WebSocket管理  
+
+在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)  
+
+*   进入`lnmp-php`容器：`docker exec -it lnmp-php /bin/bash`  
+*   以daemon（守护进程）方式启动：` php ../workerman/start.php start -d`  
+*   配置`docker-compose.yml` 文件中对应的映射端口  
+
+    ```
+    php:
+        ports:
+            - "9000:9000"
+            - "9502:9502"
+    ```
+
+*   可能会遇到的问题，如果使用阿里云ESC，务必在**安全组**增加**入方向**和**出方向**端口配置
+
+    ```
+    协议类型：自定义 TCP
+    端口范围：9502/9502
+    授权对象：0.0.0.0/0
+    ```
+
+*   宿主机可以查看对应端口号是否已经映射成功：`ps -aux|grep 9502`，打印:`WorkerMan: worker process  AppGateway websocket://0.0.0.0:9502`
+*   通过`telnet`命令检测远程端口是否打开
+
+    ```
+    telnet 127.0.0.1 9502
+    Trying 127.0.0.1...
+    Connected to 127.0.0.1.
+    Escape character is '^]'.
+    ```
+    > 出现Connected表示连通了
+
+*   通过Console测试是否
+
+    ```
+    var ws = new WebSocket('ws://宿主机公网ip:9502/');
+    ws.onmessage = function(event) {
+        console.log('MESSAGE: ' + event.data);
+    };
+    ƒ (event) {
+        console.log('MESSAGE: ' + event.data);
+    }
+    MESSAGE: {"type":"docker","text":"Hi Tinywan"}
+    ```  
 
 ### 证书管理
 
