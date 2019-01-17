@@ -282,7 +282,7 @@ dnmp
 在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)  
 
 *   进入`lnmp-php`容器：`docker exec -it lnmp-php /bin/bash`  
-*   以daemon（守护进程）方式启动：` php ../workerman/start.php start -d`  
+*   以daemon（守护进程）方式启动 workerman ：` php ../workerman/start.php start -d`  
 *   配置`docker-compose.yml` 文件中对应的映射端口  
 
     ```
@@ -300,7 +300,13 @@ dnmp
     授权对象：0.0.0.0/0
     ```
 
-*   宿主机可以查看对应端口号是否已经映射成功：`ps -aux|grep 9502`，打印:`WorkerMan: worker process  AppGateway websocket://0.0.0.0:9502`
+*   宿主机可以查看对应端口号是否已经映射成功
+
+    ```
+    ps -aux|grep 9502
+    WorkerMan: worker process  AppGateway websocket://0.0.0.0:9502
+    ```
+
 *   通过`telnet`命令检测远程端口是否打开
 
     ```
@@ -309,9 +315,9 @@ dnmp
     Connected to 127.0.0.1.
     Escape character is '^]'.
     ```
-    > 出现Connected表示连通了
+    > 出现`Connected`表示连通了
 
-*   通过Console测试是否
+*   通过Console测试是否支持外网访问 
 
     ```
     var ws = new WebSocket('ws://宿主机公网ip:9502/');
