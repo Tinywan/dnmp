@@ -62,6 +62,7 @@ dnmp
     │   ├── mime.types
     │   └── nginx.conf          -- Nginx 主配置文件
     ├── docker-compose.yml      -- Docker Compose 配置文件
+    ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
     ├── etc                     -- 公共配置目录
     │   ├── letsencrypt         -- Nginx 证书目录
     │   │   ├── ssl.crt
@@ -81,7 +82,7 @@ dnmp
     │   ├── access.log
     │   └── error.log           -- Nginx 系统错误日志
     └── www                     -- 项目代码目录
-        └── tp5.1               -- 具体项目目录
+        └── site               -- 具体项目目录
             ├── application
             └── public
                └──index.php     -- 项目框架入口文件
