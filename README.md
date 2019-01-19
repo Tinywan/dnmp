@@ -120,18 +120,23 @@ dnmp
 ### Nginx管理  
 
 *   配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口一一对应
+
     > 列如：`conf/conf.d/www.conf`中配置端口为 `80`,则映射端口也`80`，对应的映射端口为：`8088:80`
+
 *   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
 
 ### MySQL管理
 
 *   进入容器：`docker exec -it lnmp-mysql /bin/bash`
+
     > Windows 环境使用：`docker exec -it lnmp-mysql bash`  
+
 *   修改配置文件 `my.cnf`，重新加载：`docker-compose restart mysql` 
 *   容器内连接：`mysql -uroot -p123456`
 *   外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 *   数据库的数据-备份-恢复  
     *   导出数据库中的所有表结构和数据（备份）
+
         > 只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
 
         > 只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
@@ -144,6 +149,7 @@ dnmp
 
 *   进入php容器 `docker exec -it lnmp-php /bin/bash`  
 *   重启php服务 `docker-compose restart php`
+
     > 修改配置文件 `www.conf`，可使用该命令重新加载。  
 
 ### Redis管理
@@ -220,6 +226,7 @@ dnmp
     Connected to 127.0.0.1.
     Escape character is '^]'.
     ```
+
     > 出现`Connected`表示连通了
 
 *   通过Console测试是否支持外网访问 
@@ -243,6 +250,7 @@ dnmp
     * Windows 环境  `$ winpty docker exec -it lnmp-php bash`
 
 *   单独重启redis服务 `docker-compose up --no-deps -d redis` 
+
     > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
 
 *   单独加载配置文件，列如修改了nginx配置文件`www.conf`中的内容，如何即使生效，请使用以下命令重启容器内的Nginx配置文件生效：
@@ -250,6 +258,7 @@ dnmp
     ```java
     docker exec -it lnmp-nginx nginx -s reload
     ```
+
     > `lnmp-nginx`为容器名称（`NAMES`），也可以指定容器的ID 。`nginx`为服务名称（`docker-compose.yml`）  
 
 *   修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效？
@@ -257,6 +266,7 @@ dnmp
     ```java
     docker-compose up --no-deps -d  nginx
     ```
+
     > 以上表示只是修改了`docker-compose.yml`中关于Nginx相关服务器的配置  
 
 *   容器资源使用情况    
@@ -269,9 +279,12 @@ dnmp
     *   启动`docker-compose.yml`定义的所有服务：`docker-compose up`
     *   重启`docker-compose.yml`中定义的所有服务：`docker-compose restart`
     *   停止`docker-compose.yml`中定义的所有服务(当前目录配置)：`docker-compose stop`
-    *   停止现有 docker-compose 中的容器：`docker-compose down`（重要）
+    *   停止现有 docker-compose 中的容器：`docker-compose down`（重要） 
+
         > 如果你修改了`docker-compose.yml`文件中的内容，请使用该命令，否则配置文件不会生效  
+
         > 例如：Nginx或者 MySQL配置文件的端口
+
     *   重新拉取镜像：`docker-compose pull`   
     *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
 
