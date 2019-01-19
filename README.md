@@ -184,6 +184,7 @@ dnmp
 ### Crontab管理
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
+*   手动启动crontab，`/etc/init.d/cron start` 
 *   添加Crontab任务 `crontab -e`  
 *   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
