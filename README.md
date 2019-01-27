@@ -61,7 +61,9 @@ dnmp
     │   ├── fastcgi_params
     │   ├── mime.types
     │   └── nginx.conf          -- Nginx 主配置文件
-    ├── docker-compose.yml      -- Docker Compose 配置文件
+    ├── docker-compose.yml      -- 基础配置文件
+    ├── docker-compose.override.yml -- 开发环境配置文件，默认加载
+    ├── docker-compose.prod.yml -- 生产环境配置文件，-f 指定加载
     ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
     ├── etc                     -- 公共配置目录
     │   ├── letsencrypt         -- Nginx 证书目录
@@ -82,7 +84,7 @@ dnmp
     │   ├── access.log
     │   └── error.log           -- Nginx 系统错误日志
     └── www                     -- 项目代码目录
-        └── site               -- 具体项目目录
+        └── site                -- 具体项目目录
             ├── application
             └── public
                └──index.php     -- 项目框架入口文件
