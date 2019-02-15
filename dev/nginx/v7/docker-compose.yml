@@ -52,6 +52,7 @@ services:
             - ./log/redis.log:/data/redis.log
         restart: always
         container_name: lnmp-redis-v7
+
 networks:
   frontend:
     driver: bridge

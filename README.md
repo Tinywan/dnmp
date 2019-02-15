@@ -17,8 +17,9 @@
 * [MySQL管理](#MySQL管理)
 * [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
+* [Crontab管理](#Crontab管理)
 * [WebSocket管理](#WebSocket管理)
-* [Crontab管理](#Crontab添加定时任务)
+* [phpMyAdmin管理](#phpMyAdmin管理)
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
@@ -150,10 +151,7 @@ dnmp
 ### PHP管理
 
 *   进入php容器 `docker exec -it lnmp-php /bin/bash`
-    > 删除配置文件：
-    ```
-    vim ~/.bashrc [/bin/bash, -c, source ~/.bashrc]
-    ```
+    > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
 *   重启php服务 `docker-compose restart php`
 
     > 修改配置文件 `www.conf`，可使用该命令重新加载。  
@@ -218,18 +216,20 @@ dnmp
     source ~/.bashrc
     ```
 
-*   4、在主机的任何目录下就能用composer了
+*   4、在主机的任何目录下就能用`composer`了
     ```
     cd ~/dnmp/www/
-    composer create-project yeszao/fastphp project --no-dev
+    composer create-project topthink/think tp5.2
+    composer update topthink/framework
     ```
+    > 第一次执行提示：`Unable to find image 'composer:latest' locally`，不要慌，稍等片刻  
 
 ### Crontab管理
 
 #### 执行方案  
 
 * 1、使用主机的cron实现定时任务（推荐）
-* 2、创建一个新容器专门执行定时任务
+* 2、创建一个新容器专门执行定时任务，[crontab for docker ](https://hub.docker.com/r/willfarrell/crontab) 
 * 3、在原有容器上安装cron，里面运行2个进程
 
 #### 宿主机执行任务（推荐）  
@@ -299,7 +299,18 @@ dnmp
         console.log('MESSAGE: ' + event.data);
     }
     MESSAGE: {"type":"docker","text":"Hi Tinywan"}
-    ```  
+    ```
+
+#### phpMyAdmin管理  
+
+主机上访问phpMyAdmin的地址：`http://localhost:8080`  
+
+MySQL连接信息：
+
+* host：(本项目的MySQL容器网络)
+* port：3306
+* username：（手动在phpmyadmin界面输入）
+* password：（手动在phpmyadmin界面输入）
 
 #### 容器管理  
 
@@ -454,6 +465,14 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
     > 执行命令：`chmod -R 777 runtime`
     > 如果图片上传也有问题：`chmod -R 777 upload`
 *   权限问题：`mkdir(): Permission denied`，解决办法：`sudo chmod -R 777 tp5.1/`
+*   `docker-compose.yml`文件格式错误  
+
+    ```
+    ERROR: yaml.scanner.ScannerError: while scanning for the next token
+    found character '\t' that cannot start any token
+    in "./docker-compose.yml", line 68, column 1
+    ```
+    > 这里的原因是`docker-compose.yml`中最前面用了`tab`，改成空格就好了。对yaml文件格式要求严格  
 
 ###  参考
 
