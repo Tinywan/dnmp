@@ -149,7 +149,11 @@ dnmp
 
 ### PHP管理
 
-*   进入php容器 `docker exec -it lnmp-php /bin/bash`  
+*   进入php容器 `docker exec -it lnmp-php /bin/bash`
+    > 删除配置文件：
+    ```
+    vim ~/.bashrc [/bin/bash, -c, source ~/.bashrc]
+    ```
 *   重启php服务 `docker-compose restart php`
 
     > 修改配置文件 `www.conf`，可使用该命令重新加载。  
@@ -163,6 +167,8 @@ dnmp
 
 ### Composer管理
 
+#### 容器内
+
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
 *   查看 `composer`版本：`composer --version`
 *   修改 composer 的全局配置文件（推荐方式）
@@ -170,7 +176,6 @@ dnmp
     ```
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
     ```
-
     > 如果你是墙内客户，务必添加以上国内镜像
     
 *   更新框架或者扩展
@@ -183,7 +188,58 @@ dnmp
     Generating autoload files
     ```
 
+#### 宿主机
+
+建议在主机HOST中使用composer，避免PHP容器变得庞大，[Docker Official Images](https://hub.docker.com/_/composer)
+
+*   1、在主机创建一个目录，用以保存composer的配置和缓存文件
+    ```
+    mkdir ~/dnmp/composer
+    ```
+*   2、打开主机的 ~/.bashrc 或者 ~/.zshrc 文件，加上
+    ```
+    composer () {
+        tty=
+        tty -s && tty=--tty
+        docker run \
+            $tty \
+            --interactive \
+            --rm \
+            --user $(id -u):$(id -g) \
+            --volume ~/dnmp/composer:/tmp \
+            --volume /etc/passwd:/etc/passwd:ro \
+            --volume /etc/group:/etc/group:ro \
+            --volume $(pwd):/app \
+            composer "$@"
+    }
+    ```
+*   3、让文件起效
+    ```
+    source ~/.bashrc
+    ```
+
+*   4、在主机的任何目录下就能用composer了
+    ```
+    cd ~/dnmp/www/
+    composer create-project yeszao/fastphp project --no-dev
+    ```
+
 ### Crontab管理
+
+#### 执行方案  
+
+* 1、使用主机的cron实现定时任务（推荐）
+* 2、创建一个新容器专门执行定时任务
+* 3、在原有容器上安装cron，里面运行2个进程
+
+#### 宿主机执行任务（推荐）  
+
+```
+*/30 * * * * docker exec -it lnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
+```
+> `lnmp-php` 为容器名称
+
+#### 容器内执行任务  
 
 *   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
 *   手动启动crontab，`/etc/init.d/cron start` 
