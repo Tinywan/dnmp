@@ -47,7 +47,8 @@ dnmp
 ├── v4      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0
 ├── v5      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0  + HTTPS
 ├── v6      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
-└── v7      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket  
+├── v7      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket  
+└── v8      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket + phpmyadmin
 ```
 
 ### 项目结构  
@@ -106,7 +107,8 @@ dnmp
     Starting lnmp-redis ... done
     Starting lnmp-mysql ... done
     Starting lnmp-php ... done
-    Recreating lnmp-nginx ... done
+    Starting lnmp-nginx ... done
+    Starting lnmp-phpmyadmin ... done
     ```
     > 或者直接执行`./start.sh`脚本文件一键启动  
 
@@ -303,14 +305,8 @@ dnmp
 
 #### phpMyAdmin管理  
 
-主机上访问phpMyAdmin的地址：`http://localhost:8080`  
-
-MySQL连接信息：
-
-* host：(本项目的MySQL容器网络)
-* port：3306
-* username：（手动在phpmyadmin界面输入）
-* password：（手动在phpmyadmin界面输入）
+主机上访问phpMyAdmin的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
+> 默认登录账户：`root`，密码：`123456`
 
 #### 容器管理  
 

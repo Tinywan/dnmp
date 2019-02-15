@@ -1,31 +1,30 @@
 version: '3'
 
 services:
-    nginx:
+    lnmp-nginx:
         depends_on:
-            - php
+            - lnmp-php
         image: nginx:1.14.2-alpine
         ports:
-            - 80:80
+            - 8088:80
+            - 8081:81
+            - 127.0.0.1:8082:82
             - 443:443
         volumes:
-          - ./conf/nginx.conf:/etc/nginx/nginx.conf
+          - ./conf/nginx.conf:/etc/nginx/nginx.conf # 修改默认配置文件
           - ./conf/conf.d:/etc/nginx/conf.d
           - ./log:/var/log/nginx
           - ./www:/var/www
           - ./etc/letsencrypt:/etc/letsencrypt
         restart: always  
-        container_name: lnmp-nginx
+        container_name: lnmp-nginx-v8 # 容器名称
         networks:
             - frontend
-    php:
+    lnmp-php:
         depends_on:
-            - mysql
-            - redis
-        image: tinywan/lnmp:php7.2.13-v2
-        ports:
-            - "9000:9000"
-            #- "9502:9502"
+            - lnmp-mysql
+            - lnmp-redis
+        image: tinywan/lnmp:php7.2.13-v1
         volumes:
             - ./www:/var/www
             - ./etc/php.ini:/usr/local/php/etc/php.ini
@@ -34,12 +33,12 @@ services:
         networks:
             - frontend
             - backend    
-        container_name: lnmp-php # 容器名称   
-    mysql:
+        container_name: lnmp-php7.2-v8 # 容器名称   
+    lnmp-mysql:
         image: mysql:5.7
         restart: always
-        command: --default-authentication-plugin=mysql_native_password 
-        hostname: lnmp-mysql
+        command: --default-authentication-plugin=mysql_native_password # 这行代码解决无法访问的问题
+        hostname: lnmp-mysql-v8
         ports:
             - "3308:3306"
         volumes:
@@ -50,10 +49,10 @@ services:
         networks:
             - backend
         restart: always
-        container_name: lnmp-mysql
-    redis:
+        container_name: lnmp-mysql-v8
+    lnmp-redis:
         image: redis:5.0-alpine
-        hostname: lnmp-redis
+        hostname: lnmp-redis-v8
         ports:
             - "63789:63789"
         command: redis-server /usr/local/etc/redis/redis.conf    
@@ -63,7 +62,7 @@ services:
             - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
             - ./log/redis.log:/data/redis.log
         restart: always
-        container_name: lnmp-redis
+        container_name: lnmp-redis-v8
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         ports:
@@ -74,7 +73,7 @@ services:
         environment:
             - PMA_HOST=lnmp-mysql
             - PMA_PORT=3306
-        container_name: lnmp-phpmyadmin    
+        container_name: lnmp-phpmyadmin
 networks:
   frontend:
     driver: bridge
