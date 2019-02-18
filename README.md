@@ -146,7 +146,20 @@ dnmp
         *   只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
         *   导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
     *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`  
-        > 如果导入不成功，则删除sql文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`
+        > 如果导入不成功，检查sql文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`是否存在该内容，有则删除即可
+*   备份小脚本`mysql_auto_backup.sh`  
+
+    ```
+    #!/bin/bash
+    SHELL_NAME="mysql_auto_backup.sh"
+    SHELL_TIME=$(date '+%Y-%m-%d-%H:%M:%S')
+    SHELL_DIR="/home/www/backup"
+    DB_NAME="test"
+    BACKUP_NAME=${DB_NAME}"-${SHELL_TIME}.sql"
+
+    docker exec -it lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
+    ```
+    > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
 
 ### PHP管理
 
@@ -235,6 +248,7 @@ dnmp
 #### 宿主机执行任务（推荐）  
 
 ```
+# 2019年2月14日 @add Tinywan 获取图表数据 每3分钟执行一次
 */30 * * * * docker exec -it lnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
 ```
 > `lnmp-php` 为容器名称
