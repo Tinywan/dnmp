@@ -139,18 +139,14 @@ dnmp
 *   修改配置文件 `my.cnf`，重新加载：`docker-compose restart mysql`
 *   容器内连接：`mysql -uroot -p123456`
 *   外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
-*   数据库的数据-备份-恢复  
+*   数据-备份-恢复  
     *   导出（备份）
-
-        > 导出数据库中的所有表结构和数据：`docker exec -it lnmp-mysql mysqldump -uroot -p123456 test > test.sql`  
-
-        > 只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
-
-        > 只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
-
-        > 导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
-
-    *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`
+        *   导出数据库中的所有表结构和数据：`docker exec -it lnmp-mysql mysqldump -uroot -p123456 test > test.sql`  
+        *   只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
+        *   只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
+        *   导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
+    *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`  
+        > 如果导入不成功，则删除sql文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`
 
 ### PHP管理
 
