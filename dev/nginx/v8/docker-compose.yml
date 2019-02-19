@@ -8,13 +8,12 @@ services:
         ports:
             - 8088:80
             - 8081:81
-            - 127.0.0.1:8082:82
             - 443:443
         volumes:
-          - ./conf/nginx.conf:/etc/nginx/nginx.conf # 修改默认配置文件
-          - ./conf/conf.d:/etc/nginx/conf.d
-          - ./log:/var/log/nginx
-          - ./www:/var/www
+          - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro # 修改默认配置文件
+          - ./conf/conf.d:/etc/nginx/conf.d:ro
+          - ./log:/var/log/nginx:rw
+          - ./www:/var/www:rw
           - ./etc/letsencrypt:/etc/letsencrypt
         restart: always  
         container_name: lnmp-nginx-v8 # 容器名称
@@ -24,9 +23,9 @@ services:
         depends_on:
             - lnmp-mysql
             - lnmp-redis
-        image: tinywan/lnmp:php7.2.13-v1
+        image: tinywan/lnmp:php7.2.13-v3
         volumes:
-            - ./www:/var/www
+            - ./www:/var/www:rw
             - ./etc/php.ini:/usr/local/php/etc/php.ini
             - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
             - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
@@ -55,12 +54,12 @@ services:
         hostname: lnmp-redis-v8
         ports:
             - "63789:63789"
-        command: redis-server /usr/local/etc/redis/redis.conf    
+        command: redis-server /usr/local/etc/redis/redis.conf:ro    
         networks:
             - backend      
         volumes:
-            - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
-            - ./log/redis.log:/data/redis.log
+            - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+            - ./log/redis.log:/data/redis.log:rw
         restart: always
         container_name: lnmp-redis-v8
     phpmyadmin:

@@ -22,7 +22,7 @@ services:
         depends_on:
             - mysql
             - redis
-        image: tinywan/lnmp:php7.2.13-v2
+        image: tinywan/lnmp:php7.2.13-v3
         ports:
             - "9000:9000"
             #- "9502:9502"

@@ -327,7 +327,9 @@ dnmp
     * Linux 环境  `$ docker exec -it lnmp-php bash`
     * Windows 环境  `$ winpty docker exec -it lnmp-php bash`
 
-*   单独重启redis服务 `docker-compose up --no-deps -d redis` 
+*   关闭容器并删除服务`docker-compose down`  
+
+*   单独重启redis服务 `docker-compose up --no-deps -d redis`  
 
     > 如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
 
@@ -487,3 +489,8 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 *   [docker-openresty](https://github.com/openresty/docker-openresty)
 *   [Docker Volume 之权限管理(转)](https://www.cnblogs.com/jackluo/p/5783116.html)
+*   [bind-mount或者COPY时需要注意 用户、文件权限 的问题](https://segmentfault.com/a/1190000015233229)
+*   [write in shared volumes docker](https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker)
+
+
+docker-compose run --rm -w /var/www/cl_new_pay_dev php-fpm composer update
