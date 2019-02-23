@@ -471,10 +471,12 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 *   Linux 环境启动的时候，MySQL总是`Restarting`：`lnmp-mysql-v6    docker-entrypoint.sh --def ...   Restarting`
     > 解决办法：`cd etc/mysql `，查看文件权限。最暴力的：`rm -r data && mkdir data`解决问题
-*   ThinkPHP5，`thinkphp5 404 file_put_contents` 无法权限被拒绝
-    > 执行命令：`chmod -R 777 runtime`
-    > 如果图片上传也有问题：`chmod -R 777 upload`
-*   权限问题：`mkdir(): Permission denied`，解决办法：`sudo chmod -R 777 tp5.1/`
+
+*   权限问题
+    *   遇到`mkdir(): Permission denied`问题，解决办法：`sudo chmod -R 777 runtime`
+    *   ThinkPHP5，`ErrorException in File.php line 29 mkdir(): Permission denied` 无法权限被拒绝
+        > 执行命令：`chmod -R 777 runtime`
+        > 如果图片上传也有问题：`chmod -R 777 upload`
 *   `docker-compose.yml`文件格式错误  
 
     ```
