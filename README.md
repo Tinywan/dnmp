@@ -157,9 +157,10 @@ dnmp
     DB_NAME="test"
     BACKUP_NAME=${DB_NAME}"-${SHELL_TIME}.sql"
 
-    docker exec -it lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
+    docker exec lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
     ```
     > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
+    > 注意：crontab定时执行Docker 任务的时候是不需要添加参数 `-it`。`-t`是分配一个伪终端,但是crontab执行的时候实际是不需要的。
 
 ### PHP管理
 
