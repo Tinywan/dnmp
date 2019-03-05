@@ -20,6 +20,7 @@
 * [Crontab管理](#Crontab管理)
 * [WebSocket管理](#WebSocket管理)
 * [phpMyAdmin管理](#phpMyAdmin管理)
+* [容器管理](#容器管理)  
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
@@ -320,6 +321,8 @@ dnmp
 
 主机上访问phpMyAdmin的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
 > 默认登录账户：`root`，密码：`123456`
+
+![images](images/engine-components-flow.png)
 
 #### 容器管理  
 
