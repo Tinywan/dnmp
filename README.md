@@ -20,6 +20,7 @@
 * [Crontab管理](#Crontab管理)
 * [WebSocket管理](#WebSocket管理)
 * [phpMyAdmin管理](#phpMyAdmin管理)
+* [容器管理](#容器管理)  
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
@@ -153,9 +154,10 @@ dnmp
     DB_NAME="test"
     BACKUP_NAME=${DB_NAME}"-${SHELL_TIME}.sql"
 
-    docker exec -it lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
+    docker exec lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
     ```
     > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
+    > 注意：crontab定时执行Docker 任务的时候是不需要添加参数 `-it`。`-t`是分配一个伪终端,但是crontab执行的时候实际是不需要的。
 
 ### PHP管理
 
@@ -317,6 +319,8 @@ dnmp
 > 默认登录账户：`root`，密码：`123456`
 
 #### 容器管理  
+
+![images](images/engine-components-flow.png)
 
 *   进入Docker 容器  
 
