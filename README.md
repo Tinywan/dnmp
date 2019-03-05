@@ -322,9 +322,9 @@ dnmp
 主机上访问phpMyAdmin的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
 > 默认登录账户：`root`，密码：`123456`
 
-![images](images/engine-components-flow.png)
-
 #### 容器管理  
+
+![images](images/engine-components-flow.png)
 
 *   进入Docker 容器  
 
