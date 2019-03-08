@@ -2,10 +2,10 @@
 
 #######################################################
 # $Name:          nginx_log_cut.sh
-# $Version:        1.0
+# $Version:       1.0
 # $Function:      Nginx Log Cut Script
-# $Author:         ShaoBo Wan (Tinywan)
-# $Description:  Nginx日志定时切割
+# $Author:        ShaoBo Wan (Tinywan)
+# $Description:   Nginx日志定时切割
 # $Crontab:       55 1 * * * bash /home/tinywan/shell/nginx_log_cut.sh >/dev/null 2>&1
 #######################################################
 

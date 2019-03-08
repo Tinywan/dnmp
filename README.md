@@ -14,9 +14,9 @@
     *   [快速启动](#快速启动)
     *   [测试访问](#测试访问)
 * [Nginx管理](#Nginx管理)
-    *   [Nginx日志定时备份和删除](#Nginx日志定时备份和删除)
+    *   Nginx日志定时备份和删除
 * [MySQL管理](#MySQL管理)
-    *   [Mysql自动备份脚本](#Mysql自动备份脚本)
+    *   Mysql自动备份脚本
 * [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
 * [Crontab管理](#Crontab管理)
