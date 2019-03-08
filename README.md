@@ -15,6 +15,7 @@
     *   [测试访问](#测试访问)
 * [Nginx管理](#Nginx管理)
     *   Nginx日志定时备份和删除
+    *   容器时间跟宿主机时间不一致
 * [MySQL管理](#MySQL管理)
     *   Mysql自动备份脚本
 * [Redis管理](#Redis管理)  
@@ -135,8 +136,9 @@ dnmp
 *   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
 
 *   容器时间跟宿主机时间不一致
-    *   宿主机采用了CST时区。容器采用了UTC时区。复制主机的localtime `docker cp /etc/localtime lnmp-nginx:/etc/`
-    *   重启容器`docker restart lnmp-nginx`
+    *   原因：宿主机采用了CST时区。容器采用了UTC时区。
+    *   复制主机的`localtime`： `docker cp /etc/localtime lnmp-nginx:/etc/`
+    *   重启容器：`docker restart lnmp-nginx`
 
 ### MySQL管理
 
