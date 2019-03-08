@@ -170,16 +170,21 @@ dnmp
     > 修改配置文件 `www.conf`，可使用该命令重新加载。  
 
 *   服务管理
-
-    *   php-fpm 配置测试：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
-
-    *   php-fpm 启动：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm"`
-
-    *   php-fpm 关闭：`docker exec -it lnmp-php bash -c "kill -INT 1"`
-
-    *   php-fpm 重启：`docker exec -it lnmp-php bash -c "kill -USR2 1"`
-
+    *   配置测试：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
+    *   启动：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm"`
+    *   关闭：`docker exec -it lnmp-php bash -c "kill -INT 1"`
+    *   重启：`docker exec -it lnmp-php bash -c "kill -USR2 1"`
     *   查看php-fpm进程数：`docker exec -it lnmp-php bash -c "ps aux | grep -c php-fpm"`
+    *   查看PHP版本：`docker exec -it lnmp-php bash -c "/usr/local/php/bin/php -v"`
+
+*   编译安装扩展
+    *   1、下载：`cd /opt && git clone https://github.com/php/pecl-encryption-mcrypt.git`
+    *   2、生成配置文件：`/usr/local/php/bin/phpize  --with-php-config=/usr/local/php/bin/php-config`
+    *   3、检测配置文件：`./configure --with-php-config=/usr/local/php/bin/php-config`
+    *   4、编译：`make -j2`
+    *   5、安装：`make install`
+    *   6、修改`php.ini`配置文件：`vim /usr/local/php/etc/php.ini`
+    *   7、重启`php-fpm`：`kill -USR2 1`
 
 ### Redis管理
 
@@ -509,3 +514,4 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   [write in shared volumes docker](https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker)
 
 ![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
+
