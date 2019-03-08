@@ -1,1 +1,3 @@
 192.168.48.1 - - [02/Jan/2019:08:36:20 +0000] "GET /hp/device/InternalPages/Index?id=ConfigurationPage HTTP/1.1" 200 194 "-" "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)" "-"
+192.168.0.1 - - [23/Feb/2019:04:50:58 +0000] "GET /?debug=true HTTP/1.1" 200 201 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36" "183.159.228.142, 127.0.0.1"
+192.168.0.1 - - [23/Feb/2019:04:51:05 +0000] "GET / HTTP/1.1" 200 201 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36" "183.159.228.142, 127.0.0.1"

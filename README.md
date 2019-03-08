@@ -113,17 +113,12 @@ dnmp
     Starting lnmp-nginx ... done
     Starting lnmp-phpmyadmin ... done
     ```
-    > 或者直接执行`./start.sh`脚本文件一键启动  
 
 * 浏览器访问：`http://127.0.0.1/`  
-    * 注意连接：
-        * Redis 容器内连接，连接主机为：`lnmp-redis`
-        * MySQL 容器内连接，连接主机为：`lnmp-mysql`
-    * 支持Https `https://docker-v5.frps.tinywan.top/`（测试环境，请手动输入https://）
-    * 支持frp反向代理 `http://docker-v1.frp.tinywan.top:8007/`
+    * 请确保`80`端口没有被占用
+    * Redis 容器内连接，连接主机为：`lnmp-redis`
+    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
-
-![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
 
 ### Nginx管理  
 
@@ -132,6 +127,8 @@ dnmp
     > 列如：`conf/conf.d/www.conf`中配置端口为 `80`,则映射端口也`80`，对应的映射端口为：`8088:80`
 
 *   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
+
+    > 或者 `docker exec lnmp-nginx nginx -s reload`
 
 *   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
 
@@ -244,7 +241,7 @@ dnmp
 
 ```
 # 2019年2月14日 @add Tinywan 获取图表数据 每3分钟执行一次
-*/30 * * * * docker exec -it lnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
+*/30 * * * * docker exec lnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
 ```
 > `lnmp-php` 为容器名称
 
@@ -472,8 +469,8 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   权限问题
     *   遇到`mkdir(): Permission denied`问题，解决办法：`sudo chmod -R 777 runtime`
     *   ThinkPHP5，`ErrorException in File.php line 29 mkdir(): Permission denied` 无法权限被拒绝
-        > 执行命令：`chmod -R 777 runtime`
-        > 如果图片上传也有问题：`chmod -R 777 upload`
+        *   执行命令：`chmod -R 777 runtime`
+        *   如果图片上传也有问题：`chmod -R 777 upload`
 *   `docker-compose.yml`文件格式错误  
 
     ```
@@ -491,5 +488,4 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   [bind-mount或者COPY时需要注意 用户、文件权限 的问题](https://segmentfault.com/a/1190000015233229)
 *   [write in shared volumes docker](https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker)
 
-
-docker-compose run --rm -w /var/www/cl_new_pay_dev php-fpm composer update
+![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
