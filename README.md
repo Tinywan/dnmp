@@ -130,6 +130,8 @@ dnmp
 
     > 或者 `docker exec lnmp-nginx nginx -s reload`
 
+*   在容器内执行shell命令：`docker exec -it lnmp-nginx sh -c "ps -aef | grep nginx | grep -v grep | grep master |awk '{print $2}'"`
+
 *   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
 
 ### MySQL管理
