@@ -169,6 +169,20 @@ dnmp
 
     > 修改配置文件 `www.conf`，可使用该命令重新加载。  
 
+*   服务管理
+
+    *   php-fpm 配置测试：`/usr/local/php/sbin/php-fpm -t`
+        > 或者：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t"`
+
+    *   php-fpm 启动：`/usr/local/php/sbin/php-fpm`
+        > 或者：`/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf`
+
+    *   php-fpm 关闭：`docker exec -it lnmp-php bash -c "kill -INT 1"`
+
+    *   php-fpm 重启：`docker exec -it lnmp-php bash -c "kill -USR2 1"`
+
+    *   查看php-fpm进程数：`docker exec -it lnmp-php bash -c "ps aux | grep -c php-fpm"`
+
 ### Redis管理
 
 *   连接Redis容器：`docker exec -it lnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
