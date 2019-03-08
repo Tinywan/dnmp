@@ -14,7 +14,9 @@
     *   [快速启动](#快速启动)
     *   [测试访问](#测试访问)
 * [Nginx管理](#Nginx管理)
+    *   [Nginx日志定时备份和删除](#Nginx日志定时备份和删除)
 * [MySQL管理](#MySQL管理)
+    *   [Mysql自动备份脚本](#Mysql自动备份脚本)
 * [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
 * [Crontab管理](#Crontab管理)
@@ -131,6 +133,8 @@ dnmp
 
 *   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
 
+*   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
+
 ### MySQL管理
 
 *   进入容器：`docker exec -it lnmp-mysql /bin/bash`
@@ -148,18 +152,7 @@ dnmp
         *   导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
     *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`  
         > 如果导入不成功，检查sql文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`是否存在该内容，有则删除即可
-*   备份小脚本`mysql_auto_backup.sh`  
-
-    ```
-    #!/bin/bash
-    SHELL_NAME="mysql_auto_backup.sh"
-    SHELL_TIME=$(date '+%Y-%m-%d-%H:%M:%S')
-    SHELL_DIR="/home/www/backup"
-    DB_NAME="test"
-    BACKUP_NAME=${DB_NAME}"-${SHELL_TIME}.sql"
-
-    docker exec lnmp-mysql mysqldump -uroot -p123456 $DB_NAME > $SHELL_DIR/$BACKUP_NAME
-    ```
+*   [MySQL定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
     > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
     > 注意：crontab定时执行Docker 任务的时候是不需要添加参数 `-it`。`-t`是分配一个伪终端,但是crontab执行的时候实际是不需要的。
 
