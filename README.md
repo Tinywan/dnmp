@@ -134,6 +134,10 @@ dnmp
 
 *   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
 
+*   容器时间跟宿主机时间不一致
+    *   宿主机采用了CST时区。容器采用了UTC时区。复制主机的localtime `docker cp /etc/localtime lnmp-nginx:/etc/`
+    *   重启容器`docker restart lnmp-nginx`
+
 ### MySQL管理
 
 *   进入容器：`docker exec -it lnmp-mysql /bin/bash`
