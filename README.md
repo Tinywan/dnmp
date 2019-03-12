@@ -219,6 +219,7 @@ dnmp
 #### 宿主机
 
 建议在主机HOST中使用composer，避免PHP容器变得庞大，[Docker Official Images](https://hub.docker.com/_/composer)
+> 宿主机直接使用命令：`docker exec lnmp-php bash -c "cd /var/www/p2p_wallet; /usr/local/php/bin/php /usr/local/sbin/composer update"`
 
 *   1、在主机创建一个目录，用以保存composer的配置和缓存文件
     ```
