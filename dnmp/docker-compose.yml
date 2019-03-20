@@ -14,7 +14,9 @@ services:
            - ./log:/var/log/nginx
            - ./www:/var/www
            - ./etc/letsencrypt:/etc/letsencrypt
-        restart: always  
+        restart: always
+        environment:
+           TZ: Asia/Shanghai  
         container_name: lnmp-nginx
         networks:
             - backend
@@ -22,7 +24,7 @@ services:
         depends_on:
             - mysql
             - redis
-        image: tinywan/lnmp:php7.2.13-v3
+        image: tinywan/dnmp:php7.2-v1
         ports:
             - "9000:9000"
             #- "9502:9502"
