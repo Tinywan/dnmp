@@ -1,6 +1,7 @@
 ![images](images/docker-composer-lnmp.png)
 
-##  使用 docker-compose 部署 LNMP 环境
+##  [下载 dnmp-v1.0.zip](https://github.com/Tinywan/dnmp/releases/download/1.0/dnmp.zip)
+##  推荐码云下载 https://gitee.com/Tinywan/dnmp
 
 ### :book: 目录
 
