@@ -18,6 +18,7 @@
     *   容器时间跟宿主机时间不一致
 * [MySQL管理](#MySQL管理)
     *   Mysql自动备份脚本
+* [PHP管理](#PHP管理)  
 * [Redis管理](#Redis管理)  
 * [Composer管理](#Composer管理)
 * [Crontab管理](#Crontab管理)
@@ -160,6 +161,10 @@ dnmp
 *   [MySQL备份小脚本](./dnmp/backup/nginx_log_cut.sh)
     > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
     > 注意：crontab定时执行Docker 任务的时候是不需要添加参数 `-it`。`-t`是分配一个伪终端,但是crontab执行的时候实际是不需要的。
+*   项目配置文件建议：
+    *   root 默认不开开启远程访问   
+    *   新建项目用户 `www`，配置访问权限只允许容器ip段访问   
+    *   查看容器IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' lnmp-mysql`  
 
 ### PHP管理
 
@@ -386,7 +391,13 @@ dnmp
         > 例如：Nginx或者 MySQL配置文件的端口
 
     *   重新拉取镜像：`docker-compose pull`   
-    *   后台启动 docker-compose 中的容器：`docker-compose up -d`   
+    *   后台启动 docker-compose 中的容器：`docker-compose up -d`  
+
+*   查看容器详细信息
+    *   获取实例的IP地址：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID`
+    *   获取实例的MAC地址：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID`
+    *   获取实例的日志路径：`docker inspect --format='{{.LogPath}}' $INSTANCE_ID`
+    *   获取实例的镜像名称：`docker inspect --format='{{.Config.Image}}' $INSTANCE_ID`
 
 ### 证书管理
 
