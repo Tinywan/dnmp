@@ -163,7 +163,7 @@ dnmp
     > 注意：crontab定时执行Docker 任务的时候是不需要添加参数 `-it`。`-t`是分配一个伪终端,但是crontab执行的时候实际是不需要的。
 *   项目配置文件建议：
     *   root 默认不开开启远程访问   
-    *   新建项目用户 `www`，配置访问权限只允许容器ip段访问   
+    *   新建项目用户 `www`，配置主机`Host`字段值为MySQL容器ip段`172.18.0.%` 
     *   查看容器IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' lnmp-mysql`  
 
 ### PHP管理
