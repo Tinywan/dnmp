@@ -293,6 +293,7 @@ dnmp
 
 *   进入`lnmp-php`容器：`docker exec -it lnmp-php /bin/bash`  
 *   以daemon（守护进程）方式启动 workerman ：` php ../workerman/start.php start -d`  
+*   宿主机平滑重启 workerman ：` docker exec -it lnmp-php bash -c "/usr/local/php/bin/php /var/www/site/think worker:gateway reload"`  
 *   配置`docker-compose.yml` 文件中对应的映射端口  
 
     ```
