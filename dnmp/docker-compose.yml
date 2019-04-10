@@ -17,7 +17,7 @@ services:
         restart: always
         environment:
            TZ: Asia/Shanghai  
-        container_name: lnmp-nginx
+        container_name: dnmp-nginx
         networks:
             - backend
     php:
@@ -35,12 +35,12 @@ services:
             - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
         networks:
             - backend    
-        container_name: lnmp-php # 容器名称   
+        container_name: dnmp-php # 容器名称   
     mysql:
         image: mysql:5.7
         restart: always
         command: --default-authentication-plugin=mysql_native_password 
-        hostname: lnmp-mysql
+        hostname: dnmp-mysql
         ports:
             - "3308:3306"
         volumes:
@@ -51,10 +51,10 @@ services:
         networks:
             - backend
         restart: always
-        container_name: lnmp-mysql
+        container_name: dnmp-mysql
     redis:
         image: redis:5.0-alpine
-        hostname: lnmp-redis
+        hostname: dnmp-redis
         ports:
             - "63789:63789"
         command: redis-server /usr/local/etc/redis/redis.conf    
@@ -64,7 +64,7 @@ services:
             - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
             - ./log/redis.log:/data/redis.log
         restart: always
-        container_name: lnmp-redis
+        container_name: dnmp-redis
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         ports:
@@ -72,9 +72,9 @@ services:
         networks:
             - backend
         environment:
-            - PMA_HOST=lnmp-mysql
+            - PMA_HOST=dnmp-mysql
             - PMA_PORT=3306
-        container_name: lnmp-phpmyadmin    
+        container_name: dnmp-phpmyadmin    
 networks:
   backend:
     driver: bridge   

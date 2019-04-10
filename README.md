@@ -111,17 +111,17 @@ dnmp
 
     ```java
     $ docker-compose up -d
-    Starting lnmp-redis ... done
-    Starting lnmp-mysql ... done
-    Starting lnmp-php ... done
-    Starting lnmp-nginx ... done
-    Starting lnmp-phpmyadmin ... done
+    Starting dnmp-redis ... done
+    Starting dnmp-mysql ... done
+    Starting dnmp-php ... done
+    Starting dnmp-nginx ... done
+    Starting dnmp-phpmyadmin ... done
     ```
 
 * 浏览器访问：`http://127.0.0.1/`  
     * 请确保`80`端口没有被占用
-    * Redis 容器内连接，连接主机为：`lnmp-redis`
-    * MySQL 容器内连接，连接主机为：`lnmp-mysql`
+    * Redis 容器内连接，连接主机为：`dnmp-redis`
+    * MySQL 容器内连接，连接主机为：`dnmp-mysql`
 *   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
 
 ### Nginx管理  
@@ -130,11 +130,11 @@ dnmp
 
     > 列如：`conf/conf.d/www.conf`中配置端口为 `80`,则映射端口也`80`，对应的映射端口为：`8088:80`
 
-*   重新加载配置文件 `docker exec -it lnmp-nginx nginx -s reload`  
+*   重新加载配置文件 `docker exec -it dnmp-nginx nginx -s reload`  
 
-    > 或者 `docker exec lnmp-nginx nginx -s reload`
+    > 或者 `docker exec dnmp-nginx nginx -s reload`
 
-*   在容器内执行shell命令：`docker exec -it lnmp-nginx sh -c "ps -aef | grep nginx | grep -v grep | grep master |awk '{print $2}'"`
+*   在容器内执行shell命令：`docker exec -it dnmp-nginx sh -c "ps -aef | grep nginx | grep -v grep | grep master |awk '{print $2}'"`
 
 *   [Nginx日志定时备份和删除](./dnmp/backup/nginx_log_cut.sh)
 
@@ -145,20 +145,20 @@ dnmp
 
 ### MySQL管理
 
-*   进入容器：`docker exec -it lnmp-mysql /bin/bash`
+*   进入容器：`docker exec -it dnmp-mysql /bin/bash`
 
-    > Windows 环境使用：`docker exec -it lnmp-mysql bash`  
+    > Windows 环境使用：`docker exec -it dnmp-mysql bash`  
 
 *   修改配置文件 `my.cnf`，重新加载：`docker-compose restart mysql`
 *   容器内连接：`mysql -uroot -p123456`
 *   外部宿主机连接：`mysql -h 127.0.0.1 -P 3308 -uroot -p123456`
 *   数据-备份-恢复  
     *   导出（备份）
-        *   导出数据库中的所有表结构和数据：`docker exec -it lnmp-mysql mysqldump -uroot -p123456 test > test.sql`  
-        *   只导结构不导数据：`docker exec -it lnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
-        *   只导数据不导结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
-        *   导出特定表的结构：`docker exec -it lnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
-    *   导入（恢复）`docker exec -i lnmp-mysql -uroot -p123456 test < /home/www/test.sql`  
+        *   导出数据库中的所有表结构和数据：`docker exec -it dnmp-mysql mysqldump -uroot -p123456 test > test.sql`  
+        *   只导结构不导数据：`docker exec -it dnmp-mysql mysqldump --opt -d -uroot -p123456 test > test.sql`  
+        *   只导数据不导结构：`docker exec -it dnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`  
+        *   导出特定表的结构：`docker exec -it dnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`  
+    *   导入（恢复）`docker exec -i dnmp-mysql -uroot -p123456 test < /home/www/test.sql`  
         > 如果导入不成功，检查sql文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`是否存在该内容，有则删除即可
 *   [MySQL备份小脚本](./dnmp/backup/nginx_log_cut.sh)
     > Crontab 任务：`55 23 * * *  bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
@@ -166,11 +166,11 @@ dnmp
 *   项目配置文件建议：
     *   root 默认不开开启远程访问   
     *   新建项目用户 `www`，配置主机`Host`字段值为MySQL容器ip段`172.18.0.%` 
-    *   查看容器IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' lnmp-mysql`  
+    *   查看容器IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnmp-mysql`  
 
 ### PHP管理
 
-*   进入php容器 `docker exec -it lnmp-php /bin/bash`
+*   进入php容器 `docker exec -it dnmp-php /bin/bash`
     > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
 *   重启php服务 `docker-compose restart php`
 
@@ -178,12 +178,12 @@ dnmp
     > 修改配置文件 `www.conf`，可使用该命令重新加载配置文件。  
 
 *   服务管理
-    *   配置测试：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
-    *   启动：`docker exec -it lnmp-php bash -c "/usr/local/php/sbin/php-fpm"`
-    *   关闭：`docker exec -it lnmp-php bash -c "kill -INT 1"`
-    *   重启：`docker exec -it lnmp-php bash -c "kill -USR2 1"`
-    *   查看php-fpm进程数：`docker exec -it lnmp-php bash -c "ps aux | grep -c php-fpm"`
-    *   查看PHP版本：`docker exec -it lnmp-php bash -c "/usr/local/php/bin/php -v"`
+    *   配置测试：`docker exec -it dnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
+    *   启动：`docker exec -it dnmp-php bash -c "/usr/local/php/sbin/php-fpm"`
+    *   关闭：`docker exec -it dnmp-php bash -c "kill -INT 1"`
+    *   重启：`docker exec -it dnmp-php bash -c "kill -USR2 1"`
+    *   查看php-fpm进程数：`docker exec -it dnmp-php bash -c "ps aux | grep -c php-fpm"`
+    *   查看PHP版本：`docker exec -it dnmp-php bash -c "/usr/local/php/bin/php -v"`
 
 *   编译安装扩展
     *   1、下载：`cd /opt && git clone https://github.com/php/pecl-encryption-mcrypt.git`
@@ -196,8 +196,8 @@ dnmp
 
 ### Redis管理
 
-*   连接Redis容器：`docker exec -it lnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
-*   通过容器连接：`docker exec -it lnmp-redis redis-cli -h lnmp-redis -p 63789`  
+*   连接Redis容器：`docker exec -it dnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
+*   通过容器连接：`docker exec -it dnmp-redis redis-cli -h dnmp-redis -p 63789`  
 *   单独重启redis服务 `docker-compose up --no-deps -d redis`
 *   外部宿主机连接：`redis-cli -h 127.0.0.1 -p 63789`
 
@@ -205,7 +205,7 @@ dnmp
 
 #### 容器内
 
-*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
+*   需要进入`dnmp-php`容器： `docker exec -it dnmp-php /bin/bash`
 *   查看 `composer`版本：`composer --version`
 *   修改 composer 的全局配置文件（推荐方式）
 
@@ -227,7 +227,7 @@ dnmp
 #### 宿主机
 
 建议在主机HOST中使用composer，避免PHP容器变得庞大，[Docker Official Images](https://hub.docker.com/_/composer)
-> 宿主机直接使用命令：`docker exec lnmp-php bash -c "cd /var/www/p2p_wallet; /usr/local/php/bin/php /usr/local/sbin/composer update"`
+> 宿主机直接使用命令：`docker exec dnmp-php bash -c "cd /var/www/p2p_wallet; /usr/local/php/bin/php /usr/local/sbin/composer update"`
 
 *   1、在主机创建一个目录，用以保存composer的配置和缓存文件
     ```
@@ -275,25 +275,25 @@ dnmp
 
 ```
 # 2019年2月14日 @add Tinywan 获取图表数据 每3分钟执行一次
-*/30 * * * * docker exec lnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
+*/30 * * * * docker exec dnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
 ```
-> `lnmp-php` 为容器名称
+> `dnmp-php` 为容器名称
 
 #### 容器内执行任务  
 
-*   需要进入`lnmp-php`容器： `docker exec -it lnmp-php /bin/bash`
+*   需要进入`dnmp-php`容器： `docker exec -it dnmp-php /bin/bash`
 *   手动启动crontab，`/etc/init.d/cron start` 
 *   添加Crontab任务 `crontab -e`  
-*   添加任务输出日志到映射目录：`* * * * * echo " Hi Lnmp " >> /var/www/crontab.log`
+*   添加任务输出日志到映射目录：`* * * * * echo " Hi dnmp " >> /var/www/crontab.log`
 *   定时执行ThinkPHP5自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
 ### WebSocket管理  
 
 在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)  
 
-*   进入`lnmp-php`容器：`docker exec -it lnmp-php /bin/bash`  
+*   进入`dnmp-php`容器：`docker exec -it dnmp-php /bin/bash`  
 *   以daemon（守护进程）方式启动 workerman ：` php ../workerman/start.php start -d`  
-*   宿主机平滑重启 workerman ：` docker exec -it lnmp-php bash -c "/usr/local/php/bin/php /var/www/site/think worker:gateway reload"`  
+*   宿主机平滑重启 workerman ：` docker exec -it dnmp-php bash -c "/usr/local/php/bin/php /var/www/site/think worker:gateway reload"`  
 *   配置`docker-compose.yml` 文件中对应的映射端口  
 
     ```
@@ -301,6 +301,7 @@ dnmp
         ports:
             - "9000:9000"
             - "9502:9502" # workerman 映射端口
+            - "1239:1239" # Gateway 客户端
     ```
 
 *   防火墙问题，如果使用阿里云ESC，请在[安全组](https://ecs.console.aliyun.com/?spm=5176.2020520001#/securityGroup/region/cn-shanghai)增加**入方向**和**出方向**端口配置
@@ -353,8 +354,8 @@ dnmp
 
 *   进入Docker 容器  
 
-    * Linux 环境  `$ docker exec -it lnmp-php bash`
-    * Windows 环境  `$ winpty docker exec -it lnmp-php bash`
+    * Linux 环境  `$ docker exec -it dnmp-php bash`
+    * Windows 环境  `$ winpty docker exec -it dnmp-php bash`
 
 *   关闭容器并删除服务`docker-compose down`  
 
@@ -380,8 +381,8 @@ dnmp
 
 *   容器资源使用情况    
     *   所有运行中的容器资源使用情况：`docker stats`  
-    *   查看多个容器资源使用：`docker stats lnmp-nginx lnmp-php lnmp-mysql lnmp-redis`  
-    *   自定义格式的docker统计信息：`docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" lnmp-nginx lnmp-php`  
+    *   查看多个容器资源使用：`docker stats dnmp-nginx dnmp-php dnmp-mysql dnmp-redis`  
+    *   自定义格式的docker统计信息：`docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" dnmp-nginx dnmp-php`  
 
 *   docker-compose常用命令
 
@@ -460,7 +461,6 @@ dnmp
 
         ssl_certificate /etc/letsencrypt/dnmp.com+4.pem;
         ssl_certificate_key /etc/letsencrypt/dnmp.com+4-key.pem;
-
         ...
     }
     ```
@@ -529,5 +529,4 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 *   [bind-mount或者COPY时需要注意 用户、文件权限 的问题](https://segmentfault.com/a/1190000015233229)
 *   [write in shared volumes docker](https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker)
 
-![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
-
+![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)  
