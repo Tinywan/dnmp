@@ -194,6 +194,22 @@ dnmp
     *   6、修改`php.ini`配置文件：`vim /usr/local/php/etc/php.ini`
     *   7、重启`php-fpm`：`kill -USR2 1`
 
+*   服务器开机自动启PHP容器，[Ubuntu 18.04 rc.local systemd设置](https://blog.csdn.net/dahuzix/article/details/80785691)  
+
+    ```
+    #!/bin/sh -e
+
+    # docker-compose php container
+    /usr/local/bin/docker-compose -f /home/www/dnmp/docker-compose.yml up -d
+
+    # docker tab cron start  
+    sleep 10; docker exec lnmp-php bash -c "/etc/init.d/cron start"
+
+    exit 0
+    ```
+    > 编辑文件`vim /etc/rc.local`，添加以上内容
+    > 以上主要是解决服务器重启后，PHP容器不能够重启以及PHP容器之内的Crontab服务不能够启动的的问题，目前没有其他解决方案   
+
 ### Redis管理
 
 *   连接Redis容器：`docker exec -it dnmp-redis redis-cli -h 127.0.0.1 -p 63789`  
@@ -217,12 +233,13 @@ dnmp
 *   更新框架或者扩展
 
     ```java
-    /var/www/tp5.1# composer update
+    /var/www/tp5.1# composer install
     - Installing topthink/think-installer (v2.0.0): Downloading (100%)
     - Installing topthink/framework (v5.1.32): Downloading (100%)
     Writing lock file
     Generating autoload files
     ```
+    > 尽量使用`composer install` 更新安装包，而不是`composer update`，原因
 
 #### 宿主机
 
