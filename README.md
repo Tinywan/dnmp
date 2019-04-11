@@ -82,7 +82,10 @@ dnmp
     │   ├── php-fpm.d
     │   │   └── www.conf        -- PHP-FPM 扩展配置文件
     │   ├── redis
-    │   │   └── redis.conf      -- Redis 配置文件
+    │   │   ├── data
+    │   │   │   ├── appendonly.aof  -- Redis AOF 数据库保存文件
+    │   │   │   └── redis.log       -- Redis 日志文件
+    │   │   └── redis.conf          -- Redis 配置文件
     │   ├── mysql
     │   │   └── data            -- MySQL 数据存储目录
     │   │   └── my.cnf          -- MySQL 配置文件
