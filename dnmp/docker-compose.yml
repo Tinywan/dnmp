@@ -62,7 +62,7 @@ services:
             - backend      
         volumes:
             - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
-            - ./log/redis.log:/data/redis.log
+            - ./etc/redis/data:/data
         restart: always
         container_name: dnmp-redis
     phpmyadmin:

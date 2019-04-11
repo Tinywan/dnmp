@@ -59,7 +59,7 @@ services:
             - backend      
         volumes:
             - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
-            - ./log/redis.log:/data/redis.log:rw
+            - ./etc/redis/data:/data
         restart: always
         container_name: lnmp-redis-v8
     phpmyadmin:
