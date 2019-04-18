@@ -222,6 +222,15 @@ dnmp
 
 ### Composer管理
 
+#### 使用Docker 安装
+
+进入项目目录，执行以下命令安装
+
+```
+docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer install --ignore-platform-reqs
+```
+> `--ignore-platform-reqs` 参数表示官方docker composer 库没有包含当前PHP版本  
+
 #### 容器内
 
 *   需要进入`dnmp-php`容器： `docker exec -it dnmp-php /bin/bash`
@@ -236,13 +245,12 @@ dnmp
 *   更新框架或者扩展
 
     ```java
-    /var/www/tp5.1# composer install
-    - Installing topthink/think-installer (v2.0.0): Downloading (100%)
-    - Installing topthink/framework (v5.1.32): Downloading (100%)
-    Writing lock file
-    Generating autoload files
+    /var/www/tp5.1# apt update
+    /var/www/tp5.1# apt install sudo 
+    /var/www/tp5.1# sudo -u www-data sh -c "/usr/local/php/bin/php /usr/local/bin/composer install"
     ```
-    > 尽量使用`composer install` 更新安装包，而不是`composer update`，原因
+    > 请使用`www-data` 更新安装包，而不是默认直接使用`root`账户，
+    > 尽量使用`composer install` 更新安装包，而不是`composer update`，
 
 #### 宿主机
 
