@@ -24,7 +24,7 @@ services:
         depends_on:
             - mysql
             - redis
-        image: tinywan/dnmp:php7.2-v1
+        image: registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php7.2-v4
         ports:
             - "9000:9000"
             #- "9502:9502"
