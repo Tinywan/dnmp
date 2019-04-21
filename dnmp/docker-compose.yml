@@ -56,7 +56,7 @@ services:
         image: redis:5.0-alpine
         hostname: dnmp-redis
         ports:
-            - "63789:63789"
+            - "63789:6379"
         command: redis-server /usr/local/etc/redis/redis.conf    
         networks:
             - backend      
