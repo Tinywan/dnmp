@@ -240,8 +240,10 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
     ```
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
+    // 或者
+    composer config -g repo.packagist composer https://packagist.laravel-china.org
     ```
-    > 如果你是墙内客户，务必添加以上国内镜像
+    > 如果你是墙内客户，务必添加以上国内镜像。否则会出现` file could not be downloaded (HTTP/1.1 404 Not Found)`
     
 *   更新框架或者扩展
 
@@ -557,7 +559,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
     Err:1 http://mirrors.163.com/ubuntu bionic InRelease
     Temporary failure resolving 'mirrors.163.com'
     ```
-    
+
 ###  参考
 
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
