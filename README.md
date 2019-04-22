@@ -1,7 +1,7 @@
 ![images](images/docker-composer-lnmp.png)
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-##  [下载 dnmp-v1.0.zip](https://github.com/Tinywan/dnmp/releases/download/1.0/dnmp.zip)
+##  [最新下载 dnmp-v2.0.zip](https://github.com/Tinywan/dnmp/releases/download/2.0/dnmp-v2.0.zip)
 ##  推荐码云下载 https://gitee.com/Tinywan/dnmp
 
 ### :book: 目录
@@ -105,7 +105,8 @@ dnmp
 ### 环境要求   
 
 *   已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
-*   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)  
+*   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
+*   使用国内阿里云镜像源：`https://oimy1q5h.mirror.aliyuncs.com`  
 
 ### 如何快速使用 
 *   拉取项目：`git clone https://github.com/Tinywan/dnmp.git`  
