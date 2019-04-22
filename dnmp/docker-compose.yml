@@ -27,7 +27,7 @@ services:
         image: registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php7.2-v4
         ports:
             - "9000:9000"
-            #- "9502:9502"
+            - "9502:9502" # WorkerMan 端口
         volumes:
             - ./www:/var/www
             - ./etc/php.ini:/usr/local/php/etc/php.ini
