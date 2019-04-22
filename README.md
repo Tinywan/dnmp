@@ -550,6 +550,14 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
     ```
     > 这里的原因是`docker-compose.yml`中最前面用了`tab`，改成空格就好了。对yaml文件格式要求严格  
 
+*   PHP 容器更新源或者使用 Composer 出现以下错误，请重启Docekr（Windows 10 环境很容易出现这个问题）
+
+    ```
+    # apt-get update
+    Err:1 http://mirrors.163.com/ubuntu bionic InRelease
+    Temporary failure resolving 'mirrors.163.com'
+    ```
+    
 ###  参考
 
 *   [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
