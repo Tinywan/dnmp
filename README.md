@@ -178,8 +178,8 @@ dnmp
     > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
 *   重启php服务 `docker-compose restart php`
 
-    > 修改配置文件 `php.init`，可使用该命令重新加载配置文件。  
-    > 修改配置文件 `www.conf`，可使用该命令重新加载配置文件。  
+    > 修改核心配置文件 `php.ini`，可使用该命令重新加载配置文件。  
+    > 修改扩展配置文件 `www.conf`，可使用该命令重新加载配置文件。  
 
 *   服务管理
     *   配置测试：`docker exec -it dnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
