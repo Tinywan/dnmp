@@ -30,6 +30,7 @@
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
+* [Openresty专题](#Openresty)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -58,6 +59,13 @@ dnmp
 └── v8      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket + phpmyadmin
 ```
 
+Openresty 版本
+```java
+dev/openresty
+├── v1      -- openresty:alpine + PHP7.2.3-v1
+```
+> cd dnmp/dev/openresty/v1 && docker-compose.exe up
+
 ### 项目结构  
 
 ```java
@@ -65,7 +73,11 @@ dnmp
 └── dnmp
     ├── conf                    -- Nginx 配置目录
     │   ├── conf.d
-    │   │   └── www.conf        -- Nginx 扩展配置文件
+    │   │   └── 80.conf         -- 虚拟主机配置文件
+    │   │   └── lua_script.conf -- 虚拟主机配置文件
+    │   ├── lua                 -- Lua 脚本目录（仅Openresty有效）
+    │   │   └── test
+    │   │       └── test.lua    -- Lua 测试脚本（仅Openresty有效）
     │   ├── fastcgi.conf
     │   ├── fastcgi_params
     │   ├── mime.types
@@ -102,7 +114,7 @@ dnmp
                └──index.php     -- 项目框架入口文件
 ```
 
-### 环境要求   
+### 环境要求  
 
 *   已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
 *   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
@@ -178,8 +190,8 @@ dnmp
     > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
 *   重启php服务 `docker-compose restart php`
 
-    > 修改配置文件 `php.init`，可使用该命令重新加载配置文件。  
-    > 修改配置文件 `www.conf`，可使用该命令重新加载配置文件。  
+    > 修改核心配置文件 `php.ini`，可使用该命令重新加载配置文件。  
+    > 修改扩展配置文件 `www.conf`，可使用该命令重新加载配置文件。  
 
 *   服务管理
     *   配置测试：`docker exec -it dnmp-php bash -c "/usr/local/php/sbin/php-fpm -t"`
@@ -526,6 +538,14 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
         *   2、https://docker-v6.frps.tinywan.top/
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
+
+### Openresty专题
+
+*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+
+    > Windows环境 `winpty docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+
+*   LuaRocks 
 
 ### 遇到的问题
 
