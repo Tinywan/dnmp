@@ -72,7 +72,11 @@ dnmp
 └── dnmp
     ├── conf                    -- Nginx 配置目录
     │   ├── conf.d
-    │   │   └── www.conf        -- Nginx 扩展配置文件
+    │   │   └── 80.conf         -- 虚拟主机配置文件
+    │   │   └── lua_script.conf -- 虚拟主机配置文件
+    │   ├── lua                 -- Lua 脚本目录（仅Openresty有效）
+    │   │   └── test
+    │   │       └── test.lua    -- Lua 测试脚本（仅Openresty有效）
     │   ├── fastcgi.conf
     │   ├── fastcgi_params
     │   ├── mime.types
@@ -109,7 +113,7 @@ dnmp
                └──index.php     -- 项目框架入口文件
 ```
 
-### 环境要求   
+### 环境要求  
 
 *   已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
 *   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
