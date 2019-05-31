@@ -58,6 +58,13 @@ dnmp
 └── v8      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket + phpmyadmin
 ```
 
+Openresty 版本
+```java
+dev/openresty
+├── v1      -- openresty:alpine + PHP7.2.3-v1
+```
+> cd dnmp/dev/openresty/v1 && docker-compose.exe up
+
 ### 项目结构  
 
 ```java
