@@ -30,6 +30,7 @@
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
+* [Openresty专题](#Openresty)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -535,6 +536,14 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
         *   2、https://docker-v6.frps.tinywan.top/
         *   3、https://docker-v7.frps.tinywan.top/
 *   配置文件列表
+
+### Openresty专题
+
+*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+
+    > Windows环境 `winpty docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+
+*   LuaRocks 
 
 ### 遇到的问题
 
