@@ -30,7 +30,7 @@
 * [证书管理](#证书管理)
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
-* [Openresty专题](#Openresty)
+* [Openresty专题](#Openresty专题)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -541,11 +541,39 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 ### Openresty专题
 
-*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+*   安装[OPM](https://github.com/openresty/opm) 
 
-    > Windows环境 `winpty docker exec -it dnmp-openresty-vv1 apk add --no-cache curl perl`
+    ```
+    docker exec -it dnmp-openresty apk add --no-cache curl perl
+    ```
 
-*   LuaRocks 
+    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+
+*   通过opm 安装扩展
+
+    > 搜索redis包
+
+    ```
+    docker exec -it dnmp-openresty opm search redis
+    ```
+    
+    > 安装redis包 
+
+    ```
+    docker exec -it dnmp-openresty opm get openresty/lua-resty-redis
+    ```
+
+    > 下载到指定`/usr/local/openresty/lualib/resty`目录（推荐，避免不必要的麻烦）
+    
+    ```
+    docker exec -it dnmp-openresty sh -c "opm --install-dir=/usr/local/openresty get ledgetech/lua-resty-http"
+    ```
+
+*   配置文件
+
+    > 测试配置是否正确  `docker exec -it dnmp-openresty nginx -t` 
+
+    > 重启nginx `docker exec -it dnmp-openresty nginx -s reload` 
 
 ### 遇到的问题
 

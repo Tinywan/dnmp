@@ -1,32 +1,65 @@
-version: '3'
+version: "3"
 
 services:
-    lnmp-openresty:
-        image: openresty/openresty:alpine
+    openresty:
+        image: openresty/openresty:bionic # Ubuntu 18.04.2 LTS (Bionic Beaver)
         ports:
-          - 8880:80
-          - 8881:81
+          - "8880:80"
+          - "8881:81"
         volumes:
           - ./conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
           - ./conf/conf.d:/etc/nginx/conf.d
           - ./conf/lua:/usr/local/openresty/nginx/conf/lua
           - ./log:/var/log/nginx
           - ./www:/var/www
-        container_name: dnmp-openresty-vv1
+          - ./etc/letsencrypt:/etc/letsencrypt
+        restart: always
+        container_name: dnmp-openresty
         networks:
-          - backend
+          - web
     php:
         image: registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php7.2-v4
+        depends_on:
+          - redis
         ports:
-            - "9009:9000"
+          - "9009:9000"
         volumes:
-            - ./www:/var/www
-            - ./etc/php.ini:/usr/local/php/etc/php.ini
-            - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
-            - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+          - ./www:/var/www
+          - ./etc/php.ini:/usr/local/php/etc/php.ini
+          - ./etc/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
+          - ./etc/php-fpm.d/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+        container_name: dnmp-php-v1   
         networks:
-            - backend    
-        container_name: dnmp-php-vv1 # 容器名称   
+          - web    
+    mysql:
+        image: mysql:5.7
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password 
+        hostname: dnmp-mysql-v1
+        ports:
+            - "3388:3306"
+        volumes:
+            - ./etc/mysql/data:/var/lib/mysql
+            - ./etc/mysql/my.cnf:/etc/mysql/my.cnf
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456  
+        networks:
+            - web
+        restart: always
+        container_name: dnmp-mysql-v1
+    redis:
+        image: redis:5.0-alpine
+        hostname: dnmp-redis-v1
+        ports:
+          - "63799:6379"
+        command: redis-server /usr/local/etc/redis/redis.conf    
+        volumes:
+          - ./etc/redis/redis.conf:/usr/local/etc/redis/redis.conf
+          - ./etc/redis/data:/data
+        restart: always
+        container_name: dnmp-redis-v1   
+        networks:
+          - web      
 networks:
-  backend:
+  web:
     driver: bridge   
