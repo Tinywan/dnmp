@@ -549,19 +549,13 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
     > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
 
+    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+
 *   通过opm 安装扩展
 
-    > 搜索redis包
+    > 搜索redis包 `docker exec -it dnmp-openresty opm search redis`
 
-    ```
-    docker exec -it dnmp-openresty opm search redis
-    ```
-    
-    > 安装redis包 
-
-    ```
-    docker exec -it dnmp-openresty opm get openresty/lua-resty-redis
-    ```
+    > 安装redis包 `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
 
     > 下载到指定`/usr/local/openresty/lualib/resty`目录（推荐，避免不必要的麻烦）
     
@@ -573,7 +567,14 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
     > 测试配置是否正确  `docker exec -it dnmp-openresty nginx -t` 
 
-    > 重启nginx `docker exec -it dnmp-openresty nginx -s reload` 
+    > 重新加载配置文件 `docker exec -it dnmp-openresty nginx -s reload` 
+
+    > 获取Redis容器的IP地址 `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnmp-redis-v2`
+
+    > Nginx日志时间时间不一致 
+    
+    * 复制主机的localtime  `docker cp etc/localtime dnmp-openresty:/etc/` 
+    * 重启容器  `docker-compose restart openresty` 
 
 ### 遇到的问题
 
