@@ -536,6 +536,8 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
     > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
 
+    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+
 *   通过opm 安装扩展
 
     > 搜索redis包 `docker exec -it dnmp-openresty opm search redis`
