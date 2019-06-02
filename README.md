@@ -59,13 +59,6 @@ dnmp
 └── v8      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket + phpmyadmin
 ```
 
-Openresty 版本
-```java
-dev/openresty
-├── v1      -- openresty:alpine + PHP7.2.3-v1
-```
-> cd dnmp/dev/openresty/v1 && docker-compose.exe up
-
 ### 项目结构  
 
 ```java
@@ -528,40 +521,26 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 * `Ali_Key` 阿里云 AccessKey ID
 * `Ali_Secret` 阿里云 Access Key Secret
 
-### 多域名配置
-*   域名列表
-    *   HTTP访问：
-        *   1、http://localhost:8081/
-        *   2、http://localhost:8082/
-    *   HTTPS访问：    
-        *   1、https://docker-v5.frps.tinywan.top/
-        *   2、https://docker-v6.frps.tinywan.top/
-        *   3、https://docker-v7.frps.tinywan.top/
-*   配置文件列表
-
 ### Openresty专题
 
-*   安装[OPM](https://github.com/openresty/opm) 
 
+*   结构
+
+    ```java
+    dev/openresty
+    ├── v1      -- openresty:alpine + PHP7.2.3-v1
     ```
-    docker exec -it dnmp-openresty apk add --no-cache curl perl
-    ```
+    > cd dnmp/dev/openresty/v1 && docker-compose.exe up
+
+*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`  
 
     > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
 
 *   通过opm 安装扩展
 
-    > 搜索redis包
+    > 搜索redis包 `docker exec -it dnmp-openresty opm search redis`
 
-    ```
-    docker exec -it dnmp-openresty opm search redis
-    ```
-    
-    > 安装redis包 
-
-    ```
-    docker exec -it dnmp-openresty opm get openresty/lua-resty-redis
-    ```
+    > 安装redis包 `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
 
     > 下载到指定`/usr/local/openresty/lualib/resty`目录（推荐，避免不必要的麻烦）
     
@@ -573,17 +552,24 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
     > 测试配置是否正确  `docker exec -it dnmp-openresty nginx -t` 
 
-    > 重启nginx `docker exec -it dnmp-openresty nginx -s reload` 
+    > 重新加载配置文件 `docker exec -it dnmp-openresty nginx -s reload` 
+
+    > 获取Redis容器的IP地址 `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnmp-redis-v2`
+
+    > Nginx日志时间时间不一致 
+    
+    * 复制主机的localtime  `docker cp etc/localtime dnmp-openresty:/etc/` 
+    * 重启容器  `docker-compose restart openresty` 
 
 ### 遇到的问题
 
 *   连接Redis报错：`Connection refused`，其他客户端可以正常连接
-    > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-mysql-v3` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
+    > 容器之间相互隔绝，在进行了端口映射之后，宿主机可以通过127.0.0.1:6379访问redis，但php容器不行。在php中可以直接使用`hostname: lnmp-redis` 来连接redis容器。[原贴地址](https://stackoverflow.com/questions/42360356/docker-redis-connection-refused/42361204)
 
 *   Windows 10 启动错误 `Error starting userland proxy: Bind for 127.0.0.1:3306: unexpected error Permission denied `  
     > 检查本地是否有MySQL已经启动或者端口被占用。关闭即可 
 
-*   Linux 环境启动的时候，MySQL总是`Restarting`：`lnmp-mysql-v6    docker-entrypoint.sh --def ...   Restarting`
+*   Linux 环境启动的时候，MySQL总是`Restarting`：`lnmp-mysql    docker-entrypoint.sh --def ...   Restarting`
     > 解决办法：`cd etc/mysql `，查看文件权限。最暴力的：`rm -r data && mkdir data`解决问题
 
 *   权限问题
