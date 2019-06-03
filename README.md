@@ -535,28 +535,19 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 ### Openresty专题
 
+*   Usage：`cd dnmp/dev/openresty/v1 && docker-compose.exe up`
 
-*   结构
+*   Installation [OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`  
 
-    ```java
-    dev/openresty
-    ├── v1      -- openresty:alpine + PHP7.2.3-v1
-    ```
-    > cd dnmp/dev/openresty/v1 && docker-compose.exe up
+    > Windows `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
 
-*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`  
+*   opm install extend
 
-    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+    > search redis package `docker exec -it dnmp-openresty opm search redis`
 
-    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+    > install redis package `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
 
-*   通过opm 安装扩展
-
-    > 搜索redis包 `docker exec -it dnmp-openresty opm search redis`
-
-    > 安装redis包 `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
-
-    > 下载到指定`/usr/local/openresty/lualib/resty`目录（推荐，避免不必要的麻烦）
+    > install to specification directory `/usr/local/openresty/lualib/resty`
     
     ```
     docker exec -it dnmp-openresty sh -c "opm --install-dir=/usr/local/openresty get ledgetech/lua-resty-http"
