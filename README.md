@@ -69,8 +69,10 @@ dnmp
     │   │   └── 80.conf         -- 虚拟主机配置文件
     │   │   └── lua_script.conf -- 虚拟主机配置文件
     │   ├── lua                 -- Lua 脚本目录（仅Openresty有效）
+    │   │   └── bin
+    │   │   │   └── resty-limit-traffic.lua -- Lua 限流脚本（仅Openresty有效）
     │   │   └── test
-    │   │       └── test.lua    -- Lua 测试脚本（仅Openresty有效）
+    │   │       └── hello.lua    -- Lua 测试脚本（仅Openresty有效）
     │   ├── fastcgi.conf
     │   ├── fastcgi_params
     │   ├── mime.types
