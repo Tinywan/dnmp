@@ -113,25 +113,35 @@ dnmp
 *   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
 *   使用国内阿里云镜像源：`https://oimy1q5h.mirror.aliyuncs.com`  
 
-### 如何快速使用 
-*   拉取项目：`git clone https://github.com/Tinywan/dnmp.git`  
-*   进入目录：`cd dnmp/dnmp` 
-*   启动所有容器（守护进程） 
+### 如何快速使用
 
-    ```java
-    $ docker-compose up -d
-    Starting dnmp-redis ... done
-    Starting dnmp-mysql ... done
-    Starting dnmp-php ... done
-    Starting dnmp-nginx ... done
-    Starting dnmp-phpmyadmin ... done
-    ```
+#### Linux and MacOS  
 
-* 浏览器访问：`http://127.0.0.1/`  
-    * 请确保`80`端口没有被占用
-    * Redis 容器内连接，连接主机为：`dnmp-redis`
-    * MySQL 容器内连接，连接主机为：`dnmp-mysql`
-*   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
+Get the dnmp
+```
+
+$ git clone https://github.com/Tinywan/dnmp.git
+```
+
+Create docker-compose environment file
+```
+$ cd dnmp
+$ cp env.sample .env
+```
+
+Edit your configuration
+```
+$ vim .env
+```
+
+Start all container
+```
+$ docker-compose up
+```
+
+#### Windows  
+
+同上
 
 ### Nginx管理  
 
