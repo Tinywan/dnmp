@@ -1,5 +1,4 @@
 # These are supported funding model platforms
-github: Tinywan
+github: [Tinywan]
 patreon: Tinywan
-tidelift: packagist/load-balancing
-custom: # Replace with a single custom sponsorship URL
+custom: https://mp.weixin.qq.com/s/H74v5IPr3_xcGgzUJt5hIg
