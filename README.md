@@ -242,12 +242,22 @@ $ docker-compose up
 
 #### 使用Docker 安装
 
+##### Linux 环境
+
 进入项目目录，执行以下命令安装
 
 ```
 docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer install --ignore-platform-reqs
 ```
 > `--ignore-platform-reqs` 参数表示官方docker composer 库没有包含当前PHP版本  
+
+##### Windows 10 环境
+
+执行执行项目的绝对路径
+```
+E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer install --ignore-platform-reqs
+```
+> `tp6` 为项目目录 
 
 #### 容器内
 
