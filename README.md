@@ -70,8 +70,10 @@ dnmp
     │   │   └── 80.conf         -- 虚拟主机配置文件
     │   │   └── lua_script.conf -- 虚拟主机配置文件
     │   ├── lua                 -- Lua 脚本目录（仅Openresty有效）
+    │   │   └── bin
+    │   │   │   └── resty-limit-traffic.lua -- Lua 限流脚本（仅Openresty有效）
     │   │   └── test
-    │   │       └── test.lua    -- Lua 测试脚本（仅Openresty有效）
+    │   │       └── hello.lua    -- Lua 测试脚本（仅Openresty有效）
     │   ├── fastcgi.conf
     │   ├── fastcgi_params
     │   ├── mime.types
@@ -114,25 +116,35 @@ dnmp
 *   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
 *   使用国内阿里云镜像源：`https://oimy1q5h.mirror.aliyuncs.com`  
 
-### 如何快速使用 
-*   拉取项目：`git clone https://github.com/Tinywan/dnmp.git`  
-*   进入目录：`cd dnmp/dnmp` 
-*   启动所有容器（守护进程） 
+### 如何快速使用
 
-    ```java
-    $ docker-compose up -d
-    Starting dnmp-redis ... done
-    Starting dnmp-mysql ... done
-    Starting dnmp-php ... done
-    Starting dnmp-nginx ... done
-    Starting dnmp-phpmyadmin ... done
-    ```
+#### Linux and MacOS  
 
-* 浏览器访问：`http://127.0.0.1/`  
-    * 请确保`80`端口没有被占用
-    * Redis 容器内连接，连接主机为：`dnmp-redis`
-    * MySQL 容器内连接，连接主机为：`dnmp-mysql`
-*   请务必给使用`-v`挂载主机目录赋予权限：`sudo chown -R 1000 data(宿主机目录)`
+Get the dnmp
+```
+
+$ git clone https://github.com/Tinywan/dnmp.git
+```
+
+Create docker-compose environment file
+```
+$ cd dnmp
+$ cp env.sample .env
+```
+
+Edit your configuration
+```
+$ vim .env
+```
+
+Start all container
+```
+$ docker-compose up
+```
+
+#### Windows  
+
+同上
 
 ### Nginx管理  
 
@@ -231,12 +243,22 @@ dnmp
 
 #### 使用Docker 安装
 
+##### Linux 环境
+
 进入项目目录，执行以下命令安装
 
 ```
 docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer install --ignore-platform-reqs
 ```
 > `--ignore-platform-reqs` 参数表示官方docker composer 库没有包含当前PHP版本  
+
+##### Windows 10 环境
+
+执行执行项目的绝对路径
+```
+E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer install --ignore-platform-reqs
+```
+> `tp6` 为项目目录 
 
 #### 容器内
 
@@ -524,28 +546,19 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 ### Openresty专题
 
+*   Usage：`cd dnmp/dev/openresty/v1 && docker-compose.exe up`
 
-*   结构
+*   Installation [OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`  
 
-    ```java
-    dev/openresty
-    ├── v1      -- openresty:alpine + PHP7.2.3-v1
-    ```
-    > cd dnmp/dev/openresty/v1 && docker-compose.exe up
+    > Windows `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
 
-*   安装[OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`  
+*   opm install extend
 
-    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+    > search redis package `docker exec -it dnmp-openresty opm search redis`
 
-    > Windows环境 `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+    > install redis package `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
 
-*   通过opm 安装扩展
-
-    > 搜索redis包 `docker exec -it dnmp-openresty opm search redis`
-
-    > 安装redis包 `docker exec -it dnmp-openresty opm get openresty/lua-resty-redis`
-
-    > 下载到指定`/usr/local/openresty/lualib/resty`目录（推荐，避免不必要的麻烦）
+    > install to specification directory `/usr/local/openresty/lualib/resty`
     
     ```
     docker exec -it dnmp-openresty sh -c "opm --install-dir=/usr/local/openresty get ledgetech/lua-resty-http"
