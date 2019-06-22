@@ -24,7 +24,8 @@ services:
         depends_on:
             - mysql
             - redis
-        image: registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php7.2-v4
+        # image: registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php7.2-v4
+        image: tinywan/dnmp:php7.2-v5
         ports:
             - "9000:9000"
             - "9502:9502" # WorkerMan 端口

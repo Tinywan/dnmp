@@ -1,5 +1,5 @@
 <?php
-// phpinfo();
+phpinfo();
 
 // 测试Redis
 function testRedis()
@@ -41,6 +41,6 @@ function testMySQL()
     mysqli_close($conn);
 }
 
-testRedis();
-testMySQL();
+// testRedis();
+// testMySQL();
 
