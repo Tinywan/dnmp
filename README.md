@@ -253,6 +253,12 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
 ##### Windows 10 环境
 
+安装一个新的composer包
+```
+E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/thinkphp_3.2:/app  composer require tinywan/load-balancing --ignore-platform-reqs
+```
+> `tinywan/load-balancing` 为需要安装的包名
+
 执行执行项目的绝对路径
 ```
 E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer install --ignore-platform-reqs
