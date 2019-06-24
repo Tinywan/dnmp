@@ -31,6 +31,7 @@
     * [本地生成HTTPS](#本地生成HTTPS)
     * [Docker生成HTTPS](#Docker生成HTTPS)
 * [Openresty专题](#Openresty专题)
+* [XDebug管理](#XDebug管理)
 * [遇到的问题](#遇到的问题)
 
 ### Docker简介
@@ -581,6 +582,21 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
     
     * 复制主机的localtime  `docker cp etc/localtime dnmp-openresty:/etc/` 
     * 重启容器  `docker-compose restart openresty` 
+
+### XDebug管理
+
+*   镜像：`docker pull registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php5.6-v2`
+*   配置文件映射路径：
+
+    ```
+    volumes:
+        - ./www:/var/www
+        - ./etc/php.ini:/usr/local/etc/php/php.ini:ro
+        - ./etc/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+        - ./log:/var/log/php
+    ```
+*   Google 浏览器安装Xdebug插件：[xdebug-helper](https://github.com/mac-cain13/xdebug-helper-for-chrome)   
+*   PHPStrom 默认配置就可以，打断点开始调试    
 
 ### 遇到的问题
 

@@ -2,8 +2,6 @@ version: '3'
 
 services:
     nginx:
-        depends_on:
-          - php
         image: ${NGINX_IMAGE_BASE}:${NGINX_IMAGE_TAG}
         ports:
           - "${NGINX_HTTP_PORT}:80"
@@ -20,7 +18,7 @@ services:
         container_name: dnmp-nginx
         networks:
           - backend
-    php:
+    php7:
         depends_on:
           - mysql
           - redis
@@ -35,7 +33,22 @@ services:
           - ${PHP_WWW_CONF_FILE}:/usr/local/php/etc/php-fpm.d/www.conf
         networks:
           - backend    
-        container_name: dnmp-php    
+        container_name: ${PHP72_CONTAINER_NAME}
+    php56:
+      depends_on:
+        - mysql
+        - redis
+      image: ${PHP_IMAGE_BASE}:${PHP56_IMAGE_TAG}
+      ports:
+        - "${PHP56_FPM_PORT}:9000"
+      volumes:
+        - ${SOURCE_SHARE_DIR}:/var/www
+        - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
+        - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
+        - ${NGINX_LOG_DIR}:/var/log/php
+      networks:
+        - backend
+      container_name: ${PHP56_CONTAINER_NAME}
     mysql:
         image: mysql:${MYSQL_IMAGE_TAG}
         restart: always
