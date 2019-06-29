@@ -46,20 +46,6 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 高性能、超大规划的宿主机部署  
 - [x] 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境
 
-### 版本更新
-
-```java
-dnmp
-├── v1      -- Nginx + PHHP-FPM
-├── v2      -- Nginx + PHP7.2.3 + PHPRedis4.0
-├── v3      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7 + Reids3.2
-├── v4      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0
-├── v5      -- Nginx + PHP7.2.3 + PHPRedis4.0 + MySQL5.7  + Reids5.0  + HTTPS
-├── v6      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab
-├── v7      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket  
-└── v8      -- Nginx + PHP7.2.3-v1 + PHPRedis4.0 + MySQL5.7 + Reids5.0 + HTTPS + Crontab + Websocket + phpmyadmin
-```
-
 ### 项目结构  
 
 ```java
