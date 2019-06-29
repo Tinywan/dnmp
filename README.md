@@ -114,7 +114,6 @@ dnmp
 
 *   已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)  
 *   已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04) 
-*   使用国内阿里云镜像源：`https://oimy1q5h.mirror.aliyuncs.com`  
 
 ### 如何快速使用
 
@@ -137,12 +136,18 @@ Edit your configuration
 $ vim .env
 ```
 
-Start all container
+Start all container (Debug model)
 ```
 $ docker-compose up
 ```
+> daemon model `docker-compose up -d`
 
-#### Windows  
+#### 重新构建PHP镜像
+
+```
+$ docker-compose build          # 重建全部服务
+$ docker-compose build php72    # 重建单个服务
+```
 
 同上
 
