@@ -51,49 +51,42 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 ```java
 dnmp
 └── dnmp
-    ├── conf                    -- Nginx 配置目录
+    ├── docker-compose.yml      -- 基础配置文件
+    ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
+    ├── Dockerfile              -- PHP镜像构建文件
+    ├── extensions              -- PHP扩展源码包
+    ├── conf                    
+    │   ├── nginx.conf          -- Nginx 主配置文件
     │   ├── conf.d
     │   │   └── 80.conf         -- 虚拟主机配置文件
-    │   │   └── lua_script.conf -- 虚拟主机配置文件
-    │   ├── lua                 -- Lua 脚本目录（仅Openresty有效）
-    │   │   └── bin
-    │   │   │   └── resty-limit-traffic.lua -- Lua 限流脚本（仅Openresty有效）
-    │   │   └── test
-    │   │       └── hello.lua    -- Lua 测试脚本（仅Openresty有效）
-    │   ├── fastcgi.conf
-    │   ├── fastcgi_params
-    │   ├── mime.types
-    │   └── nginx.conf          -- Nginx 主配置文件
-    ├── docker-compose.yml      -- 基础配置文件
-    ├── docker-compose.override.yml -- 开发环境配置文件，默认加载
-    ├── docker-compose.prod.yml -- 生产环境配置文件，-f 指定加载
-    ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
-    ├── etc                     -- 公共配置目录
-    │   ├── letsencrypt         -- Nginx 证书目录
-    │   │   ├── ssl.crt
-    │   │   └── ssl.key
-    │   ├── php-fpm.conf        -- PHP-FPM 进程服务的配置文件
-    │   ├── php-fpm.d
-    │   │   └── www.conf        -- PHP-FPM 扩展配置文件
-    │   ├── redis
-    │   │   ├── data
-    │   │   │   ├── appendonly.aof  -- Redis AOF 数据库保存文件
-    │   │   │   └── redis.log       -- Redis 日志文件
-    │   │   └── redis.conf          -- Redis 配置文件
-    │   ├── mysql
-    │   │   └── data            -- MySQL 数据存储目录
-    │   │   └── my.cnf          -- MySQL 配置文件
-    │   └── php.ini             -- PHP 运行核心配置文件
-    ├── log                     -- Nginx 日志目录
-    │   ├── tp5_access.log
-    │   ├── tp5_error.log       -- 项目错误日志
-    │   ├── access.log
-    │   └── error.log           -- Nginx 系统错误日志
+    │   ├── letsencrypt         -- Nginx 证书目录                 
+    │   ├── mysql                 
+    │   │   └── my.cnf          -- MySQL 配置文件
+    │   ├── redis                 
+    │   │   └── redis.conf      -- Redis 配置文件
+    │   ├── php                 
+    │   │   ├── php.ini         -- PHP 运行核心配置文件
+    │   │   ├── php-fpm.conf    -- PHP-FPM 进程服务的配置文件
+    │   │   └── php-fpm.d
+    │   │        └── www.conf   -- PHP-FPM 扩展配置文件
+    │   └──lua                 -- Lua 脚本目录（仅Openresty有效）
+    │        └── bin
+    │             └── imit.lua    -- Lua 限流脚本（仅Openresty有效）
+    ├── data                    -- 数据目录
+    │   ├── redis         
+    │   │   ├── appendonly.aof  -- AOF 数据库保存文件
+    │   │   ├── dump.rdb        -- RDB 数据库保存文件
+    │   │   └── redis.log       -- Redis 日志文件
+    │   └── mysql               -- MySQL 数据目录
+    ├── log 
+    ├   ├── nginx               -- Nginx 系统错误日志    
+    │   │   ├── access.log
+    │   │   └── error.log      
+    │   └──redis                -- Redis错误日志
+    │   └──php                  -- PHP错误日志
     └── www                     -- 项目代码目录
         └── site                -- 具体项目目录
-            ├── application
-            └── public
-               └──index.php     -- 项目框架入口文件
+           └──index.php         
 ```
 
 ### 环境要求  
