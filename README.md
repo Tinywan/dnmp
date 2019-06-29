@@ -1,7 +1,6 @@
 ![images](images/docker-composer-lnmp.png)
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-##  [最新下载 dnmp-v2.0.zip](https://github.com/Tinywan/dnmp/releases/download/2.0/dnmp-v2.0.zip)
 ##  推荐码云下载 https://gitee.com/Tinywan/dnmp
 
 ### :book: 目录
