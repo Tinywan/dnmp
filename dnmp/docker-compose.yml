@@ -19,6 +19,18 @@ services:
       container_name: dnmp-nginx
       networks:
           - backend
+    php7:
+      image: ${PHP_IMAGE_BASE}:${PHP72_IMAGE_TAG}
+      ports:
+        - "9001:9000"
+      volumes:
+        - ${SOURCE_SHARE_DIR}:/var/www
+        - ${PHP_INI_FILE}:/usr/local/php/etc/php.ini
+        - ${PHP_FPM_CONF_FILE}:/usr/local/php/etc/php-fpm.conf
+        - ${PHP_WWW_CONF_FILE}:/usr/local/php/etc/php-fpm.d/www.conf
+      networks:
+        - backend    
+      container_name: dnmp-php7
     php72:
       build:
         context: .
@@ -27,15 +39,14 @@ services:
           ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
           PHP_EXTENSIONS: ${PHP72_EXTENSIONS}
           MORE_EXTENSION_INSTALLER: php72.sh
-      #image: ${PHP_IMAGE_BASE}:${PHP72_IMAGE_TAG}
       ports:
         - "${PHP72_FPM_PORT}:9000"
         - "${PHP72_WORKERMAN_PORT}:9502"
       volumes:
         - ${SOURCE_SHARE_DIR}:/var/www
-        - ${PHP_INI_FILE}:/usr/local/php/etc/php.ini
-        - ${PHP_FPM_CONF_FILE}:/usr/local/php/etc/php-fpm.conf
-        - ${PHP_WWW_CONF_FILE}:/usr/local/php/etc/php-fpm.d/www.conf
+        - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
+        - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
+        - ${NGINX_LOG_DIR}:/var/log/php
       networks:
         - backend    
       container_name: ${PHP72_CONTAINER_NAME}
@@ -46,8 +57,7 @@ services:
           PHP_VERSION: ${PHP56_VERSION}
           ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
           PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
-          MORE_EXTENSION_INSTALLER: php72.sh
-      #image: ${PHP_IMAGE_BASE}:${PHP56_IMAGE_TAG}
+          MORE_EXTENSION_INSTALLER: php56.sh
       ports:
         - "${PHP56_FPM_PORT}:9000"
       volumes:
