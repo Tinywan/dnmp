@@ -69,9 +69,9 @@ dnmp
     │   │   ├── php-fpm.conf    -- PHP-FPM 进程服务的配置文件
     │   │   └── php-fpm.d
     │   │        └── www.conf   -- PHP-FPM 扩展配置文件
-    │   └──lua                 -- Lua 脚本目录（仅Openresty有效）
+    │   └──lua                  -- Lua 脚本目录（仅Openresty有效）
     │        └── bin
-    │             └── imit.lua    -- Lua 限流脚本（仅Openresty有效）
+    │             └── imit.lua  -- Lua 限流脚本（仅Openresty有效）
     ├── data                    -- 数据目录
     │   ├── redis
     │   │   ├── appendonly.aof  -- AOF 数据库保存文件
