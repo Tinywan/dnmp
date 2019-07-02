@@ -5,3 +5,4 @@ thinkphp
 vendor
 /.idea
 /dnmp/*.env
+/dnmp/.env

@@ -98,11 +98,11 @@ dnmp
 
 #### Linux and MacOS
 
-Get the dnmp
+下载
 
 ```
 
-$ git clone https://github.com/Tinywan/dnmp.git
+$ https://gitee.com/Tinywan/dnmp/attach_files/250115/download
 ```
 
 Create docker-compose environment file
@@ -133,7 +133,7 @@ $ docker-compose build          # 重建全部服务
 $ docker-compose build php72    # 重建单个服务
 ```
 
-同上
+#### Windows 同上
 
 ### Nginx 管理
 
