@@ -94,7 +94,20 @@ dnmp
 - 已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
 - 已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
 
-### 如何快速使用
+## 使用说明（很重要）
+
+#### Web服务包含两个（只能选择运行一个）
+
+* Nginx 官方镜像
+* Openresty 官方镜像
+
+#### PHP服务包含三个（多个同时构建运行）
+
+* `PHP56` 官方`ph5.6`镜像扩展构建
+* `PHP72` 官方`ph7.2.19`镜像扩展构建
+* `PHP7` 该版本已经是构建好的镜像（php7.2），支持PHP-FPM、PHP-CLI、Crontab、Composer等
+
+### 快速使用
 
 #### Linux and MacOS
 
