@@ -639,6 +639,9 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
   Err:1 http://mirrors.163.com/ubuntu bionic InRelease
   Temporary failure resolving 'mirrors.163.com'
   ```
+- Windows10 环境自动构建遇到的问题：`ERROR: http://mirrors.aliyun.com/..: temporary error (try again later)`
+  
+  > 解决办法：重启Docker 服务 
 
 ### 参考
 
