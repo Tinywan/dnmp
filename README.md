@@ -2,7 +2,7 @@
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 
-## [快速下载](https://gitee.com/Tinywan/dnmp/attach_files/250115/download)
+## [快速下载](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
 
 ### :book: 目录
 
@@ -111,7 +111,7 @@ dnmp
 
 #### Linux and MacOS
 
-下载
+[最新下载](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
 
 ```
 $ git clone https://gitee.com/Tinywan/dnmp.git
