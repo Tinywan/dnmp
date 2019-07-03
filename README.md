@@ -101,30 +101,30 @@ dnmp
 下载
 
 ```
-
-$ https://gitee.com/Tinywan/dnmp/attach_files/250115/download
+$ git clone https://gitee.com/Tinywan/dnmp.git
+$ cd dnmp
 ```
 
 Create docker-compose environment file
 
 ```
-$ cd dnmp
+$ cd dnmp // 进入正式目录而不是开发目录dev
 $ cp env.sample .env
 ```
 
-Edit your configuration
+修改配置文件
 
 ```
 $ vim .env
 ```
 
-Start all container (Debug model)
+开启所有容器
 
 ```
 $ docker-compose up
 ```
 
-> daemon model `docker-compose up -d`
+> 守护进程 `docker-compose up -d`
 
 #### 重新构建 PHP 镜像
 
