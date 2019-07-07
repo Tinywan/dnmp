@@ -654,10 +654,14 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 ### [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
 
-1、安装 `sudo apt-get install etcd`
+1、安装 `sudo apt-get install etcd`  
+
 2、开启服务 `sudo service etcd start`
+
 3、etcdctl 命令进行测试
+
 （1）设置和获取键值 testkey: "hello Tinywan"，检查 etcd 服务是否启动成功
+
 （2）命令行执行
 
   ```
@@ -675,13 +679,16 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
   # # etcdctl set testkey "hello Tinywan" --ttl 10 # 设置一个过期时间
   ```
+
   > 说明 etcd 服务已经成功启动了
+
 4、通过 HTTP 访问本地 2379 或 4001 端口的方式来进行操作，例如查看 testkey 的值
 
 ```
 # curl -L http://localhost:2379/v2/keys/testkey
 {"action":"get","node":{"key":"/testkey","value":"hello Tinywan","modifiedIndex":12,"createdIndex":12}}
 ```
+
 5、member
 通过 list、add、remove 命令列出、添加、删除 etcd 实例到 etcd 集群中。
 启动一个 etcd 服务实例后，可以用如下命令进行查看
