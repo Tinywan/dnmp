@@ -96,16 +96,16 @@ dnmp
 
 ## 使用说明（很重要）
 
-#### Web服务包含两个（只能选择运行一个）
+#### Web 服务包含两个（只能选择运行一个）
 
-* Nginx 官方镜像
-* Openresty 官方镜像
+- Nginx 官方镜像
+- Openresty 官方镜像
 
-#### PHP服务包含三个（多个同时构建运行）
+#### PHP 服务包含三个（多个同时构建运行）
 
-* `PHP56` 官方`ph5.6`镜像扩展构建
-* `PHP72` 官方`ph7.2.19`镜像扩展构建
-* `PHP7` 该版本已经是构建好的镜像（php7.2），支持PHP-FPM、PHP-CLI、Crontab、Composer等
+- `PHP56` 官方`ph5.6`镜像扩展构建
+- `PHP72` 官方`ph7.2.19`镜像扩展构建
+- `PHP7` 该版本已经是构建好的镜像（php7.2），支持 PHP-FPM、PHP-CLI、Crontab、Composer 等
 
 ### 快速使用
 
@@ -260,10 +260,12 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
 ##### Windows 10 环境
 
-安装一个新的composer包
+安装一个新的 composer 包
+
 ```
 E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/thinkphp_3.2:/app  composer require tinywan/load-balancing --ignore-platform-reqs
 ```
+
 > `tinywan/load-balancing` 为需要安装的包名
 
 执行执行项目的绝对路径
@@ -569,13 +571,17 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 ### Openresty 专题
 
-- Usage：`cd dnmp/dev/openresty/v1 && docker-compose.exe up`
+> 这里默认镜像标签为：`bionic`
 
-- Installation [OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`
+- 注意：如果你使用`alpine` and `stretch` 镜像标签，请单独安装`opm`，按照下面步骤安装既可
 
-  > Windows `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+  - Usage：`cd dnmp/dev/openresty/v1 && docker-compose.exe up`
 
-- opm install extend
+  - Installation [OPM](https://github.com/openresty/opm) `docker exec -it dnmp-openresty apk add --no-cache curl perl`
+
+    > Windows `winpty docker exec -it dnmp-openresty apk add --no-cache curl perl`
+
+- 通过 opm install extend
 
   > search redis package `docker exec -it dnmp-openresty opm search redis`
 
@@ -599,6 +605,91 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
   - 复制主机的 localtime `docker cp etc/localtime dnmp-openresty:/etc/`
   - 重启容器 `docker-compose restart openresty`
+
+#### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
+
+
+安装前的依赖 
+```
+apt install sudo
+
+sudo apt install wget
+
+sudo apt install vim
+
+sudo apt install vim
+
+vim /etc/apt/sources.list # 请使用163 的源，比阿里云的靠谱点 `http://mirrors.163.com/ubuntu/ bionic`
+
+sudo apt update
+
+# add openresty source
+wget -qO - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository -y "deb http://openresty.org/package/ubuntu $(lsb_release -sc) main"
+sudo apt-get update
+
+# install openresty, etcd and some compilation tools
+sudo apt-get install -y git etcd curl luarocks\
+    check libpcre3 libpcre3-dev libjemalloc-dev \
+    libjemalloc1 build-essential libtool automake autoconf pkg-config cmake
+
+# start etcd server
+sudo service etcd start
+
+```
+
+安装 APISIX
+
+```
+sudo luarocks install apisix
+```
+如果一切顺利，你会在最后看到这样的信息：
+
+```
+apisix is now built and installed in /usr (license: Apache License 2.0)
+```
+
+恭喜你，APISIX 已经安装成功了。
+
+### [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
+
+1、安装 `sudo apt-get install etcd`
+2、开启服务 `sudo service etcd start`
+3、etcdctl 命令进行测试
+（1）设置和获取键值 testkey: "hello Tinywan"，检查 etcd 服务是否启动成功
+（2）命令行执行
+
+  ```
+  # etcdctl set testkey "hello Tinywan"  # 设置
+  hello Tinywan
+
+  # etcdctl get testkey # 获取
+  hello Tinywan
+
+  # etcdctl rm testkey # 删除
+  PrevNode.Value: hello Tinywan
+
+  #etcdctl get testkey1 # 重新获取
+  Error:  100: Key not found (/testkey1) [13]
+
+  # # etcdctl set testkey "hello Tinywan" --ttl 10 # 设置一个过期时间
+  ```
+  > 说明 etcd 服务已经成功启动了
+4、通过 HTTP 访问本地 2379 或 4001 端口的方式来进行操作，例如查看 testkey 的值
+
+```
+# curl -L http://localhost:2379/v2/keys/testkey
+{"action":"get","node":{"key":"/testkey","value":"hello Tinywan","modifiedIndex":12,"createdIndex":12}}
+```
+5、member
+通过 list、add、remove 命令列出、添加、删除 etcd 实例到 etcd 集群中。
+启动一个 etcd 服务实例后，可以用如下命令进行查看
+
+```
+# etcdctl member list
+8e9e05c52164694d: name=8c831881add4 peerURLs=http://localhost:2380 clientURLs=http://localhost:2379 isLeader=true
+```
 
 ### XDebug 管理
 
@@ -652,9 +743,10 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
   Err:1 http://mirrors.163.com/ubuntu bionic InRelease
   Temporary failure resolving 'mirrors.163.com'
   ```
+
 - Windows10 环境自动构建遇到的问题：`ERROR: http://mirrors.aliyun.com/..: temporary error (try again later)`
-  
-  > 解决办法：重启Docker 服务 
+
+  > 解决办法：重启 Docker 服务
 
 ### 参考
 
@@ -665,3 +757,40 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 - [write in shared volumes docker](https://stackoverflow.com/questions/29245216/write-in-shared-volumes-docker)
 
 ![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
+
+### OR 编译参数
+
+```
+./configure  \
+ --prefix=/usr/local/openresty   \
+ --with-luajit  \
+ --with-stream  \
+ --with-stream_ssl_module \
+ --with-stream=dynamic  \
+ --with-file-aio  \
+ --with-threads  \
+ --with-cc-opt="-O3"  \
+ --with-http_v2_module  \
+ --with-http_realip_module  \
+ --with-http_mp4_module  \
+ --with-http_gzip_static_module  \
+ --with-http_ssl_module \
+ --with-http_stub_status_module  \
+ --with-http_xslt_module \
+ --with-http_iconv_module   \
+ --without-http_redis2_module \
+ --with-openssl-opt=enable-tlsext \
+ --add-dynamic-module=/home/www/build/nginx-rtmp-module/ \
+ --add-dynamic-module=/home/www/build/nginx-ts-module/ \
+ --add-dynamic-module=/www/home/build/nginx-vod-module/  \
+ --add-dynamic-module=/www/home/build/nginx-module-vts/
+```
+编译安装 
+```
+make
+sudo make install
+
+# 安装好后进入 apisix 项目
+make run
+make stop
+```
