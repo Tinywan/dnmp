@@ -712,7 +712,10 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
   ```
 
 - Google 浏览器安装 Xdebug 插件：[xdebug-helper](https://github.com/mac-cain13/xdebug-helper-for-chrome)
-- PHPStrom 默认配置就可以，打断点开始调试
+
+- PHPStrom 默认配置就可以，打断点开始调试，默认不需要添加参数
+
+- Postman 断点调试（API接口），直接在后面增加`?XDEBUG_SESSION_START=PHPSTORM`参数，即：`http://www.tinywan.top:8007?XDEBUG_SESSION_START=PHPSTORM`
 
 ### 遇到的问题
 
