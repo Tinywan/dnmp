@@ -772,19 +772,21 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 1、安装vim  `apt-get install vim`
 
-2、更新源`vim sources.list`
+2、更新源`vim sources.list`，
 
-```
-deb http://mirrors.163.com/debian/  stretch main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
-deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
-deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
-deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
-```
-> `degian9` 的163源
+（1）中科大源：`sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list`
+（2）直接编辑 `/etc/apt/sources.list` 文件
+  ```
+  deb http://mirrors.163.com/debian/  stretch main non-free contrib
+  deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+  deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+  deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
+  deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+  deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+  deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+  deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+  ```
+  > `degian9` 的163源
 
 3、更新163源：`apt update`
 
