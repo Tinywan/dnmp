@@ -768,6 +768,36 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 ![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
 
+### [mycli](https://github.com/dbcli/mycli) 工具安装使用
+
+1、安装vim  `apt-get install vim`
+
+2、更新源`vim sources.list`
+
+```
+deb http://mirrors.163.com/debian/  stretch main non-free contrib
+deb http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+deb http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch-updates main non-free contrib
+deb-src http://mirrors.163.com/debian/  stretch-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/  stretch/updates main non-free contrib
+```
+> `degian9` 的163源
+
+3、更新163源：`apt update`
+
+4、安装mycli：`apt-get install mycli`
+
+5、设置默认语言格式： `export LANG=C.UTF-8`
+
+6、演示如下所示
+
+![images](images/dnmp-mysql.gif)
+
+7、直接通过外部连接`docker exec -it dnmp-mysql sh -c "export LANG=C.UTF-8 && mycli -h 127.0.0.1 -p123456"`
+
 ### OR 编译参数
 
 ```
