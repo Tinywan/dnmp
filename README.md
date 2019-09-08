@@ -11,7 +11,7 @@
 - [版本更新](#版本更新)
 - [项目结构](#项目结构)
 - [版本更新](#版本更新)
-- [如何快速使用](#如何快速使用)
+- [快速使用](#快速使用)
   - [部署环境要求](#部署环境要求)
   - [快速启动](#快速启动)
   - [测试访问](#测试访问)
@@ -34,11 +34,11 @@
 - [XDebug 管理](#XDebug管理)
 - [遇到的问题](#遇到的问题)
 
-### Docker 简介
+### Docker简介
 
 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
-### 为什么使用 Docker
+### 为什么使用Docker
 
 - [x] 加速本地的开发和构建流程，容器可以在开发环境构建，然后轻松地提交到测试环境，并最终进入生产环境
 - [x] 能够在让独立的服务或应用程序在不同的环境中得到相同的运行结果
@@ -148,7 +148,7 @@ $ docker-compose build php72    # 重建单个服务
 
 #### Windows 同上
 
-### Nginx 管理
+### Nginx管理
 
 - 配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口一一对应
 
@@ -167,7 +167,7 @@ $ docker-compose build php72    # 重建单个服务
   - 复制主机的`localtime`： `docker cp /etc/localtime lnmp-nginx:/etc/`
   - 重启容器：`docker restart lnmp-nginx`
 
-### MySQL 管理
+### MySQL管理
 
 - 进入容器：`docker exec -it dnmp-mysql /bin/bash`
 
@@ -192,7 +192,7 @@ $ docker-compose build php72    # 重建单个服务
   - 新建项目用户 `www`，配置主机`Host`字段值为 MySQL 容器 ip 段`172.18.0.%`
   - 查看容器 IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnmp-mysql`
 
-### PHP 管理
+### PHP管理
 
 - 进入 php 容器 `docker exec -it dnmp-php /bin/bash`
   > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
@@ -237,18 +237,18 @@ $ docker-compose build php72    # 重建单个服务
   > 编辑文件`vim /etc/rc.local`，添加以上内容
   > 以上主要是解决服务器重启后，PHP 容器不能够重启以及 PHP 容器之内的 Crontab 服务不能够启动的的问题，目前没有其他解决方案
 
-### Redis 管理
+### Redis管理
 
 - 连接 Redis 容器：`docker exec -it dnmp-redis redis-cli -h 127.0.0.1 -p 63789`
 - 通过容器连接：`docker exec -it dnmp-redis redis-cli -h dnmp-redis -p 63789`
 - 单独重启 redis 服务 `docker-compose up --no-deps -d redis`
 - 外部宿主机连接：`redis-cli -h 127.0.0.1 -p 63789`
 
-### Composer 管理
+### Composer管理
 
-#### 使用 Docker 安装
+#### 使用Docker安装
 
-##### Linux 环境
+##### Linux环境
 
 进入项目目录，执行以下命令安装
 
@@ -258,7 +258,7 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
 > `--ignore-platform-reqs` 参数表示官方 docker composer 库没有包含当前 PHP 版本
 
-##### Windows 10 环境
+##### Windows环境
 
 安装一个新的 composer 包
 
@@ -342,7 +342,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   ```
   > 第一次执行提示：`Unable to find image 'composer:latest' locally`，不要慌，稍等片刻
 
-### Crontab 管理
+### Crontab管理
 
 #### 执行方案
 
@@ -367,7 +367,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 - 添加任务输出日志到映射目录：`* * * * * echo " Hi dnmp " >> /var/www/crontab.log`
 - 定时执行 ThinkPHP5 自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-### WebSocket 管理
+### WebSocket管理
 
 在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)
 
@@ -423,7 +423,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   MESSAGE: {"type":"docker","text":"Hi Tinywan"}
   ```
 
-#### phpMyAdmin 管理
+#### phpMyAdmin管理
 
 主机上访问 phpMyAdmin 的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
 
@@ -569,7 +569,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 - `Ali_Key` 阿里云 AccessKey ID
 - `Ali_Secret` 阿里云 Access Key Secret
 
-### Openresty 专题
+### Openresty专题
 
 > 这里默认镜像标签为：`bionic`
 
@@ -698,7 +698,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 8e9e05c52164694d: name=8c831881add4 peerURLs=http://localhost:2380 clientURLs=http://localhost:2379 isLeader=true
 ```
 
-### XDebug 管理
+### XDebug管理
 
 - 镜像：`docker pull registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php5.6-v2`
 - 配置文件映射路径：
