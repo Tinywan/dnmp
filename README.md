@@ -31,6 +31,7 @@
   - [本地生成 HTTPS](#本地生成HTTPS)
   - [Docker 生成 HTTPS](#Docker生成HTTPS)
 - [Openresty 专题](#Openresty专题)
+- [RabbitMQ 专题](#RabbitMQ专题)
 - [XDebug 管理](#XDebug管理)
 - [遇到的问题](#遇到的问题)
 
@@ -605,6 +606,10 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
   - 复制主机的 localtime `docker cp etc/localtime dnmp-openresty:/etc/`
   - 重启容器 `docker-compose restart openresty`
+
+### RabbitMQ专题
+
+管理界面地址：[http://127.0.0.1:15672/](http://127.0.0.1:15672/)
 
 #### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
