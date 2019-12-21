@@ -5,20 +5,20 @@ export MC="-j$(nproc)"
 LOG_LEVEL=0
 
 function record_log() {
-    local LOG_TYPE=$1
-    local LOG_CONTENT=$2
-    case $LOG_TYPE in
+    local type=$1
+    local content=$2
+    case $type in
     debug)
-        [[ $LOG_LEVEL -le 0 ]] && echo -e "\033[34m${LOG_CONTENT}\033[0m"
+        [[ $LOG_LEVEL -le 0 ]] && echo -e "\033[34m${content}\033[0m"
         ;;
     info)
-        [[ $LOG_LEVEL -le 1 ]] && echo -e "\033[32m${LOG_CONTENT}\033[0m"
+        [[ $LOG_LEVEL -le 1 ]] && echo -e "\033[32m${content}\033[0m"
         ;;
     warn)
-        [[ $LOG_LEVEL -le 2 ]] && echo -e "\033[33m${LOG_CONTENT}\033[0m"
+        [[ $LOG_LEVEL -le 2 ]] && echo -e "\033[33m${content}\033[0m"
         ;;
     error)
-        [[ $LOG_LEVEL -le 3 ]] && echo -e "\033[31m${LOG_CONTENT}\033[0m"
+        [[ $LOG_LEVEL -le 3 ]] && echo -e "\033[31m${content}\033[0m"
         ;;
     esac
 }
@@ -47,17 +47,17 @@ export EXTENSIONS=",${PHP_EXTENSIONS},"
 # For example, to check if current php is greater than or
 # equal to PHP 7.0:
 #
-# isPhpVersionGreaterOrEqual 7 0
+# is_php_version_greater_or_equal 7 0
 #
 # Param 1: Specific PHP Major version
 # Param 2: Specific PHP Minor version
 # Return : 1 if greater than or equal to, 0 if less than
 #
-function isPhpVersionGreaterOrEqual() {
-    local PHP_MAJOR_VERSION=$(php -r "echo PHP_MAJOR_VERSION;")
-    local PHP_MINOR_VERSION=$(php -r "echo PHP_MINOR_VERSION;")
+function is_php_version_greater_or_equal() {
+    local php_major_version=$(php -r "echo PHP_MAJOR_VERSION;")
+    local php_minjor_version=$(php -r "echo PHP_MINOR_VERSION;")
 
-    if [[ "$PHP_MAJOR_VERSION" -gt "$1" || "$PHP_MAJOR_VERSION" -eq "$1" && "$PHP_MINOR_VERSION" -ge "$2" ]]; then
+    if [[ "${php_major_version}" -gt "$1" || "${php_major_version}" -eq "$1" && "${php_minjor_version}" -ge "$2" ]]; then
         return 1
     else
         return 0
@@ -68,20 +68,20 @@ function isPhpVersionGreaterOrEqual() {
 # Install extension from package file(.tgz),
 # For example:
 #
-# installExtensionFromTgz redis-5.0.2
+# install_extension_from_tgz redis-5.0.2
 #
 # Param 1: Package name with version
 # Param 2: enable options
 #
-function installExtensionFromTgz() {
-    tgzName=$1
-    extensionName="${tgzName%%-*}"
+function install_extension_from_tgz() {
+    local package_name=$1
+    local extension="${package_name%%-*}"
 
-    mkdir ${extensionName}
-    tar -xf ${tgzName}.tgz -C ${extensionName} --strip-components=1
-    (cd ${extensionName} && phpize && ./configure && make ${MC} && make install)
+    mkdir ${extension}
+    tar -xf ${package_name}.tgz -C ${extension} --strip-components=1
+    (cd ${extension} && phpize && ./configure && make ${MC} && make install)
 
-    docker-php-ext-enable ${extensionName} $2
+    docker-php-ext-enable ${extension} $2
 }
 
 # install
@@ -374,7 +374,7 @@ function install_script() {
     fi
 
     if [[ -z "${EXTENSIONS##*,pdo_sqlsrv,*}" ]]; then
-        isPhpVersionGreaterOrEqual 7 1
+        is_php_version_greater_or_equal 7 1
         if [[ "$?" == "1" ]]; then
             record_log info "---------- Install pdo_sqlsrv ----------"
             apk add --no-cache unixodbc-dev
@@ -386,7 +386,7 @@ function install_script() {
     fi
 
     if [[ -z "${EXTENSIONS##*,sqlsrv,*}" ]]; then
-        isPhpVersionGreaterOrEqual 7 1
+        is_php_version_greater_or_equal 7 1
         if [[ "$?" == "1" ]]; then
             record_log info "---------- Install sqlsrv ----------"
             apk add --no-cache unixodbc-dev
@@ -398,7 +398,7 @@ function install_script() {
     fi
 
     if [[ -z "${EXTENSIONS##*,mcrypt,*}" ]]; then
-        isPhpVersionGreaterOrEqual 7 2
+        is_php_version_greater_or_equal 7 2
         if [[ "$?" == "1" ]]; then
             record_log info "---------- mcrypt was REMOVED from PHP 7.2.0 ----------"
         else
@@ -409,7 +409,7 @@ function install_script() {
     fi
 
     if [[ -z "${EXTENSIONS##*,mysql,*}" ]]; then
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
             record_log info "---------- mysql was REMOVED from PHP 7.0.0 ----------"
@@ -420,7 +420,7 @@ function install_script() {
     fi
 
     if [[ -z "${EXTENSIONS##*,sodium,*}" ]]; then
-        isPhpVersionGreaterOrEqual 7 2
+        is_php_version_greater_or_equal 7 2
         if [[ "$?" == "1" ]]; then
             record_log info ""
             record_log info "Sodium is bundled with PHP from PHP 7.2.0"
@@ -435,14 +435,14 @@ function install_script() {
     if [[ -z "${EXTENSIONS##*,amqp,*}" ]]; then
         record_log info "---------- Install amqp ----------"
         apk add --no-cache rabbitmq-c-dev
-        installExtensionFromTgz amqp-1.9.4
+        install_extension_from_tgz amqp-1.9.4
     fi
 
     if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
         record_log info "---------- Install redis ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
         if [[ "$?" == "1" ]]; then
-            installExtensionFromTgz redis-5.1.1
+            install_extension_from_tgz redis-5.1.1
         else
             printf "\n" | pecl install redis-4.3.0
             docker-php-ext-enable redis
@@ -451,13 +451,13 @@ function install_script() {
 
     if [[ -z "${EXTENSIONS##*,apcu,*}" ]]; then
         record_log info "---------- Install apcu ----------"
-        installExtensionFromTgz apcu-5.1.17
+        install_extension_from_tgz apcu-5.1.17
     fi
 
     if [[ -z "${EXTENSIONS##*,memcached,*}" ]]; then
         record_log info "---------- Install memcached ----------"
         apk add --no-cache libmemcached-dev zlib-dev
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
             printf "\n" | pecl install memcached-3.1.3
@@ -470,12 +470,12 @@ function install_script() {
 
     if [[ -z "${EXTENSIONS##*,xdebug,*}" ]]; then
         record_log info "---------- Install xdebug ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
-            installExtensionFromTgz xdebug-2.9.0
+            install_extension_from_tgz xdebug-2.9.0
         else
-            installExtensionFromTgz xdebug-2.5.5
+            install_extension_from_tgz xdebug-2.5.5
         fi
     fi
 
@@ -490,32 +490,32 @@ function install_script() {
         fi
 
         record_log info "---------- Install event again ----------"
-        installExtensionFromTgz event-2.5.3 "--ini-name event.ini"
+        install_extension_from_tgz event-2.5.3 "--ini-name event.ini"
     fi
 
     if [[ -z "${EXTENSIONS##*,mongodb,*}" ]]; then
         record_log info "---------- Install mongodb ----------"
-        installExtensionFromTgz mongodb-1.5.5
+        install_extension_from_tgz mongodb-1.5.5
     fi
 
     if [[ -z "${EXTENSIONS##*,yaf,*}" ]]; then
         record_log info "---------- Install yaf ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
             printf "\n" | pecl install yaf
             docker-php-ext-enable yaf
         else
-            installExtensionFromTgz yaf-2.3.5
+            install_extension_from_tgz yaf-2.3.5
         fi
     fi
 
     if [[ -z "${EXTENSIONS##*,swoole,*}" ]]; then
         record_log info "---------- Install swoole ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
-            installExtensionFromTgz swoole-4.4.13
+            install_extension_from_tgz swoole-4.4.13
         fi
     fi
 
@@ -530,7 +530,7 @@ function install_script() {
 
     if [[ -z "${EXTENSIONS##*,xhprof,*}" ]]; then
         record_log info "---------- Install XHProf ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
             mkdir xhprof &&
@@ -544,7 +544,7 @@ function install_script() {
 
     if [[ -z "${EXTENSIONS##*,xlswriter,*}" ]]; then
         record_log info "---------- Install xlswriter ----------"
-        isPhpVersionGreaterOrEqual 7 0
+        is_php_version_greater_or_equal 7 0
 
         if [[ "$?" == "1" ]]; then
             printf "\n" | pecl install xlswriter
@@ -556,8 +556,8 @@ function install_script() {
 }
 
 function main() {
-    isPhpVersionGreaterOrEqual
-    installExtensionFromTgz
+    is_php_version_greater_or_equal
+    install_extension_from_tgz
     install_script
     exit 0
 }
