@@ -54,8 +54,9 @@ dnmp
 └── dnmp
     ├── docker-compose.yml      -- 基础配置文件
     ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
-    ├── Dockerfile              -- PHP镜像构建文件
-    ├── extensions              -- PHP扩展源码包
+    ├── composes                -- 编写目录
+    │   ├── php
+    │   │   └── Dockerfile      -- 镜像构建文件
     ├── conf
     │   ├── nginx.conf          -- Nginx 主配置文件
     │   ├── conf.d
@@ -63,6 +64,8 @@ dnmp
     │   ├── letsencrypt         -- Nginx 证书目录
     │   ├── mysql
     │   │   └── my.cnf          -- MySQL 配置文件
+    │   ├── etcd
+    │   │   └── etcd.conf.yml   -- Etcd 配置文件
     │   ├── redis
     │   │   └── redis.conf      -- Redis 配置文件
     │   ├── php
@@ -70,9 +73,9 @@ dnmp
     │   │   ├── php-fpm.conf    -- PHP-FPM 进程服务的配置文件
     │   │   └── php-fpm.d
     │   │        └── www.conf   -- PHP-FPM 扩展配置文件
-    │   └──lua                  -- Lua 脚本目录（仅Openresty有效）
+    │   └──lua                  -- Lua 脚本目录
     │        └── bin
-    │             └── imit.lua  -- Lua 限流脚本（仅Openresty有效）
+    │             └── imit.lua  -- Lua 限流脚本
     ├── data                    -- 数据目录
     │   ├── redis
     │   │   ├── appendonly.aof  -- AOF 数据库保存文件
@@ -92,30 +95,15 @@ dnmp
 
 ### 环境要求
 
-- 已经安装 [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
-- 已经安装 [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
-
-## 使用说明（很重要）
-
-#### Web 服务包含两个（只能选择运行一个）
-
-- Nginx 官方镜像
-- Openresty 官方镜像
-
-#### PHP 服务包含三个（多个同时构建运行）
-
-- `PHP56` 官方`ph5.6`镜像扩展构建
-- `PHP72` 官方`ph7.2.19`镜像扩展构建
-- `PHP7` 该版本已经是构建好的镜像（php7.2），支持 PHP-FPM、PHP-CLI、Crontab、Composer 等
+- [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
+- [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
 
 ### 快速使用
 
-#### Linux and MacOS
-
-[最新下载](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
+[Latest download](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
 
 ```
-$ git clone https://gitee.com/Tinywan/dnmp.git
+$ git clone git@github.com:Tinywan/dnmp.git
 $ cd dnmp
 ```
 
@@ -140,14 +128,12 @@ $ docker-compose up
 
 > 守护进程 `docker-compose up -d`
 
-#### 重新构建 PHP 镜像
+#### 构建镜像
 
 ```
 $ docker-compose build          # 重建全部服务
-$ docker-compose build php72    # 重建单个服务
+$ docker-compose build php74    # 重建单个服务
 ```
-
-#### Windows 同上
 
 ### Nginx管理
 
@@ -723,6 +709,8 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 - Postman 断点调试（API接口），直接在后面增加`?XDEBUG_SESSION_START=PHPSTORM`参数，即：`http://www.tinywan.top:8007?XDEBUG_SESSION_START=PHPSTORM`
 
 ### 遇到的问题
+
+- 编译问题 `repository does not exist or may require 'docker login': denied: requested `，请检查`docker-compose.yml`文件格式
 
 - 连接 Redis 报错：`Connection refused`，其他客户端可以正常连接
 
