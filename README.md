@@ -1,8 +1,7 @@
 ![images](images/docker-composer-lnmp.png)
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-
-## [快速下载](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
+[![Build status](https://github.com/Tinywan/dnmp/workflows/CI/badge.svg)]()
 
 ### :book: 目录
 
