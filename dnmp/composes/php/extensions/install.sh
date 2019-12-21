@@ -473,7 +473,7 @@ function install_script() {
         isPhpVersionGreaterOrEqual 7 0
 
         if [[ "$?" == "1" ]]; then
-            installExtensionFromTgz xdebug-2.6.1
+            installExtensionFromTgz xdebug-2.9.0
         else
             installExtensionFromTgz xdebug-2.5.5
         fi
