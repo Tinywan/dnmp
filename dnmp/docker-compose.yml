@@ -97,7 +97,7 @@ services:
     networks:
       - backend
     restart: always
-    container_name: dnmp-mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
   
   redis:
     image: redis:${REDIS_IMAGE_TAG}
@@ -111,7 +111,7 @@ services:
       - ${REDIS_CONF_FILE}:/usr/local/etc/redis/redis.conf
       - ${REDIS_DATA_DIR}:/data
     restart: always
-    container_name: dnmp-redis
+    container_name: ${REDIS_CONTAINER_NAME}
   
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:${PHPMYADMIN_TAG}
