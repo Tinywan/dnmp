@@ -103,13 +103,12 @@ dnmp
 
 ```
 $ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp
+$ cd dnmp/dnmp // 注意：两个目录而
 ```
 
 Create docker-compose environment file
 
 ```
-$ cd dnmp // 进入正式目录而不是开发目录dev
 $ cp env.sample .env
 ```
 
