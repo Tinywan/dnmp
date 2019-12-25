@@ -1,7 +1,8 @@
 version: '3'
 services:
   openresty:
-    image: ${OPENRESTY_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
+    # image: ${OPENRESTY_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
+    image: ${OPENRESTY_CHINA_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
     ports:
       - "${NGINX_HTTP_PORT}:80"
       - "8001:8001"
@@ -21,6 +22,25 @@ services:
     container_name: ${OPENRESTY_CONTAINER_NAME}
     networks:
         - backend
+
+  # nginx:
+  #   image: ${NGINX_IMAGE_BASE}:${NGINX_IMAGE_TAG}
+  #   ports:
+  #     - "${NGINX_HTTP_PORT}:80"
+  #     - "${NGINX_HTTPS_PORT}:443"
+  #     - "${NGINX_HTTP_PORT_72}:8072"
+  #   volumes:
+  #     - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf
+  #     - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d
+  #     - ${NGINX_LOG_DIR}:/var/log/nginx
+  #     - ${SOURCE_SHARE_DIR}:/var/www
+  #     - ${NGINX_SSL_DIR}:/etc/letsencrypt
+  #   restart: always
+  #   environment:
+  #       TZ: "${TZ}"  
+  #   container_name: ${NGINX_CONTAINER_NAME}
+  #   networks:
+  #       - backend
 
   php74:
     build:
@@ -82,7 +102,7 @@ services:
     container_name: ${PHP56_CONTAINER_NAME}
   
   mysql:
-    image: mysql:${MYSQL_IMAGE_TAG}
+    image: ${MYSQL_CHINA_IMAGE_BASE}:${MYSQL_IMAGE_TAG}
     restart: always
     command: --default-authentication-plugin=mysql_native_password 
     hostname: dnmp-mysql
