@@ -104,37 +104,24 @@ dnmp
 
 ### 快速使用
 
+拉取代码
 ```
 $ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp/dnmp // 注意：两个目录而
+$ cd dnmp/dnmp        // 注意！！！：是两个目录
 ```
 
-Create docker-compose environment file
-
+新建配置文件
 ```
 $ cp env.example .env
 ```
 
-修改配置文件
-
-```
-$ vim .env
-```
-
-开启所有容器
-
+开启容器服务
 ```
 $ docker-compose up
 ```
-
 > 守护进程 `docker-compose up -d`
 
-#### 构建镜像
-
-```
-$ docker-compose build          # 重建全部服务
-$ docker-compose build php74    # 重建单个服务
-```
+结束
 
 ### Nginx管理
 
@@ -436,6 +423,13 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 #### 容器管理
 
 ![images](images/engine-components-flow.png)
+
+- 重新单独构建镜像
+
+  ```
+  $ docker-compose build          # 重建全部服务
+  $ docker-compose build php74    # 重建单个服务
+  ```
 
 - 进入 Docker 容器
 
