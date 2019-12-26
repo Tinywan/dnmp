@@ -52,7 +52,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 dnmp
 └── dnmp
     ├── docker-compose.yml      -- 基础配置文件
-    ├── env.sample              -- 环境配置文件，拷贝 env.sample 为 .env
+    ├── env.example              -- 环境配置文件，拷贝 env.example 为 .env
     ├── composes                -- 编写目录
     │   ├── php
     │   │   └── Dockerfile      -- 镜像构建文件
@@ -97,9 +97,12 @@ dnmp
 - [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
 - [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
 
-### 快速使用
+### 墙内用户
 
-[Latest download](https://gitee.com/Tinywan/dnmp/attach_files/251844/download)
+* [码云下载](https://gitee.com/Tinywan/dnmp/releases/v3.0)
+* 请使用默认镜像源（阿里云镜像源）`registry.cn-beijing.aliyuncs.com/tinywan/openresty`
+
+### 快速使用
 
 ```
 $ git clone git@github.com:Tinywan/dnmp.git
@@ -109,7 +112,7 @@ $ cd dnmp/dnmp // 注意：两个目录而
 Create docker-compose environment file
 
 ```
-$ cp env.sample .env
+$ cp env.example .env
 ```
 
 修改配置文件
