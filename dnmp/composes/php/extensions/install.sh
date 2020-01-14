@@ -215,9 +215,20 @@ function install_script() {
 
     if [[ -z "${EXTENSIONS##*,gd,*}" ]]; then
         record_log info "---------- Install gd ----------"
-        apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev &&
-            docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&
-            docker-php-ext-install ${MC} gd
+
+        is_php_version_greater_or_equal 7 4
+
+        if [[ "$?" == "1" ]]; then
+            record_log warn "---------- gd PHP >= 7.4 ----------"
+            apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev &&
+                docker-php-ext-configure gd &&
+                docker-php-ext-install ${MC} gd
+        else
+            record_log warn "---------- gd PHP < 7.4 ----------"
+            apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev &&
+                docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&
+                docker-php-ext-install ${MC} gd
+        fi
     fi
 
     if [[ -z "${EXTENSIONS##*,intl,*}" ]]; then

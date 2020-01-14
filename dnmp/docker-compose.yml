@@ -18,7 +18,7 @@ services:
       - ${NGINX_SSL_DIR}:/etc/letsencrypt
     restart: always
     environment:
-      TZ: "$TZ"  
+      TZ: "$TZ"
     container_name: ${OPENRESTY_CONTAINER_NAME}
     networks:
         - backend
@@ -37,7 +37,7 @@ services:
   #     - ${NGINX_SSL_DIR}:/etc/letsencrypt
   #   restart: always
   #   environment:
-  #       TZ: "${TZ}"  
+  #       TZ: "${TZ}"
   #   container_name: ${NGINX_CONTAINER_NAME}
   #   networks:
   #       - backend
@@ -58,9 +58,9 @@ services:
       - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
       - ${PHP_LOG_DIR}:/var/log/php
     networks:
-      - backend    
-    container_name: ${PHP74_CONTAINER_NAME}  
-  
+      - backend
+    container_name: ${PHP74_CONTAINER_NAME}
+
   php72:
     build:
       context: ./composes/php
@@ -79,9 +79,9 @@ services:
       - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
       - ${PHP_LOG_DIR}:/var/log/php
     networks:
-      - backend    
+      - backend
     container_name: ${PHP72_CONTAINER_NAME}
-  
+
   php56:
     build:
       context: ./composes/php
@@ -100,11 +100,11 @@ services:
     networks:
       - backend
     container_name: ${PHP56_CONTAINER_NAME}
-  
+
   mysql:
     image: ${MYSQL_CHINA_IMAGE_BASE}:${MYSQL_IMAGE_TAG}
     restart: always
-    command: --default-authentication-plugin=mysql_native_password 
+    command: --default-authentication-plugin=mysql_native_password
     hostname: dnmp-mysql
     ports:
       - "3308:3306"
@@ -112,27 +112,27 @@ services:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
       - ${MYSQL_CONF_FILE}:/etc/mysql/my.cnf
     environment:
-        MYSQL_ROOT_PASSWORD: 123456  
-        TZ: "$TZ"  
+        MYSQL_ROOT_PASSWORD: 123456
+        TZ: "$TZ"
     networks:
       - backend
     restart: always
     container_name: ${MYSQL_CONTAINER_NAME}
-  
+
   redis:
     image: redis:${REDIS_IMAGE_TAG}
     hostname: dnmp-redis
     ports:
       - "${REDIS_HOST_PORT}:6379"
-    command: redis-server /usr/local/etc/redis/redis.conf    
+    command: redis-server /usr/local/etc/redis/redis.conf
     networks:
-      - backend      
+      - backend
     volumes:
       - ${REDIS_CONF_FILE}:/usr/local/etc/redis/redis.conf
       - ${REDIS_DATA_DIR}:/data
     restart: always
     container_name: ${REDIS_CONTAINER_NAME}
-  
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:${PHPMYADMIN_TAG}
     ports:
@@ -157,7 +157,7 @@ services:
       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
     container_name: ${RABBITMQ_CONTAINER_NAME}
     networks:
-      - backend     
+      - backend
 networks:
   backend:
-    driver: bridge   
+    driver: bridge
