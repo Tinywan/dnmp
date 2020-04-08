@@ -109,6 +109,7 @@ dnmp
 $ git clone git@github.com:Tinywan/dnmp.git
 $ cd dnmp/dnmp        // 注意！！！：是两个目录
 ```
+> 注意：是进入两个目录! 是进入两个目录! 是进入两个目录!
 
 新建配置文件
 ```
