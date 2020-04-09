@@ -59,7 +59,9 @@ dnmp
     ├── conf
     │   ├── nginx.conf          -- Nginx 主配置文件
     │   ├── conf.d
-    │   │   └── 80.conf         -- 虚拟主机配置文件
+    │   │   └── 80.conf         -- HTTP 80 虚拟主机扩展配置文件
+    │   │   └── 443.conf        -- HTTPS 虚拟主机扩展配置文件
+    │   │   └── lua.conf        -- Lua 配置虚拟主机扩展配置文件
     │   ├── letsencrypt         -- Nginx 证书目录
     │   ├── mysql
     │   │   └── my.cnf          -- MySQL 配置文件
@@ -74,7 +76,9 @@ dnmp
     │   │        └── www.conf   -- PHP-FPM 扩展配置文件
     │   └──lua                  -- Lua 脚本目录
     │        └── bin
-    │             └── imit.lua  -- Lua 限流脚本
+    │        │    └── limit.lua -- 核心库脚本
+    │        └── test
+    │             └── http.lua  -- 测试脚本
     ├── data                    -- 数据目录
     │   ├── redis
     │   │   ├── appendonly.aof  -- AOF 数据库保存文件
