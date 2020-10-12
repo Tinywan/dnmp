@@ -49,51 +49,50 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 ### 项目结构
 
 ```
-dnmp
-└── dnmp
-    ├── docker-compose.yml      -- 基础配置文件
-    ├── env.example              -- 环境配置文件，拷贝 env.example 为 .env
-    ├── composes                -- 编写目录
-    │   ├── php
-    │   │   └── Dockerfile      -- 镜像构建文件
-    ├── conf
-    │   ├── nginx.conf          -- Nginx 主配置文件
-    │   ├── conf.d
-    │   │   └── 80.conf         -- HTTP 80 虚拟主机扩展配置文件
-    │   │   └── 443.conf        -- HTTPS 虚拟主机扩展配置文件
-    │   │   └── lua.conf        -- Lua 配置虚拟主机扩展配置文件
-    │   ├── letsencrypt         -- Nginx 证书目录
-    │   ├── mysql
-    │   │   └── my.cnf          -- MySQL 配置文件
-    │   ├── etcd
-    │   │   └── etcd.conf.yml   -- Etcd 配置文件
-    │   ├── redis
-    │   │   └── redis.conf      -- Redis 配置文件
-    │   ├── php
-    │   │   ├── php.ini         -- PHP 运行核心配置文件
-    │   │   ├── php-fpm.conf    -- PHP-FPM 进程服务的配置文件
-    │   │   └── php-fpm.d
-    │   │        └── www.conf   -- PHP-FPM 扩展配置文件
-    │   └──lua                  -- Lua 脚本目录
-    │        └── bin
-    │        │    └── limit.lua -- 核心库脚本
-    │        └── test
-    │             └── http.lua  -- 测试脚本
-    ├── data                    -- 数据目录
-    │   ├── redis
-    │   │   ├── appendonly.aof  -- AOF 数据库保存文件
-    │   │   ├── dump.rdb        -- RDB 数据库保存文件
-    │   │   └── redis.log       -- Redis 日志文件
-    │   └── mysql               -- MySQL 数据目录
-    ├── log
-    ├   ├── nginx               -- Nginx 系统错误日志
-    │   │   ├── access.log
-    │   │   └── error.log
-    │   └──redis                -- Redis错误日志
-    │   └──php                  -- PHP错误日志
-    └── www                     -- 项目代码目录
-        └── site                -- 具体项目目录
-           └──index.php
+  dnmp
+  ├── docker-compose.yml      -- 基础配置文件
+  ├── env.example              -- 环境配置文件，拷贝 env.example 为 .env
+  ├── composes                -- 编写目录
+  │   ├── php
+  │   │   └── Dockerfile      -- 镜像构建文件
+  ├── conf
+  │   ├── nginx.conf          -- Nginx 主配置文件
+  │   ├── conf.d
+  │   │   └── 80.conf         -- HTTP 80 虚拟主机扩展配置文件
+  │   │   └── 443.conf        -- HTTPS 虚拟主机扩展配置文件
+  │   │   └── lua.conf        -- Lua 配置虚拟主机扩展配置文件
+  │   ├── letsencrypt         -- Nginx 证书目录
+  │   ├── mysql
+  │   │   └── my.cnf          -- MySQL 配置文件
+  │   ├── etcd
+  │   │   └── etcd.conf.yml   -- Etcd 配置文件
+  │   ├── redis
+  │   │   └── redis.conf      -- Redis 配置文件
+  │   ├── php
+  │   │   ├── php.ini         -- PHP 运行核心配置文件
+  │   │   ├── php-fpm.conf    -- PHP-FPM 进程服务的配置文件
+  │   │   └── php-fpm.d
+  │   │        └── www.conf   -- PHP-FPM 扩展配置文件
+  │   └──lua                  -- Lua 脚本目录
+  │        └── bin
+  │        │    └── limit.lua -- 核心库脚本
+  │        └── test
+  │             └── http.lua  -- 测试脚本
+  ├── data                    -- 数据目录
+  │   ├── redis
+  │   │   ├── appendonly.aof  -- AOF 数据库保存文件
+  │   │   ├── dump.rdb        -- RDB 数据库保存文件
+  │   │   └── redis.log       -- Redis 日志文件
+  │   └── mysql               -- MySQL 数据目录
+  ├── log
+  ├   ├── nginx               -- Nginx 系统错误日志
+  │   │   ├── access.log
+  │   │   └── error.log
+  │   └──redis                -- Redis错误日志
+  │   └──php                  -- PHP错误日志
+  └── www                     -- 项目代码目录
+      └── site                -- 具体项目目录
+         └──index.php
 ```
 
 ### 环境要求
@@ -111,9 +110,8 @@ dnmp
 拉取代码
 ```
 $ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp/dnmp        // 注意！！！：是两个目录
+$ cd dnmp       
 ```
-> 注意：是进入两个目录! 是进入两个目录! 是进入两个目录!
 
 新建配置文件
 ```

@@ -5,4 +5,3 @@
 *.tgz binary
 *.zip binary
 *.gz binary
-* linguist-language=docker
