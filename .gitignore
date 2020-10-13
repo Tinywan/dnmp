@@ -6,3 +6,4 @@ vendor
 /.idea
 /dnmp/*.env
 /dnmp/.env
+/.env
