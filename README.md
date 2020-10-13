@@ -51,9 +51,10 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 ```
   dnmp
   ├── docker-compose.yml      -- 基础配置文件
-  ├── env.example              -- 环境配置文件，拷贝 env.example 为 .env
-  ├── composes                -- 编写目录
+  ├── env.example             -- 环境配置文件，拷贝 env.example 为 .env
+  ├── services                -- 服务目录
   │   ├── php
+  │   │   └── extensions      -- 扩展目录
   │   │   └── Dockerfile      -- 镜像构建文件
   ├── conf
   │   ├── nginx.conf          -- Nginx 主配置文件
