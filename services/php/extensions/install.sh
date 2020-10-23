@@ -681,6 +681,28 @@ if [[ -z "${EXTENSIONS##*,sdebug,*}" ]]; then
     fi
 fi
 
+if [[ -z "${EXTENSIONS##*,protobuf,*}" ]]; then
+    echo "---------- Install protobuf ----------"
+    isPhpVersionGreaterOrEqual 7 2
+
+    if [[ "$?" = "1" ]]; then
+        installExtensionFromTgz protobuf-3.13.0.1
+    else
+        echo "---------- PHP Version>= 7.2----------"
+    fi
+fi
+
+if [[ -z "${EXTENSIONS##*,grpc,*}" ]]; then
+    echo "---------- Install grpc ----------"
+    isPhpVersionGreaterOrEqual 7 2
+
+    if [[ "$?" = "1" ]]; then
+        installExtensionFromTgz grpc-1.33.1
+    else
+        echo "---------- PHP Version>= 7.2----------"
+    fi
+fi
+
 if [ "${PHP_EXTENSIONS}" != "" ]; then
     apk del .build-deps \
     && docker-php-source delete
