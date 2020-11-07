@@ -49,7 +49,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 
 ### 项目结构
 
-```
+```javascript
   dnmp
   ├── docker-compose.yml      -- 基础配置文件
   ├── env.example             -- 环境配置文件，拷贝 env.example 为 .env
