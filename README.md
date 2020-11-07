@@ -57,6 +57,10 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
   │   ├── php
   │   │   └── extensions      -- 扩展目录
   │   │   └── Dockerfile      -- 镜像构建文件
+  │   ├── nacos
+  │   │   └── conf            -- 配置文件目录
+  │   │   └── env             -- 环境变量目录
+  │   │   └── Dockerfile      -- 镜像构建文件（构建比较耗时，不推荐）
   ├── conf
   │   ├── nginx.conf          -- Nginx 主配置文件
   │   ├── conf.d
@@ -91,6 +95,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
   │   │   ├── access.log
   │   │   └── error.log
   │   └──redis                -- Redis错误日志
+  │   └──nacos                -- Nacos错误日志
   │   └──php                  -- PHP错误日志
   └── www                     -- 项目代码目录
       └── site                -- 具体项目目录
