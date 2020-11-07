@@ -163,6 +163,7 @@ services:
   #   networks:
   #     - backend
 
+  # 单机模式
   # nacos:
   #   # build:
   #   #   context: ./services/nacos
@@ -177,6 +178,46 @@ services:
   #   container_name: dnmp-nacos
   #   env_file:
   #     - ./services/nacos/env/nacos-standlone-mysql.env
+
+  # 集群模式
+  # nacos1:
+  #   image: nacos/nacos-server:1.4.0
+  #   ports:
+  #     - "8848:8848"
+  #   volumes:
+  #     - ./log/nacos:/home/nacos/logs
+  #     - ./services/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+  #   networks:
+  #     - backend
+  #   container_name: dnmp-nacos1
+  #   env_file:
+  #     - ./services/nacos/env/nacos-hostname.env
+
+  # nacos2:
+  #   image: nacos/nacos-server:1.4.0
+  #   ports:
+  #     - "8849:8848"
+  #   volumes:
+  #     - ./log/nacos:/home/nacos/logs
+  #     - ./services/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+  #   networks:
+  #     - backend
+  #   container_name: dnmp-nacos2
+  #   env_file:
+  #     - ./services/nacos/env/nacos-hostname.env
+
+  # nacos3:
+  #   image: nacos/nacos-server:1.4.0
+  #   ports:
+  #     - "8850:8848"
+  #   volumes:
+  #     - ./log/nacos:/home/nacos/logs
+  #     - ./services/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+  #   networks:
+  #     - backend
+  #   container_name: dnmp-nacos3
+  #   env_file:
+  #     - ./services/nacos/env/nacos-hostname.env
 
 networks:
   backend:
