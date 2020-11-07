@@ -163,20 +163,20 @@ services:
   #   networks:
   #     - backend
 
-  nacos:
-    build:
-      context: ./services/nacos
-    # image: nacos/nacos-server:1.4.0
-    ports:
-      - "8848:8848"
-    volumes:
-      - ./log/nacos:/home/nacos/logs
-      - ./services/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
-    networks:
-      - backend
-    container_name: dnmp-nacos
-    env_file:
-      - ./services/nacos/env/nacos-standlone-mysql.env
+  # nacos:
+  #   # build:
+  #   #   context: ./services/nacos
+  #   image: nacos/nacos-server:1.4.0
+  #   ports:
+  #     - "8848:8848"
+  #   volumes:
+  #     - ./log/nacos:/home/nacos/logs
+  #     - ./services/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+  #   networks:
+  #     - backend
+  #   container_name: dnmp-nacos
+  #   env_file:
+  #     - ./services/nacos/env/nacos-standlone-mysql.env
 
 networks:
   backend:
