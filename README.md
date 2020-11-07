@@ -31,6 +31,7 @@
   - [Docker 生成 HTTPS](#Docker生成HTTPS)
 - [Openresty 专题](#Openresty专题)
 - [RabbitMQ 专题](#RabbitMQ专题)
+- [Nacos 专题](#Nacos专题)
 - [XDebug 管理](#XDebug管理)
 - [遇到的问题](#遇到的问题)
 
@@ -612,8 +613,19 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 
 管理界面地址：[http://127.0.0.1:15672/](http://127.0.0.1:15672/)
 
-#### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
+### Nacos专题
 
+Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。
+
+[官方地址：https://nacos.io/zh-cn/docs/what-is-nacos.html](https://nacos.io/zh-cn/docs/what-is-nacos.html)
+
+#### MySQL 配置
+1、新建数据库 `nacos`
+2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件
+3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`
+4、重新启动
+
+#### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
 安装前的依赖 
 ```

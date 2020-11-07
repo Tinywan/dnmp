@@ -1,0 +1,112 @@
+
+         ,--.
+       ,--.'|
+   ,--,:  : |                                           Nacos 1.4.0
+,`--.'`|  ' :                       ,---.               Running in stand alone mode, All function modules
+|   :  :  | |                      '   ,'\   .--.--.    Port: 8848
+:   |   \ | :  ,--.--.     ,---.  /   /   | /  /    '   Pid: 29
+|   : '  '; | /       \   /     \.   ; ,. :|  :  /`./   Console: http://a7e14387db7f:8848/nacos/index.html
+'   ' ;.    ;.--.  .-. | /    / ''   | |: :|  :  ;_
+|   | | \   | \__\/: . ..    ' / '   | .; : \  \    `.      https://nacos.io
+'   : |  ; .' ," .--.; |'   ; :__|   :    |  `----.   \
+|   | '`--'  /  /  ,.  |'   | '.'|\   \  /  /  /`--'  /
+'   : |     ;  :   .'   \   :    : `----'  '--'.     /
+;   |.'     |  ,     .-./\   \  /            `--'---'
+'---'        `--`---'     `----'
+
+2020-11-07 10:12:14,149 INFO Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5e3d57c7' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+2020-11-07 10:12:14,163 INFO Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+2020-11-07 10:12:14,872 INFO Tomcat initialized with port(s): 8848 (http)
+
+2020-11-07 10:12:15,456 INFO Root WebApplicationContext: initialization completed in 7044 ms
+
+2020-11-07 10:12:20,237 INFO Initializing ExecutorService 'applicationTaskExecutor'
+
+2020-11-07 10:12:20,533 INFO Adding welcome page: class path resource [static/index.html]
+
+2020-11-07 10:12:21,375 INFO Creating filter chain: Ant [pattern='/**'], []
+
+2020-11-07 10:12:21,483 INFO Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6058e535, org.springframework.security.web.context.SecurityContextPersistenceFilter@12f3afb5, org.springframework.security.web.header.HeaderWriterFilter@610db97e, org.springframework.security.web.csrf.CsrfFilter@3c321bdb, org.springframework.security.web.authentication.logout.LogoutFilter@1a38ba58, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c22a348, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51b01960, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42deb43a, org.springframework.security.web.session.SessionManagementFilter@3fabf088, org.springframework.security.web.access.ExceptionTranslationFilter@3abd581e]
+
+2020-11-07 10:12:21,734 INFO Initializing ExecutorService 'taskScheduler'
+
+2020-11-07 10:12:21,789 INFO Exposing 2 endpoint(s) beneath base path '/actuator'
+
+2020-11-07 10:12:22,072 INFO Tomcat started on port(s): 8848 (http) with context path '/nacos'
+
+2020-11-07 10:12:22,085 INFO Nacos Log files: /home/nacos/logs
+
+2020-11-07 10:12:22,089 INFO Nacos Log files: /home/nacos/conf
+
+2020-11-07 10:12:22,091 INFO Nacos Log files: /home/nacos/data
+
+2020-11-07 10:12:22,092 INFO Nacos started successfully in stand alone mode. use external storage
+
+2020-11-07 10:12:40,760 INFO Initializing Servlet 'dispatcherServlet'
+
+2020-11-07 10:12:40,810 INFO Completed initialization in 48 ms
+
+org.springframework.dao.RecoverableDataAccessException: StatementCallback; SQL [DELETE FROM config_info WHERE data_id='com.alibaba.nacos.testMasterDB']; Communications link failure
+
+The last packet successfully received from the server was 7 milliseconds ago.  The last packet sent successfully to the server was 9 milliseconds ago.; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 7 milliseconds ago.  The last packet sent successfully to the server was 9 milliseconds ago.
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:100)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:81)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1443)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:388)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:523)
+	at com.alibaba.nacos.config.server.service.datasource.ExternalDataSourceServiceImpl$SelectMasterTask.run(ExternalDataSourceServiceImpl.java:233)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 7 milliseconds ago.  The last packet sent successfully to the server was 9 milliseconds ago.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1355)
+	at com.mysql.cj.jdbc.StatementImpl.executeLargeUpdate(StatementImpl.java:2128)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1264)
+	at com.zaxxer.hikari.pool.ProxyStatement.executeUpdate(ProxyStatement.java:120)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.executeUpdate(HikariProxyStatement.java)
+	at org.springframework.jdbc.core.JdbcTemplate$1UpdateStatementCallback.doInStatement(JdbcTemplate.java:511)
+	at org.springframework.jdbc.core.JdbcTemplate$1UpdateStatementCallback.doInStatement(JdbcTemplate.java:508)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:376)
+	... 9 more
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 7 milliseconds ago.  The last packet sent successfully to the server was 9 milliseconds ago.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:562)
+	at com.mysql.cj.protocol.a.NativeProtocol.checkErrorMessage(NativeProtocol.java:732)
+	at com.mysql.cj.protocol.a.NativeProtocol.sendCommand(NativeProtocol.java:671)
+	at com.mysql.cj.protocol.a.NativeProtocol.sendQueryPacket(NativeProtocol.java:986)
+	at com.mysql.cj.protocol.a.NativeProtocol.sendQueryString(NativeProtocol.java:921)
+	at com.mysql.cj.NativeSession.execSQL(NativeSession.java:1165)
+	at com.mysql.cj.jdbc.StatementImpl.executeUpdateInternal(StatementImpl.java:1323)
+	... 16 more
+Caused by: java.io.EOFException: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.
+	at com.mysql.cj.protocol.FullReadInputStream.readFully(FullReadInputStream.java:67)
+	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:63)
+	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:45)
+	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:52)
+	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:41)
+	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:54)
+	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:44)
+	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:556)
+	... 22 more
