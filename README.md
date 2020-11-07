@@ -625,10 +625,10 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 [官方地址：https://nacos.io/zh-cn/docs/what-is-nacos.html](https://nacos.io/zh-cn/docs/what-is-nacos.html)
 
 #### MySQL 配置
-1、新建数据库 `nacos`
-2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件
-3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`
-4、重新启动
+1、新建数据库 `nacos`  
+2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件  
+3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`  
+4、重新启动  
 
 #### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
