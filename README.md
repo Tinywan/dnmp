@@ -638,6 +638,8 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 
 ### SQL审核平台
 
+https://guide.yearning.io/
+
 连接到网络 `dnmp_backend`
 ```
 docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQL_ADDR=dnmp-mysql:3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=test zhangsean/yearning
