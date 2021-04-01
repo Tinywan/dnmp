@@ -32,6 +32,7 @@
 - [Openresty 专题](#Openresty专题)
 - [RabbitMQ 专题](#RabbitMQ专题)
 - [Nacos 专题](#Nacos专题)
+- [MySQL SQL 审核平台](#SQL审核平台)
 - [XDebug 管理](#XDebug管理)
 - [遇到的问题](#遇到的问题)
 
@@ -424,15 +425,26 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   MESSAGE: {"type":"docker","text":"Hi Tinywan"}
   ```
 
-#### phpMyAdmin管理
+### phpMyAdmin管理
 
 主机上访问 phpMyAdmin 的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
 
 > 默认登录账户：`root`，密码：`123456`
 
-#### 容器管理
+### 容器管理
 
 ![images](images/engine-components-flow.png)
+
+- 查看容器网络
+
+  ```
+  $ docker network ls
+  ```
+- 连接容器到用户自定义网桥
+
+  ```
+  $ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQL_ADDR=dnmp-mysql:3306  zhangsean/yearning
+  ```  
 
 - 重新单独构建镜像
 
@@ -624,13 +636,24 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 
 [官方地址：https://nacos.io/zh-cn/docs/what-is-nacos.html](https://nacos.io/zh-cn/docs/what-is-nacos.html)
 
-#### MySQL 配置
+### SQL审核平台
+
+连接到网络 `dnmp_backend`
+```
+docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQL_ADDR=dnmp-mysql:3306 -e MYSQL_USER=root -e MYSQL_PASSWORD=123456 -e MYSQL_DB=test zhangsean/yearning
+```
+![images](images/SQL审核平台.png)
+
+打开浏览器 http://127.0.0.1:8000
+
+默认账号/密码：admin/Yearning_admin
+### MySQL 配置
 1、新建数据库 `nacos`  
 2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件  
 3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`  
 4、重新启动  
 
-#### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
+### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
 安装前的依赖 
 ```
