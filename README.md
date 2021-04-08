@@ -850,7 +850,9 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 7、直接通过外部连接`docker exec -it dnmp-mysql sh -c "export LANG=C.UTF-8 && mycli -h 127.0.0.1 -p123456"`
 
-8、配置文件目录 `sudo vim /usr/share/mycli/mycli/myclirc`，官方配置：https://www.mycli.net/syntax
+8、连接指定主机和用户 `mycli -h 127.0.0.1 -P 3306 -u www`，输入 www 用户密码即可
+
+9、配置文件目录 `sudo vim /usr/share/mycli/mycli/myclirc`，官方配置：https://www.mycli.net/syntax
 
 ### OR 编译参数
 
