@@ -276,7 +276,7 @@ $ docker-compose up
 
 - 服务器开机自动启 PHP 容器，[Ubuntu 18.04 rc.local systemd 设置](https://blog.csdn.net/dahuzix/article/details/80785691)
 
-  ```
+  ```powershell
   #!/bin/sh -e
 
   # docker-compose php container
@@ -316,7 +316,7 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
 安装一个新的 composer 包
 
-```
+```powershell
 E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/thinkphp_3.2:/app  composer require tinywan/load-balancing --ignore-platform-reqs
 ```
 
@@ -324,7 +324,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/thinkphp_3.2:/app  c
 
 执行执行项目的绝对路径
 
-```
+```powershell
 E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer install --ignore-platform-reqs
 ```
 
@@ -336,7 +336,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 - 查看 `composer`版本：`composer --version`
 - 修改 composer 的全局配置文件（推荐方式）
 
-  ```
+  ```powershell
   composer config -g repo.packagist composer https://packagist.phpcomposer.com
   // 或者
   composer config -g repo.packagist composer https://packagist.laravel-china.org
@@ -366,7 +366,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   mkdir ~/dnmp/composer
   ```
 - 2、打开主机的 ~/.bashrc 或者 ~/.zshrc 文件，加上
-  ```
+  ```powershell
   composer () {
       tty=
       tty -s && tty=--tty
@@ -384,12 +384,12 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   ```
 - 3、让文件起效
 
-  ```
+  ```shell
   source ~/.bashrc
   ```
 
 - 4、在主机的任何目录下就能用`composer`了
-  ```
+  ```powershell
   cd ~/dnmp/www/
   composer create-project topthink/think tp5.2
   composer update topthink/framework
@@ -406,7 +406,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 #### 宿主机执行任务（推荐）
 
-```
+```powershell
 # 2019年2月14日 @add Tinywan 获取图表数据 每3分钟执行一次
 */30 * * * * docker exec dnmp-php echo " Hi Lnmp " >> /var/www/crontab.log
 ```
@@ -430,7 +430,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 - 宿主机平滑重启 workerman ：`docker exec -it dnmp-php bash -c "/usr/local/php/bin/php /var/www/site/think worker:gateway reload"`
 - 配置`docker-compose.yml` 文件中对应的映射端口
 
-  ```
+  ```powershell
   php:
       ports:
           - "9000:9000"
@@ -440,7 +440,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 防火墙问题，如果使用阿里云 ESC，请在[安全组](https://ecs.console.aliyun.com/?spm=5176.2020520001#/securityGroup/region/cn-shanghai)增加**入方向**和**出方向**端口配置
 
-  ```
+  ```powershell
   协议类型：自定义 TCP
   端口范围：9502/9502
   授权对象：0.0.0.0/0
@@ -448,14 +448,14 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 宿主机可以查看对应端口号是否已经映射成功
 
-  ```
+  ```powershell
   ps -aux|grep 9502
   WorkerMan: worker process  AppGateway websocket://0.0.0.0:9502
   ```
 
 - 通过`telnet`命令检测远程端口是否打开
 
-  ```
+  ```powershell
   telnet 127.0.0.1 9502
   Trying 127.0.0.1...
   Connected to 127.0.0.1.
@@ -466,7 +466,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 通过 Console 测试是否支持外网访问
 
-  ```
+  ```js
   var ws = new WebSocket('ws://宿主机公网ip:9502/');
   ws.onmessage = function(event) {
       console.log('MESSAGE: ' + event.data);
@@ -489,18 +489,18 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 查看容器网络
 
-  ```
+  ```powershell
   $ docker network ls
   ```
 - 连接容器到用户自定义网桥
 
-  ```
+  ```powershell
   $ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQL_ADDR=dnmp-mysql:3306  zhangsean/yearning
   ```  
 
 - 重新单独构建镜像
 
-  ```
+  ```powershell
   $ docker-compose build          # 重建全部服务
   $ docker-compose build php74    # 重建单个服务
   ```
@@ -518,7 +518,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 单独加载配置文件，列如修改了 nginx 配置文件`www.conf`中的内容，如何即使生效，请使用以下命令重启容器内的 Nginx 配置文件生效：
 
-  ```java
+  ```powershell
   docker exec -it lnmp-nginx nginx -s reload
   ```
 
@@ -526,7 +526,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 修改`docker-compose.yml`文件之后，如何使修改的`docker-compose.yml`生效？
 
-  ```java
+  ```powershell
   docker-compose up --no-deps -d  nginx
   ```
 
@@ -566,7 +566,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 本地本地`C:\Windows\System32\drivers\etc\hosts`文件，添加以下内容
 
-  ```
+  ```powershell
   127.0.0.1	dnmp.com
   127.0.0.1	www.dnmp.org
   127.0.0.1	www.dnmp.cn
@@ -576,14 +576,14 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
   - 首次运行时，先生成并安装根证书
 
-    ```
+    ```powershell
     $ mkcert --install
     Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
     ```
 
   - 自定义证书签名
 
-    ```
+    ```powershell
     $ mkcert dnmp.com "*.dnmp.org" "*.dnmp.cn" localhost 127.0.0.1
     Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
 
@@ -608,7 +608,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 - 配置 Nginx 虚拟主机配置文件
 
-  ```
+  ```nginx
   server {
       listen 443 ssl http2;
       server_name www.dnmp.cn;
@@ -625,7 +625,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 #### Docker 生成 HTTPS
 
-```java
+```powershell
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
 -e Ali_Key="LTAIn" -e Ali_Secret="zLzA" neilpang/acme.sh --issue --dns dns_ali \
 -d tinywan.top -d *.tinywan.top -d *.frps.tinywan.top
@@ -710,7 +710,7 @@ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQ
 ### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
 安装前的依赖 
-```
+```powershell
 apt install sudo
 
 sudo apt install wget
@@ -741,7 +741,7 @@ sudo service etcd start
 
 安装 APISIX
 
-```
+```powershell
 sudo luarocks install apisix
 ```
 如果一切顺利，你会在最后看到这样的信息：
@@ -764,7 +764,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 （2）命令行执行
 
-  ```
+  ```powershell
   # etcdctl set testkey "hello Tinywan"  # 设置
   hello Tinywan
 
@@ -803,7 +803,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 - 镜像：`docker pull registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php5.6-v2`
 - 配置文件映射路径：
 
-  ```
+  ```powershell
   volumes:
       - ./www:/var/www
       - ./etc/php.ini:/usr/local/etc/php/php.ini:ro
@@ -908,7 +908,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 ### OR 编译参数
 
-```
+```powershell
 ./configure  \
  --prefix=/usr/local/openresty   \
  --with-luajit  \
@@ -934,7 +934,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
  --add-dynamic-module=/www/home/build/nginx-module-vts/
 ```
 编译安装 
-```
+```powershell
 make
 sudo make install
 
