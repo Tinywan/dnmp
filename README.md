@@ -7,6 +7,7 @@
 
 - [Docker 简介](#Docker简介)
 - [为什么使用 Docker](#为什么使用Docker)
+- [如何清理您的 Docker数据](#如何清理您的Docker数据)
 - [版本更新](#版本更新)
 - [项目结构](#项目结构)
 - [版本更新](#版本更新)
@@ -48,6 +49,57 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 高性能、超大规划的宿主机部署
 - [x] 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境
 
+### 如何清理您的Docker数据
+Docker不会对您的系统进行任何配置更改，但是它会占用大量的磁盘空间
+
+#### 1. 使用情况统计信息
+```
+$ docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE  
+Images          25        13        9.467GB   4.368GB (46%)
+Containers      13        8         235MB     19.47MB (8%) 
+Local Volumes   14        2         6.45GB    5.869GB (90%)
+Build Cache     0         0         0B        0B
+```
+#### 2. 定期修剪
+为了安全地删除已停止的容器，未使用的网络和悬挂的图像，最好每隔一段时间运行以下命令
+```
+$ docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+5096cc97946c148450214a4330e35a67035289ecacc2806e9f693a0d46ebe75e
+```
+
+#### 3. 全面清理启动
+可以使用单个命令擦除每个未使用的容器，图像，卷和网络
+```
+$ docker system prune -a --volumes
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all volumes not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+d8827bb292a529057fc972acb982a6f13b6608ed10132b9e9a689959cafec30e
+...
+Deleted Images:
+untagged: dnmp_php72:latest
+deleted: sha256:1b29834e4f9054d78a0d5e91e114e40b865ad8ddce06a3c7ba3703f9911775e6
+
+Total reclaimed space: 12.71GB
+```
+#### 4. 使用情况
+
+![docker-data-clear.png](images/docker-data-clear.png)
 ### 项目结构
 
 ```javascript
