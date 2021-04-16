@@ -99,6 +99,8 @@ Total reclaimed space: 12.71GB
 ### 4. 使用情况
 
 ![docker-data-clear.png](images/docker-data-clear.png)
+
+[How to clean your Docker data](https://dockerwebdev.com/tutorials/clean-up-docker/)
 ## 项目结构
 
 ```powershell
