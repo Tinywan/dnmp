@@ -53,7 +53,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 Docker不会对您的系统进行任何配置更改，但是它会占用大量的磁盘空间
 
 #### 1. 使用情况统计信息
-```
+```powershell
 $ docker system df
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE  
 Images          25        13        9.467GB   4.368GB (46%)
@@ -63,7 +63,7 @@ Build Cache     0         0         0B        0B
 ```
 #### 2. 定期修剪
 为了安全地删除已停止的容器，未使用的网络和悬挂的图像，最好每隔一段时间运行以下命令
-```
+```powershell
 $ docker system prune
 WARNING! This will remove:
   - all stopped containers
@@ -78,7 +78,7 @@ Deleted Containers:
 
 #### 3. 全面清理启动
 可以使用单个命令擦除每个未使用的容器，图像，卷和网络
-```
+```powershell
 $ docker system prune -a --volumes
 WARNING! This will remove:
   - all stopped containers
@@ -102,7 +102,7 @@ Total reclaimed space: 12.71GB
 ![docker-data-clear.png](images/docker-data-clear.png)
 ### 项目结构
 
-```javascript
+```powershell
   dnmp
   ├── docker-compose.yml      -- 基础配置文件
   ├── env.example             -- 环境配置文件，拷贝 env.example 为 .env
@@ -168,18 +168,18 @@ Total reclaimed space: 12.71GB
 ### 快速使用
 
 拉取代码
-```
+```powershell
 $ git clone git@github.com:Tinywan/dnmp.git
 $ cd dnmp       
 ```
 
 新建配置文件
-```
+```powershell
 $ cp env.example .env
 ```
 
 开启容器服务
-```
+```powershell
 $ docker-compose up
 ```
 > 守护进程 `docker-compose up -d`
