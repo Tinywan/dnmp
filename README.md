@@ -3,7 +3,7 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![Build status](https://github.com/Tinywan/dnmp/workflows/CI/badge.svg)]()
 
-### :book: 目录
+## :book: 目录
 
 - [Docker 简介](#Docker简介)
 - [为什么使用 Docker](#为什么使用Docker)
@@ -49,10 +49,10 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 高性能、超大规划的宿主机部署
 - [x] 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境
 
-### 如何清理您的Docker数据
+## 如何清理您的Docker数据
 Docker不会对您的系统进行任何配置更改，但是它会占用大量的磁盘空间
 
-#### 1. 使用情况统计信息
+### 1. 使用情况统计信息
 ```powershell
 $ docker system df
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE  
@@ -61,7 +61,7 @@ Containers      13        8         235MB     19.47MB (8%)
 Local Volumes   14        2         6.45GB    5.869GB (90%)
 Build Cache     0         0         0B        0B
 ```
-#### 2. 定期修剪
+### 2. 定期修剪
 为了安全地删除已停止的容器，未使用的网络和悬挂的图像，最好每隔一段时间运行以下命令
 ```powershell
 $ docker system prune
@@ -75,8 +75,7 @@ Are you sure you want to continue? [y/N] y
 Deleted Containers:
 5096cc97946c148450214a4330e35a67035289ecacc2806e9f693a0d46ebe75e
 ```
-
-#### 3. 全面清理启动
+### 3. 全面清理启动
 可以使用单个命令擦除每个未使用的容器，图像，卷和网络
 ```powershell
 $ docker system prune -a --volumes
@@ -97,10 +96,10 @@ deleted: sha256:1b29834e4f9054d78a0d5e91e114e40b865ad8ddce06a3c7ba3703f9911775e6
 
 Total reclaimed space: 12.71GB
 ```
-#### 4. 使用情况
+### 4. 使用情况
 
 ![docker-data-clear.png](images/docker-data-clear.png)
-### 项目结构
+## 项目结构
 
 ```powershell
   dnmp
@@ -154,18 +153,17 @@ Total reclaimed space: 12.71GB
       └── site                -- 具体项目目录
          └──index.php
 ```
-
-### 环境要求
+## 环境要求
 
 - [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
 - [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
 
-### 墙内用户
+## 墙内用户
 
 * [码云下载](https://gitee.com/Tinywan/dnmp/releases/v3.0)
 * 请使用默认镜像源（阿里云镜像源）`registry.cn-beijing.aliyuncs.com/tinywan/openresty`
 
-### 快速使用
+## 快速使用
 
 拉取代码
 ```powershell
@@ -186,7 +184,7 @@ $ docker-compose up
 
 结束
 
-### Nginx管理
+## Nginx管理
 
 - 配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口一一对应
 
@@ -205,7 +203,7 @@ $ docker-compose up
   - 复制主机的`localtime`： `docker cp /etc/localtime lnmp-nginx:/etc/`
   - 重启容器：`docker restart lnmp-nginx`
 
-### MySQL管理
+## MySQL管理
 
 - 进入容器：`docker exec -it dnmp-mysql /bin/bash`
 
@@ -230,7 +228,7 @@ $ docker-compose up
   - 新建项目用户 `www`，配置主机`Host`字段值为 MySQL 容器 ip 段`172.18.0.%`
   - 查看容器 IP address：`docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnmp-mysql`
 
-### PHP管理
+## PHP管理
 
 - docker安装PHP扩展常用命令
 
@@ -291,18 +289,18 @@ $ docker-compose up
   > 编辑文件`vim /etc/rc.local`，添加以上内容
   > 以上主要是解决服务器重启后，PHP 容器不能够重启以及 PHP 容器之内的 Crontab 服务不能够启动的的问题，目前没有其他解决方案
 
-### Redis管理
+## Redis管理
 
 - 连接 Redis 容器：`docker exec -it dnmp-redis redis-cli -h 127.0.0.1 -p 63789`
 - 通过容器连接：`docker exec -it dnmp-redis redis-cli -h dnmp-redis -p 63789`
 - 单独重启 redis 服务 `docker-compose up --no-deps -d redis`
 - 外部宿主机连接：`redis-cli -h 127.0.0.1 -p 63789`
 
-### Composer管理
+## Composer管理
 
-#### 使用Docker安装
+### 使用Docker安装
 
-##### Linux环境
+#### Linux环境
 
 进入项目目录，执行以下命令安装
 
@@ -312,7 +310,7 @@ docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) 
 
 > `--ignore-platform-reqs` 参数表示官方 docker composer 库没有包含当前 PHP 版本
 
-##### Windows环境
+#### Windows环境
 
 安装一个新的 composer 包
 
@@ -330,7 +328,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 > `tp6` 为项目目录
 
-#### 容器内
+### 容器内
 
 - 需要进入`dnmp-php`容器： `docker exec -it dnmp-php /bin/bash`
 - 查看 `composer`版本：`composer --version`
@@ -355,7 +353,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   > 请使用`www-data` 更新安装包，而不是默认直接使用`root`账户，
   > 尽量使用`composer install` 更新安装包，而不是`composer update`，
 
-#### 宿主机
+### 宿主机
 
 建议在主机 HOST 中使用 composer，避免 PHP 容器变得庞大，[Docker Official Images](https://hub.docker.com/_/composer)
 
@@ -396,15 +394,15 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   ```
   > 第一次执行提示：`Unable to find image 'composer:latest' locally`，不要慌，稍等片刻
 
-### Crontab管理
+## Crontab管理
 
-#### 执行方案
+### 执行方案
 
 - 1、使用主机的 cron 实现定时任务（推荐）
 - 2、创建一个新容器专门执行定时任务，[crontab for docker ](https://hub.docker.com/r/willfarrell/crontab)
 - 3、在原有容器上安装 cron，里面运行 2 个进程
 
-#### 宿主机执行任务（推荐）
+### 宿主机执行任务（推荐）
 
 ```powershell
 # 2019年2月14日 @add Tinywan 获取图表数据 每3分钟执行一次
@@ -413,7 +411,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
 > `dnmp-php` 为容器名称
 
-#### 容器内执行任务
+### 容器内执行任务
 
 - 需要进入`dnmp-php`容器： `docker exec -it dnmp-php /bin/bash`
 - 手动启动 crontab，`/etc/init.d/cron start`
@@ -421,7 +419,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 - 添加任务输出日志到映射目录：`* * * * * echo " Hi dnmp " >> /var/www/crontab.log`
 - 定时执行 ThinkPHP5 自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
-### WebSocket管理
+## WebSocket管理
 
 在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)
 
@@ -477,13 +475,13 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   MESSAGE: {"type":"docker","text":"Hi Tinywan"}
   ```
 
-### phpMyAdmin管理
+## phpMyAdmin管理
 
 主机上访问 phpMyAdmin 的地址：`http://localhost:8082`或者`http://宿主机Ip地址:8082`
 
 > 默认登录账户：`root`，密码：`123456`
 
-### 容器管理
+## 容器管理
 
 ![images](images/engine-components-flow.png)
 
@@ -558,9 +556,9 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   - 获取实例的日志路径：`docker inspect --format='{{.LogPath}}' $INSTANCE_ID`
   - 获取实例的镜像名称：`docker inspect --format='{{.Config.Image}}' $INSTANCE_ID`
 
-### 证书管理
+## 证书管理
 
-#### 本地生成 HTTPS
+### 本地生成 HTTPS
 
 生成本地 HTTPS 加密证书的工具 [mkcert](https://github.com/FiloSottile/mkcert),一个命令就可以生成证书，不需要任何配置。
 
@@ -623,7 +621,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
   ![images](images/docker-composer-https.png)
 
-#### Docker 生成 HTTPS
+### Docker 生成 HTTPS
 
 ```powershell
 $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acme.sh \
@@ -641,7 +639,7 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
 - `Ali_Key` 阿里云 AccessKey ID
 - `Ali_Secret` 阿里云 Access Key Secret
 
-### Openresty专题
+## Openresty专题
 
 > 这里默认镜像标签为：`bionic`
 
@@ -678,17 +676,17 @@ $ docker run --rm  -it -v "D:\Git\docker-lnmp\dev\nginx\v5\etc\letsencrypt":/acm
   - 复制主机的 localtime `docker cp etc/localtime dnmp-openresty:/etc/`
   - 重启容器 `docker-compose restart openresty`
 
-### RabbitMQ专题
+## RabbitMQ专题
 
 管理界面地址：[http://127.0.0.1:15672/](http://127.0.0.1:15672/)
 
-### Nacos专题
+## Nacos专题
 
 Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。
 
 [官方地址：https://nacos.io/zh-cn/docs/what-is-nacos.html](https://nacos.io/zh-cn/docs/what-is-nacos.html)
 
-### SQL审核平台
+## SQL审核平台
 
 https://guide.yearning.io/
 
@@ -701,13 +699,13 @@ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQ
 打开浏览器 http://127.0.0.1:8000
 
 默认账号/密码：admin/Yearning_admin
-### MySQL 配置
+## MySQL 配置
 1、新建数据库 `nacos`  
 2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件  
 3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`  
 4、重新启动  
 
-### 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
+## 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
 
 安装前的依赖 
 ```powershell
@@ -752,7 +750,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 恭喜你，APISIX 已经安装成功了。
 
-### [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
+## [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
 
 1、安装 `sudo apt-get install etcd`  
 
@@ -798,7 +796,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 8e9e05c52164694d: name=8c831881add4 peerURLs=http://localhost:2380 clientURLs=http://localhost:2379 isLeader=true
 ```
 
-### XDebug管理
+## XDebug管理
 
 - 镜像：`docker pull registry.cn-beijing.aliyuncs.com/tinywan/dnmp:php5.6-v2`
 - 配置文件映射路径：
@@ -817,7 +815,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 - Postman 断点调试（API接口），直接在后面增加`?XDEBUG_SESSION_START=PHPSTORM`参数，即：`http://www.tinywan.top:8007?XDEBUG_SESSION_START=PHPSTORM`
 
-### 遇到的问题
+## 遇到的问题
 
 - 编译问题 `repository does not exist or may require 'docker login': denied: requested `，请检查`docker-compose.yml`文件格式
 
@@ -860,7 +858,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
   > 解决办法：重启 Docker 服务
 
-### 参考
+## 参考
 
 - [Dockerise your PHP application with Nginx and PHP7-FPM](http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/)
 - [docker-openresty](https://github.com/openresty/docker-openresty)
@@ -870,7 +868,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 ![images](images/Docker_Install_mostov_twitter-_-facebook-2.png)
 
-### [mycli](https://github.com/dbcli/mycli) 工具安装使用
+## [mycli](https://github.com/dbcli/mycli) 工具安装使用
 
 1、安装vim  `apt-get install vim`
 
@@ -906,7 +904,7 @@ apisix is now built and installed in /usr (license: Apache License 2.0)
 
 9、配置文件目录 `sudo vim /usr/share/mycli/mycli/myclirc`，官方配置：https://www.mycli.net/syntax
 
-### OR 编译参数
+## Openresty 编译参数
 
 ```powershell
 ./configure  \
