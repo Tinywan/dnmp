@@ -942,3 +942,8 @@ sudo make install
 make run
 make stop
 ```
+
+## Git
+```
+docker run -p 10022:22 -p 10080:3000 --name=gogs -v e:/gogs:/data  -d gogs/gogs
+```
