@@ -221,6 +221,7 @@ $ docker-compose up
     - 只导数据不导结构：`docker exec -it dnmp-mysql mysqldump -t -uroot -p123456 test > test.sql`
     - 导出特定表的结构：`docker exec -it dnmp-mysql mysqldump -t -uroot -p123456 --table user > user.sql`
   - 导入（恢复）`docker exec -i dnmp-mysql -uroot -p123456 test < /home/www/test.sql`
+    
     > 如果导入不成功，检查 sql 文件头部：`mysqldump: [Warning] Using a password on the command line interface can be insecure.`是否存在该内容，有则删除即可
 - [MySQL 备份小脚本](./dnmp/backup/nginx_log_cut.sh)
   > Crontab 任务：`55 23 * * * bash /backup/mysql_auto_backup.sh >/dev/null 2>&1`  
@@ -235,20 +236,25 @@ $ docker-compose up
 - docker安装PHP扩展常用命令
 
   - docker-php-source
+    
     > 此命令，实际上就是在PHP容器中创建一个/usr/src/php的目录，里面放了一些自带的文件而已。我们就把它当作一个从互联网中下载下来的PHP扩展源码的存放目录即可。事实上，所有PHP扩展源码扩展存放的路径： /usr/src/php/ext 里面。
     
   - docker-php-ext-install
+    
     >  这个命令，就是用来启动 PHP扩展 的。我们使用pecl安装PHP扩展的时候，默认是没有启动这个扩展的，如果想要使用这个扩展必须要在php.ini这个配置文件中去配置一下才能使用这个PHP扩展。而 docker-php-ext-enable 这个命令则是自动给我们来启动PHP扩展的，不需要你去php.ini这个配置文件中去配置。
-
+    
   - docker-php-ext-enable
+    
     > 这个命令，是用来安装并启动PHP扩展的。命令格：`docker-php-ext-install “源码包目录名”`
-
+    
   - docker-php-ext-configure
+    
     > 一般都是需要跟 docker-php-ext-install搭配使用的。它的作用就是，当你安装扩展的时候，需要自定义配置时，就可以使用它来帮你做到。
-
+    
   - [Docker php安装扩展步骤](PHP_INSTALL.md)  
 
 - 进入 php 容器 `docker exec -it dnmp-php /bin/bash`
+  
   > 如果提示：`bash: export: [/bin/bash,': not a valid identifier`。删除配置文件`vim ~/.bashrc`末尾部分：`[/bin/bash, -c, source ~/.bashrc]`
 - 重启 php 服务 `docker-compose restart php`
 
@@ -278,13 +284,13 @@ $ docker-compose up
 
   ```powershell
   #!/bin/sh -e
-
+  
   # docker-compose php container
   /usr/local/bin/docker-compose -f /home/www/dnmp/docker-compose.yml up -d
-
+  
   # docker tab cron start
   sleep 10; docker exec lnmp-php bash -c "/etc/init.d/cron start"
-
+  
   exit 0
   ```
 
@@ -496,7 +502,7 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 
   ```powershell
   $ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQL_ADDR=dnmp-mysql:3306  zhangsean/yearning
-  ```  
+  ```
 
 - 重新单独构建镜像
 
@@ -586,16 +592,16 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
     ```powershell
     $ mkcert dnmp.com "*.dnmp.org" "*.dnmp.cn" localhost 127.0.0.1
     Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
-
+  
     Created a new certificate valid for the following names 📜
     - "dnmp.com"
     - "*.dnmp.org"
     - "*.dnmp.cn"
     - "localhost"
     - "127.0.0.1"
-
+  
     Reminder: X.509 wildcards only go one level deep, so this won't match a.b.dnmp.org ℹ️
-
+  
     The certificate is at "./dnmp.com+4.pem" and the key at "./dnmp.com+4-key.pem" ✅
     ```
 
@@ -700,57 +706,27 @@ docker run -itd --name dnmp_yearning --network dnmp_backend -p 8000:8000 -e MYSQ
 
 打开浏览器 http://127.0.0.1:8000
 
-默认账号/密码：admin/Yearning_admin
+默认账号/密码：`admin/Yearning_admin`
+
+**二进制安装**
+
+```shell
+wget https://github.com/cookieY/Yearning/releases/download/2.3.2.1/Yearning-2.3.2.2-linux-amd64.zip
+unzip Yearning-2.3.2.2-linux-amd64.zip 
+vim conf.toml // 修改连接的数据库
+./Yearning --help
+./Yearning install
+./Yearning run -port "8099"
+```
+
+打开浏览器 http://127.0.0.1:8099
+
 ## MySQL 配置
+
 1、新建数据库 `nacos`  
 2、切换数据库为 `nacos`，导入`./services/nacos/nacos-mysql.sql`文件  
 3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`  
 4、重新启动  
-
-## 扩展[apisix 微服务 API 网关](https://github.com/iresty/apisix)  
-
-安装前的依赖 
-```powershell
-apt install sudo
-
-sudo apt install wget
-
-sudo apt install vim
-
-sudo apt install vim
-
-vim /etc/apt/sources.list # 请使用163 的源，比阿里云的靠谱点 `http://mirrors.163.com/ubuntu/ bionic`
-
-sudo apt update
-
-# add openresty source
-wget -qO - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
-sudo apt-get -y install software-properties-common
-sudo add-apt-repository -y "deb http://openresty.org/package/ubuntu $(lsb_release -sc) main"
-sudo apt-get update
-
-# install openresty, etcd and some compilation tools
-sudo apt-get install -y git etcd curl luarocks\
-    check libpcre3 libpcre3-dev libjemalloc-dev \
-    libjemalloc1 build-essential libtool automake autoconf pkg-config cmake
-
-# start etcd server
-sudo service etcd start
-
-```
-
-安装 APISIX
-
-```powershell
-sudo luarocks install apisix
-```
-如果一切顺利，你会在最后看到这样的信息：
-
-```
-apisix is now built and installed in /usr (license: Apache License 2.0)
-```
-
-恭喜你，APISIX 已经安装成功了。
 
 ## [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
 
