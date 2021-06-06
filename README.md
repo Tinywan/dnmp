@@ -184,6 +184,12 @@ $ docker-compose up
 ```
 > 守护进程 `docker-compose up -d`
 
+单独重启容器服务
+```powershell
+$ docker-compose up --no-deps -d nginx
+```
+> 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
+
 结束
 
 ## Nginx管理
