@@ -123,6 +123,24 @@ services:
     restart: always
     container_name: ${MYSQL_CONTAINER_NAME}
 
+  mariadb:
+    image: ${MariaDB_IMAGE_BASE}:${MariaDB_IMAGE_TAG}
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    hostname: ${MariaDB_CONTAINER_NAME}
+    ports:
+      - "3309:3306"
+    volumes:
+      - ${MariaDB_DATA_DIR}:/var/lib/mysql
+      - ${MariaDB_CONF_FILE}:/etc/mysql/my.cnf
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456
+        TZ: "$TZ"
+    networks:
+      - backend
+    restart: always
+    container_name: ${MariaDB_CONTAINER_NAME}    
+
   redis:
     image: redis:${REDIS_IMAGE_TAG}
     hostname: dnmp-redis

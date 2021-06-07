@@ -18,6 +18,7 @@
 - [Nginx 管理](#Nginx管理)
   - Nginx 日志定时备份和删除
   - 容器时间跟宿主机时间不一致
+- [MariaDB 管理](#MariaDB管理)
 - [MySQL 管理](#MySQL管理)
   - Mysql 自动备份脚本
 - [PHP 管理](#PHP管理)
