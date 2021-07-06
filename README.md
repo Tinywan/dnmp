@@ -618,6 +618,14 @@ Loaded image: composer:1.10.16
 
 使用命令`docker images`  查看已经导入镜像
 
+> 注意：`export `和 `import` 导出的是一个容器的快照, 不是镜像本身, 也就是说没有 layer。你的 dockerfile 里的 workdir, entrypoint 之类的所有东西都会丢失，commit 过的话也会丢失。快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），而镜像存储文件将保存完整记录，体积也更大。
+
+区别和练习
+
+- docker save 保存的是镜像（image），docker export 保存的是容器（container）
+- docker load 用来载入镜像包，docker import 用来载入容器包，但两者都会恢复为镜像
+- docker load 不能对载入的镜像重命名，而 docker import 可以为镜像指定新名称
+
 ## 证书管理
 
 ### 本地生成 HTTPS
