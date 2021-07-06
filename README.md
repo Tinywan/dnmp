@@ -581,7 +581,7 @@ Docker镜像的导入导出，用于迁移、备份、升级等场景。涉及�
 docker save -o composer-1.10.16.tar composer:1.10.16
 ```
 
-> 注：composer:1.10.16 是本地已经存在的镜像
+> 注：composer:1.10.16 是本地已经存在的镜像。完成后会在本地生成一个  `composer-1.10.16.tar` 压缩包文件
 
 #### load 导入镜像
 
@@ -620,7 +620,7 @@ Loaded image: composer:1.10.16
 
 > 注意：`export `和 `import` 导出的是一个容器的快照, 不是镜像本身, 也就是说没有 layer。你的 dockerfile 里的 workdir, entrypoint 之类的所有东西都会丢失，commit 过的话也会丢失。快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），而镜像存储文件将保存完整记录，体积也更大。
 
-区别和练习
+**区别和联系**
 
 - docker save 保存的是镜像（image），docker export 保存的是容器（container）
 - docker load 用来载入镜像包，docker import 用来载入容器包，但两者都会恢复为镜像
@@ -943,43 +943,6 @@ vim conf.toml // 修改连接的数据库
 8、连接指定主机和用户 `mycli -h 127.0.0.1 -P 3306 -u www`，输入 www 用户密码即可
 
 9、配置文件目录 `sudo vim /usr/share/mycli/mycli/myclirc`，官方配置：https://www.mycli.net/syntax
-
-## Openresty 编译参数
-
-```powershell
-./configure  \
- --prefix=/usr/local/openresty   \
- --with-luajit  \
- --with-stream  \
- --with-stream_ssl_module \
- --with-stream=dynamic  \
- --with-file-aio  \
- --with-threads  \
- --with-cc-opt="-O3"  \
- --with-http_v2_module  \
- --with-http_realip_module  \
- --with-http_mp4_module  \
- --with-http_gzip_static_module  \
- --with-http_ssl_module \
- --with-http_stub_status_module  \
- --with-http_xslt_module \
- --with-http_iconv_module   \
- --without-http_redis2_module \
- --with-openssl-opt=enable-tlsext \
- --add-dynamic-module=/home/www/build/nginx-rtmp-module/ \
- --add-dynamic-module=/home/www/build/nginx-ts-module/ \
- --add-dynamic-module=/www/home/build/nginx-vod-module/  \
- --add-dynamic-module=/www/home/build/nginx-module-vts/
-```
-编译安装 
-```powershell
-make
-sudo make install
-
-# 安装好后进入 apisix 项目
-make run
-make stop
-```
 
 ## Git
 ```
