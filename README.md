@@ -571,6 +571,53 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
   - 获取实例的日志路径：`docker inspect --format='{{.LogPath}}' $INSTANCE_ID`
   - 获取实例的镜像名称：`docker inspect --format='{{.Config.Image}}' $INSTANCE_ID`
 
+### 容器导出和导入
+
+Docker镜像的导入导出，用于迁移、备份、升级等场景。涉及的命令有export、import、save、load
+
+#### save 导出镜像
+
+```shell
+docker save -o composer-1.10.16.tar composer:1.10.16
+```
+
+> 注：composer:1.10.16 是本地已经存在的镜像
+
+#### load 导入镜像
+
+导入之前先删除本地已经有的镜像
+
+```powershell
+$ docker rmi composer:1.10.16
+Untagged: composer:1.10.16
+Untagged: composer@sha256:b78ead723780b67237069394745f85284cd153ab6176b85f4be65b02db484224
+Deleted: sha256:eb14965007ad5c4427d4a3d9747b221a9ff9a2592e114db26280f434658f3dc8
+```
+
+开始导入镜像
+
+```bash
+$ docker load -i composer-1.10.16.tar
+ace0eda3e3be: Loading layer [==================================================>]  5.843MB/5.843MB
+4f34707acc6f: Loading layer [==================================================>]  3.025MB/3.025MB
+c84148fa85b6: Loading layer [==================================================>]  11.78kB/11.78kB
+ea7d729a7e1b: Loading layer [==================================================>]   5.12kB/5.12kB
+84dc4b3d5140: Loading layer [==================================================>]  10.37MB/10.37MB
+f2721b9bd68e: Loading layer [==================================================>]  4.096kB/4.096kB
+8757a2dd4b44: Loading layer [==================================================>]  63.18MB/63.18MB
+1a7224379637: Loading layer [==================================================>]  12.29kB/12.29kB
+de8d4e13caf2: Loading layer [==================================================>]  60.42kB/60.42kB
+cd74717e6911: Loading layer [==================================================>]  94.64MB/94.64MB
+58d1af8009b9: Loading layer [==================================================>]    510kB/510kB
+209722ef17f3: Loading layer [==================================================>]  4.096kB/4.096kB
+8ae1fee25a6c: Loading layer [==================================================>]  2.005MB/2.005MB
+644ab4ff51a2: Loading layer [==================================================>]   2.56kB/2.56kB
+b56d854a67b1: Loading layer [==================================================>]  1.536kB/1.536kB
+Loaded image: composer:1.10.16
+```
+
+使用命令`docker images`  查看已经导入镜像
+
 ## 证书管理
 
 ### 本地生成 HTTPS
@@ -599,16 +646,16 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
     ```powershell
     $ mkcert dnmp.com "*.dnmp.org" "*.dnmp.cn" localhost 127.0.0.1
     Using the local CA at "C:\Users\tinywan\AppData\Local\mkcert" ✨
-  
+    
     Created a new certificate valid for the following names 📜
     - "dnmp.com"
     - "*.dnmp.org"
     - "*.dnmp.cn"
     - "localhost"
     - "127.0.0.1"
-  
+    
     Reminder: X.509 wildcards only go one level deep, so this won't match a.b.dnmp.org ℹ️
-  
+    
     The certificate is at "./dnmp.com+4.pem" and the key at "./dnmp.com+4-key.pem" ✅
     ```
 
