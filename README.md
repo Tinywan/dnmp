@@ -434,6 +434,18 @@ E:\dnmp> docker run --rm --interactive --tty -v e:/dnmp/www/tp6:/app  composer i
 - 添加任务输出日志到映射目录：`* * * * * echo " Hi dnmp " >> /var/www/crontab.log`
 - 定时执行 ThinkPHP5 自带命令行命令：`*/30 * * * * /usr/local/php/bin/php /var/www/tp5.1/think jobs hello`
 
+### 配置任务调度器 scheduler
+
+将下面内容添加到 crontab 计划任务中：
+
+```php
+* * * * * /usr/local/bin/php /var/www/www.tinywan.com/scheduler.php 1>> /dev/null 2>&1
+```
+
+> 默认crontab 服务是没有启动的。需要启动Crontab 任务 `/var/www # crond start`
+
+![images](images/scheduler-crontab.png)
+
 ## WebSocket管理
 
 在项目中难免会用到 [workerman](https://github.com/walkor/Workerman)
