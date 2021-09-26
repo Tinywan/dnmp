@@ -385,7 +385,6 @@ if [[ -z "${EXTENSIONS##*,yar,*}" ]]; then
 
 fi
 
-
 if [[ -z "${EXTENSIONS##*,yaconf,*}" ]]; then
     isPhpVersionGreaterOrEqual 7 0
     if [[ "$?" = "1" ]]; then
@@ -437,7 +436,7 @@ if [[ -z "${EXTENSIONS##*,sqlsrv,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,mcrypt,*}" ]]; then
-    isPhpVersionGreaterOrEqual 7 0
+    isPhpVersionGreaterOrEqual 8 0
     if [[ "$?" = "1" ]]; then
         echo "---------- Install mcrypt ----------"
         apk add --no-cache libmcrypt-dev libmcrypt re2c
@@ -451,7 +450,7 @@ if [[ -z "${EXTENSIONS##*,mcrypt,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,mysql,*}" ]]; then
-    isPhpVersionGreaterOrEqual 7 0
+    isPhpVersionGreaterOrEqual 8 0
 
     if [[ "$?" = "1" ]]; then
         echo "---------- mysql was REMOVED from PHP 7.0.0 ----------"
@@ -462,7 +461,7 @@ if [[ -z "${EXTENSIONS##*,mysql,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,sodium,*}" ]]; then
-    isPhpVersionGreaterOrEqual 7 2
+    isPhpVersionGreaterOrEqual 8 0
     if [[ "$?" = "1" ]]; then
         echo
         echo "Sodium is bundled with PHP from PHP 7.2.0"
@@ -482,9 +481,9 @@ fi
 
 if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
     echo "---------- Install redis ----------"
-    isPhpVersionGreaterOrEqual 7 0
+    isPhpVersionGreaterOrEqual 8 0
     if [[ "$?" = "1" ]]; then
-        installExtensionFromTgz redis-5.1.1
+        installExtensionFromTgz redis-5.3.4
     else
         printf "\n" | pecl install redis-4.3.0
         docker-php-ext-enable redis
@@ -566,7 +565,6 @@ if [[ -z "${EXTENSIONS##*,yaf,*}" ]]; then
         installExtensionFromTgz yaf-2.3.5
     fi
 fi
-
 
 if [[ -z "${EXTENSIONS##*,swoole,*}" ]]; then
     echo "---------- Install swoole ----------"
