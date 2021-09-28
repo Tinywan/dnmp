@@ -49,7 +49,37 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 创建隔离的环境来进行测试
 - [x] 高性能、超大规划的宿主机部署
 - [x] 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境
+## 环境要求
 
+- [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
+- [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
+
+## 快速使用
+
+拉取代码
+```powershell
+$ git clone git@github.com:Tinywan/dnmp.git
+$ cd dnmp       
+```
+
+新建配置文件
+```powershell
+$ cp env.example .env
+```
+
+开启容器服务
+```powershell
+$ docker-compose up
+```
+> 守护进程 `docker-compose up -d`
+
+单独重启容器服务
+```powershell
+$ docker-compose up --no-deps -d nginx -- php74
+```
+> 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
+
+结束
 ## 如何清理您的Docker数据
 Docker不会对您的系统进行任何配置更改，但是它会占用大量的磁盘空间
 
@@ -156,43 +186,6 @@ Total reclaimed space: 12.71GB
       └── site                -- 具体项目目录
          └──index.php
 ```
-## 环境要求
-
-- [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
-- [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
-
-## 墙内用户
-
-* [码云下载](https://gitee.com/Tinywan/dnmp/releases/v3.0)
-* 请使用默认镜像源（阿里云镜像源）`registry.cn-beijing.aliyuncs.com/tinywan/openresty`
-
-## 快速使用
-
-拉取代码
-```powershell
-$ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp       
-```
-
-新建配置文件
-```powershell
-$ cp env.example .env
-```
-
-开启容器服务
-```powershell
-$ docker-compose up
-```
-> 守护进程 `docker-compose up -d`
-
-单独重启容器服务
-```powershell
-$ docker-compose up --no-deps -d nginx
-```
-> 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
-
-结束
-
 ## Nginx管理
 
 - 配置文件端口必须和 `docker-compose.yml`的`ports - 8088:80`中的映射出来的端口一一对应
