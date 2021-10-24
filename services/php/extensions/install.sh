@@ -18,9 +18,7 @@ if [ "${PHP_EXTENSIONS}" != "" ]; then
     apk --update add --no-cache --virtual .build-deps autoconf g++ libtool make curl-dev gettext-dev linux-headers
 fi
 
-
 export EXTENSIONS=",${PHP_EXTENSIONS},"
-
 
 #
 # Check if current php version is greater than or equal to
@@ -385,6 +383,7 @@ if [[ -z "${EXTENSIONS##*,yar,*}" ]]; then
 
 fi
 
+
 if [[ -z "${EXTENSIONS##*,yaconf,*}" ]]; then
     isPhpVersionGreaterOrEqual 7 0
     if [[ "$?" = "1" ]]; then
@@ -436,7 +435,7 @@ if [[ -z "${EXTENSIONS##*,sqlsrv,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,mcrypt,*}" ]]; then
-    isPhpVersionGreaterOrEqual 8 0
+    isPhpVersionGreaterOrEqual 7 0
     if [[ "$?" = "1" ]]; then
         echo "---------- Install mcrypt ----------"
         apk add --no-cache libmcrypt-dev libmcrypt re2c
@@ -450,7 +449,7 @@ if [[ -z "${EXTENSIONS##*,mcrypt,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,mysql,*}" ]]; then
-    isPhpVersionGreaterOrEqual 8 0
+    isPhpVersionGreaterOrEqual 7 0
 
     if [[ "$?" = "1" ]]; then
         echo "---------- mysql was REMOVED from PHP 7.0.0 ----------"
@@ -461,7 +460,7 @@ if [[ -z "${EXTENSIONS##*,mysql,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,sodium,*}" ]]; then
-    isPhpVersionGreaterOrEqual 8 0
+    isPhpVersionGreaterOrEqual 7 2
     if [[ "$?" = "1" ]]; then
         echo
         echo "Sodium is bundled with PHP from PHP 7.2.0"
@@ -481,7 +480,7 @@ fi
 
 if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
     echo "---------- Install redis ----------"
-    isPhpVersionGreaterOrEqual 8 0
+    isPhpVersionGreaterOrEqual 7 0
     if [[ "$?" = "1" ]]; then
         installExtensionFromTgz redis-5.3.4
     else
@@ -565,6 +564,7 @@ if [[ -z "${EXTENSIONS##*,yaf,*}" ]]; then
         installExtensionFromTgz yaf-2.3.5
     fi
 fi
+
 
 if [[ -z "${EXTENSIONS##*,swoole,*}" ]]; then
     echo "---------- Install swoole ----------"

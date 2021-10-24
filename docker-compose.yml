@@ -48,7 +48,7 @@ services:
 
   php80:
     build:
-      context: ./composes/php
+      context: ./services/php
       args:
         PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
@@ -77,6 +77,7 @@ services:
         TZ: "$TZ"
     ports:
       - "9074:9000"
+      - "9073:9073"
     volumes:
       - ${SOURCE_SHARE_DIR}:/var/www
       - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
