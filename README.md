@@ -56,7 +56,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 
 ## 快速使用
 
-拉取代码
+拉取代码 （(gitee地址)[https://gitee.com/Tinywan/dnmp]）
 ```powershell
 $ git clone git@github.com:Tinywan/dnmp.git
 $ cd dnmp       
