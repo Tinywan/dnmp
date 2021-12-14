@@ -807,6 +807,32 @@ vim conf.toml // 修改连接的数据库
 3、修改数据库配置文件 `./services/nacos/env/nacos-standlone-mysql.env`  
 4、重新启动  
 
+### 8.0 配置
+
+#### `.env` 
+
+修改配置 `MYSQL_CONF_FILE=./conf/mysql/my8.0.cnf`
+
+#### 无法远程连接
+
+进入容器
+```
+docker exec -it dnmp-mysql bash
+```
+
+连接MySQL
+```
+root@dnmp-mysql:\# msyql
+
+> use mysql;
+> update user set host = '%' where user = 'root';
+> FLUSH PRIVILEGES;
+> alter user 'root'@'%' identified with mysql_native_password by '123456';
+> FLUSH PRIVILEGES;
+
+```
+> 上面修改之后和重新连接即可
+
 ## [etcd](https://github.com/etcd-io/etcd) 一个高可用的分布式键值（key-value）数据库
 
 1、安装 `sudo apt-get install etcd`  

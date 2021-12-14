@@ -128,7 +128,7 @@ services:
   #   container_name: ${PHP56_CONTAINER_NAME}
 
   mysql:
-    image: ${MYSQL_CHINA_IMAGE_BASE}:${MYSQL_IMAGE_TAG}
+    image: mysql:${MYSQL_IMAGE_TAG}
     restart: always
     command: --default-authentication-plugin=mysql_native_password
     hostname: dnmp-mysql
@@ -137,6 +137,7 @@ services:
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
       - ${MYSQL_CONF_FILE}:/etc/mysql/my.cnf
+      # - ${MYSQL_CONF_FILE}:/etc/mysql/mysql.cnf # 8.0 配置
     environment:
         MYSQL_ROOT_PASSWORD: 123456
         TZ: "$TZ"
