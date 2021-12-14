@@ -761,6 +761,18 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 
 [官方地址：https://nacos.io/zh-cn/docs/what-is-nacos.html](https://nacos.io/zh-cn/docs/what-is-nacos.html)
 
+#### 配置数据库
+
+数据库配置文件（单节点）：`dnmp\services\nacos\env\nacos-standlone-mysql.env`
+
+新建数据库：nacos
+
+导入SQL文件：`dnmp\services\nacos\nacos-mysql.sql`
+
+#### 访问连接
+
+http://127.0.0.1:8848/nacos
+
 ## SQL审核平台
 
 https://guide.yearning.io/
