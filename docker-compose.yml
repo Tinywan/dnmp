@@ -46,18 +46,19 @@ services:
     networks:
         - backend
 
-  php80:
+  php81:
     build:
-      context: ./services/php80
+      context: ./services/php8
       args:
-        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine3.13
+        PHP_VERSION: php:${PHP81_VERSION}-fpm-alpine
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
         TZ: "$TZ"
     ports:
-      - "9080:9000"
-      - "9081:8081"
-      - "9082:8082"
+      - "9100:9100"
+      - "8117:8187"
+      - "8119:8189"
+      - "8118:8788"
     volumes:
       - ${SOURCE_SHARE_DIR}:/var/www
       - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
@@ -65,7 +66,7 @@ services:
       - ${PHP_LOG_DIR}:/var/log/php
     networks:
       - backend
-    container_name: ${PHP80_CONTAINER_NAME}
+    container_name: ${PHP81_CONTAINER_NAME}
 
   php74:
     build:
