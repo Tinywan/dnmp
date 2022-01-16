@@ -46,6 +46,26 @@ services:
     networks:
         - backend
 
+  php74:
+    build:
+      context: ./services/php
+      args:
+        PHP_VERSION: php:${PHP74_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP74_EXTENSIONS}
+        TZ: "$TZ"
+    ports:
+      - "9074:9000"
+      - "9073:9073"
+    volumes:
+      - ${SOURCE_SHARE_DIR}:/var/www
+      - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
+      - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
+      - ${PHP_LOG_DIR}:/var/log/php
+    networks:
+      - backend
+    container_name: ${PHP74_CONTAINER_NAME}
+
   php81:
     build:
       context: ./services/php8
@@ -67,26 +87,6 @@ services:
     networks:
       - backend
     container_name: ${PHP81_CONTAINER_NAME}
-
-  php74:
-    build:
-      context: ./services/php
-      args:
-        PHP_VERSION: php:${PHP74_VERSION}-fpm-alpine
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP74_EXTENSIONS}
-        TZ: "$TZ"
-    ports:
-      - "9074:9000"
-      - "9073:9073"
-    volumes:
-      - ${SOURCE_SHARE_DIR}:/var/www
-      - ${PHP_INI_FILE}:/usr/local/etc/php/php.ini
-      - ${PHP_WWW_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
-      - ${PHP_LOG_DIR}:/var/log/php
-    networks:
-      - backend
-    container_name: ${PHP74_CONTAINER_NAME}
 
   # php72:
   #   build:
