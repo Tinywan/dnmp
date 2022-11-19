@@ -2,41 +2,92 @@
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![Build status](https://github.com/Tinywan/dnmp/workflows/CI/badge.svg)]()
+## 环境要求
+
+- [已经按照 Docker Desktop](https://docs.docker.com/get-docker/)
+
+## 快速使用
+
+拉取代码 [国内Gitee地址](https://gitee.com/Tinywan/dnmp)
+
+```php
+$ git clone git@github.com:Tinywan/dnmp.git
+$ cd dnmp       
+```
+
+新建配置文件
+```php
+$ cp env.example .env
+```
+
+开启容器服务
+
+```php
+$ docker-compose up
+```
+> 守护进程 `docker-compose up -d`
+
+单独重启容器服务
+```php
+$ docker-compose up --no-deps -d nginx -- php74
+```
+> 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
+
+打开浏览器访问地址 [http://127.0.0.1](http://127.0.0.1)
 
 ## :book: 目录
 
-- [Docker 简介](#Docker简介)
-- [为什么使用 Docker](#为什么使用Docker)
-- [如何清理您的 Docker数据](#如何清理您的Docker数据)
-- [版本更新](#版本更新)
-- [项目结构](#项目结构)
-- [版本更新](#版本更新)
+- [环境要求](#环境要求)
 - [快速使用](#快速使用)
-  - [部署环境要求](#部署环境要求)
-  - [快速启动](#快速启动)
-  - [测试访问](#测试访问)
-- [Nginx 管理](#Nginx管理)
-  - Nginx 日志定时备份和删除
-  - 容器时间跟宿主机时间不一致
-- [MariaDB 管理](#MariaDB管理)
-- [MySQL 管理](#MySQL管理)
-  - Mysql 自动备份脚本
-- [PHP 管理](#PHP管理)
-- [Redis 管理](#Redis管理)
-- [Composer 管理](#Composer管理)
-- [Crontab 管理](#Crontab管理)
-- [WebSocket 管理](#WebSocket管理)
-- [phpMyAdmin 管理](#phpMyAdmin管理)
+- [:book: 目录](#book-目录)
+- [Docker简介](#docker简介)
+- [为什么使用Docker](#为什么使用docker)
+- [如何清理您的Docker数据](#如何清理您的docker数据)
+  - [1. 使用情况统计信息](#1-使用情况统计信息)
+  - [2. 定期修剪](#2-定期修剪)
+  - [3. 全面清理启动](#3-全面清理启动)
+  - [4. 使用情况](#4-使用情况)
+- [项目结构](#项目结构)
+- [Nginx管理](#nginx管理)
+- [MySQL管理](#mysql管理)
+  - [8.0 配置（2021.12.15）](#80-配置20211215)
+    - [`.env`](#env)
+    - [无法远程连接](#无法远程连接)
+- [PHP管理](#php管理)
+- [Redis管理](#redis管理)
+- [Composer管理](#composer管理)
+  - [使用Docker安装](#使用docker安装)
+    - [Linux环境](#linux环境)
+    - [Windows环境](#windows环境)
+  - [容器内](#容器内)
+  - [宿主机](#宿主机)
+- [Crontab管理](#crontab管理)
+  - [执行方案](#执行方案)
+  - [宿主机执行任务（推荐）](#宿主机执行任务推荐)
+  - [容器内执行任务](#容器内执行任务)
+  - [配置任务调度器 scheduler](#配置任务调度器-scheduler)
+- [WebSocket管理](#websocket管理)
+- [phpMyAdmin管理](#phpmyadmin管理)
 - [容器管理](#容器管理)
+  - [容器导出和导入](#容器导出和导入)
+    - [save 导出镜像](#save-导出镜像)
+    - [load 导入镜像](#load-导入镜像)
 - [证书管理](#证书管理)
-  - [本地生成 HTTPS](#本地生成HTTPS)
-  - [Docker 生成 HTTPS](#Docker生成HTTPS)
-- [Openresty 专题](#Openresty专题)
-- [RabbitMQ 专题](#RabbitMQ专题)
-- [Nacos 专题](#Nacos专题)
-- [MySQL SQL 审核平台](#SQL审核平台)
-- [XDebug 管理](#XDebug管理)
+  - [本地生成 HTTPS](#本地生成-https)
+  - [Docker 生成 HTTPS](#docker-生成-https)
+- [Openresty专题](#openresty专题)
+- [RabbitMQ专题](#rabbitmq专题)
+- [Nacos专题](#nacos专题)
+    - [配置数据库](#配置数据库)
+    - [访问连接](#访问连接)
+- [SQL审核平台](#sql审核平台)
+- [MySQL 配置](#mysql-配置)
+- [etcd 一个高可用的分布式键值（key-value）数据库](#etcd-一个高可用的分布式键值key-value数据库)
+- [XDebug管理](#xdebug管理)
 - [遇到的问题](#遇到的问题)
+- [参考](#参考)
+- [mycli 工具安装使用](#mycli-工具安装使用)
+- [Git](#git)
 
 ## Docker简介
 
@@ -49,37 +100,6 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 - [x] 创建隔离的环境来进行测试
 - [x] 高性能、超大规划的宿主机部署
 - [x] 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境
-## 环境要求
-
-- [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
-- [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04)
-
-## 快速使用
-
-拉取代码 （[gitee地址](https://gitee.com/Tinywan/dnmp)）
-```powershell
-$ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp       
-```
-
-新建配置文件
-```powershell
-$ cp env.example .env
-```
-
-开启容器服务
-```powershell
-$ docker-compose up
-```
-> 守护进程 `docker-compose up -d`
-
-单独重启容器服务
-```powershell
-$ docker-compose up --no-deps -d nginx -- php74
-```
-> 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
-
-结束
 ## 如何清理您的Docker数据
 Docker不会对您的系统进行任何配置更改，但是它会占用大量的磁盘空间
 
