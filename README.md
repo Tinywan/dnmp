@@ -2,42 +2,40 @@
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![Build status](https://github.com/Tinywan/dnmp/workflows/CI/badge.svg)]()
-## 环境要求
-
-- [已经按照 Docker Desktop](https://docs.docker.com/get-docker/)
 
 ## 快速使用
 
 拉取代码 [国内Gitee地址](https://gitee.com/Tinywan/dnmp)
 
 ```php
-$ git clone git@github.com:Tinywan/dnmp.git
-$ cd dnmp       
+git clone git@github.com:Tinywan/dnmp.git
+cd dnmp       
 ```
 
 新建配置文件
 ```php
-$ cp env.example .env
+cp env.example .env
 ```
 
 开启容器服务
 
 ```php
-$ docker-compose up
+docker-compose up
 ```
 > 守护进程 `docker-compose up -d`
 
 单独重启容器服务
 ```php
-$ docker-compose up --no-deps -d nginx -- php74
+docker-compose up --no-deps -d nginx -- php74
 ```
 > 如：在配置 `docker-compose.yml`中增加了nginx的端口号映射
 
-打开浏览器访问地址 [http://127.0.0.1](http://127.0.0.1)
+打开浏览器访问 
+
+[http://127.0.0.1](http://127.0.0.1)
 
 ## :book: 目录
 
-- [环境要求](#环境要求)
 - [快速使用](#快速使用)
 - [:book: 目录](#book-目录)
 - [Docker简介](#docker简介)
