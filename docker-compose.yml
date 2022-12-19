@@ -66,13 +66,13 @@ services:
       - backend
     container_name: ${PHP74_CONTAINER_NAME}
 
-  php81:
+  php82:
     build:
       context: ./services/php8
       args:
-        PHP_VERSION: php:${PHP81_VERSION}-fpm-alpine
+        PHP_VERSION: php:${PHP82_VERSION}-fpm-alpine
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
+        PHP_EXTENSIONS: ${PHP82_EXTENSIONS}
         TZ: "$TZ"
     ports:
       - "9100:9100"
@@ -86,7 +86,7 @@ services:
       - ${PHP_LOG_DIR}:/var/log/php
     networks:
       - backend
-    container_name: ${PHP81_CONTAINER_NAME}
+    container_name: ${PHP82_CONTAINER_NAME}
 
   # php72:
   #   build:
