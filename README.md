@@ -34,6 +34,16 @@ docker-compose up --no-deps -d nginx -- php74
 
 [http://127.0.0.1](http://127.0.0.1)
 
+## phpy 安装
+
+修改`services/php8/Dockerfile` 找到一下文件，去掉注释
+```ts
+# phpy install https://github.com/swoole/phpy
+RUN apk add python3
+RUN apk add autoconf gcc g++ make python3-dev
+```
+修改`.env` 的 `PHP8.2`扩展`PHP82_EXTENSIONS=gd,phpy`
+
 ## :book: 目录
 
 - [快速使用](#快速使用)
