@@ -8,6 +8,10 @@ ARG CONTAINER_PACKAGE_URL
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
 
+# phpy install https://github.com/swoole/phpy
+# RUN apk add python3
+# RUN apk add autoconf gcc g++ make python3-dev
+
 COPY ./extensions /tmp/extensions
 WORKDIR /tmp/extensions
 RUN chmod +x install.sh \

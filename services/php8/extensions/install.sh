@@ -521,6 +521,12 @@ if [[ -z "${EXTENSIONS##*,redis,*}" ]]; then
     installExtensionFromTgz redis-5.3.5
 fi
 
+if [[ -z "${EXTENSIONS##*,phpy,*}" ]]; then
+    echo "---------- Install phpy Start----------"
+    pecl install phpy --yes
+    docker-php-ext-enable phpy
+fi
+
 if [[ -z "${EXTENSIONS##*,apcu,*}" ]]; then
     echo "---------- Install apcu ----------"
     pecl install apcu
