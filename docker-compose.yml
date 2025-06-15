@@ -1,8 +1,7 @@
 version: '3'
 services:
   # openresty:
-  #   # image: ${OPENRESTY_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
-  #   image: ${OPENRESTY_CHINA_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
+  #   image: ${OPENRESTY_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
   #   ports:
   #     - "${NGINX_HTTP_HOST_PORT}:80"
   #     - "${NGINX_HTTPS_HOST_PORT}:443"
