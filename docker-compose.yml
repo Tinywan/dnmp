@@ -1,4 +1,3 @@
-version: '3'
 services:
   # openresty:
   #   image: ${OPENRESTY_IMAGE_BASE}:${OPENRESTY_IMAGE_TAG}
