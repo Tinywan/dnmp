@@ -532,6 +532,14 @@ if [[ -z "${EXTENSIONS##*,xdebug,*}" ]]; then
     else
         installExtensionFromTgz xdebug-2.5.5
     fi
+
+    # Xdebug settings must be in conf.d (loaded after extension), not php.ini
+    echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.remote_handler = \"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.remote_host = host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.remote_port = 9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.remote_log = /var/log/php/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.remote_autostart = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 fi
 
 if [[ -z "${EXTENSIONS##*,event,*}" ]]; then
