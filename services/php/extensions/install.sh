@@ -523,7 +523,7 @@ if [[ -z "${EXTENSIONS##*,xdebug,*}" ]]; then
     isPhpVersionGreaterOrEqual 7 0
 
     if [[ "$?" = "1" ]]; then
-        isPhpVersionGreaterOrEqual 7 4
+        isPhpVersionGreaterOrEqual 7 2
         if [[ "$?" = "1" ]]; then
             installExtensionFromTgz xdebug-2.9.0
         else
